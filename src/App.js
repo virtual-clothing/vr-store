@@ -12,14 +12,18 @@ const Body = styled.div`
 class App extends Component {
   render() {
     return (
-      <Body>
-        <Nav />
+      <div>
+        <div style={{ position: 'relative', zIndex: "2" }}>
+          <Nav/>
+        </div>
         {/* delete Body tag below, just using to test nav and footer */}
         {/* <Body/> */}
-        <Routes />
-        
-        <Footer />
-      </Body>
+        <div style={{ position: 'relative', zIndex: "1" }}>
+          <Routes />
+          <Footer />
+        </div>
+
+      </div>
     );
   }
 }
