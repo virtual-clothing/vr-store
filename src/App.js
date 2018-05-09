@@ -15,7 +15,7 @@ class App extends Component {
       <Body>
         <Nav />
         {/* delete Body tag below, just using to test nav and footer */}
-        {/* <Body/> */}
+        <Body/>
         <Routes />
         
         <Footer />
