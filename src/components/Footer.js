@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { openCloseContact } from './ducks/reducer';
 import ContactUs from './ContactUs';
 
 
-export default class Footer extends Component {
-
-    state = {
-        contactIsOpen: false
-    }
-
-    openModal() {
-        this.setState({ contactIsOpen: true })
-      }
-  
-      closeModal() {
-        this.setState({ contactIsOpen: false })
-      }
-    
-
+class Footer extends Component {
 
     render() {
 
@@ -49,8 +37,7 @@ export default class Footer extends Component {
 
         return (
             <DesktopFooter>
-                <ContactUs isOpen={this.state.contactIsOpen} cancel={() => this.closeModal.bind(this)}/>
-                <button onClick={() => this.openModal()}>CONTACT US</button>
+                <button onClick={() => this.props.openCloseContact()}>CONTACT US</button>
                 <SocialMediaLinks>
                     <StyledATag><img src='./twitter.png' alt='twitter' height='50%' width='50%'/></StyledATag>
                     <StyledATag><img src='./facebook.png' alt='facebook' height='50%' width='50%'/></StyledATag>
@@ -61,3 +48,11 @@ export default class Footer extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        contactIsOpen: state.contactIsOpen
+    }
+};
+
+export default connect(mapStateToProps, { openCloseContact })(Footer);
