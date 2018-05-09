@@ -3,6 +3,9 @@ import Nav from './components/navbar.js';
 import Footer from './components/Footer';
 import Routes from './routes.js';
 import styled from 'styled-components';
+import ContactUs from './components/ContactUs';
+import { connect } from 'react-redux';
+import { openCloseContact } from './components/ducks/reducer';
 
 const Body = styled.div`
   min-height: 100vh;
@@ -12,16 +15,23 @@ const Body = styled.div`
 class App extends Component {
   render() {
     return (
-      <Body>
+      <div className="App">
         <Nav />
         {/* delete Body tag below, just using to test nav and footer */}
-        <Body/>
-        <Routes />
         
+        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>>
+        <Routes />
         <Footer />
-      </Body>
+
+      </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    contactIsOpen: state.contactIsOpen
+  }
+}
+
+export default connect(mapStateToProps, {openCloseContact})(App);
