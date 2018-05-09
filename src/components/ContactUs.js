@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 class ContactUs extends Component {
 
     state = {
         name: '',
+        email: '',
         subject: '',
         message: ''
     }
 
     handleChange(obj) {
 
-
+        this.setState(obj);
 
     }
 
@@ -20,7 +22,7 @@ class ContactUs extends Component {
         const Background = styled.div`
             position: fixed;
             top: 0;
-            background-color: black;
+            background-color: rgba(0, 0, 0, .8);
             opacity: 0.5;
             width: 100%;
             height: 100%;
@@ -30,7 +32,8 @@ class ContactUs extends Component {
         `
 
         const Modal = styled.div`
-            background-color: white;
+            opacity: 1.0;
+            background-color: rgba(255, 255, 255, 1);
             border: 2px solid black;
             width: 50%;
             height: 50%;
@@ -44,12 +47,25 @@ class ContactUs extends Component {
         `
         const Input = styled.input`
             width: 100%;
-            margin: 10px;
+            margin: 5px;
         `
 
         const TextArea = styled.textarea`
+            height: 60%;
             width: 100%;
             margin: 10px;
+        `
+
+        const ButtonDiv = styled.div`
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        `
+        const Header = styled.div`
+            width: 100%;
+            height: 10%;
+            background-color: black;
+            font-color: white;
         `
 
         if (this.props.isOpen === false) {
@@ -60,13 +76,14 @@ class ContactUs extends Component {
             return (
                 <Background>
                     <Modal>
-                        <Input placeholder='Name' />
-                        <Input placeholder='Subject' />
-                        <TextArea placeholder='What can we help you with?' />
-                        <div>
+                        <Input placeholder={this.props.user.nickname} onChange={(e) => this.handleChange({ name: e.target.value })} />
+                        <Input placeholder={this.props.user.email} onChange={(e) => this.handleChange({ email: e.target.value })} />
+                        <Input placeholder='Subject' onChange={(e) => this.handleChange({ subject: e.target.value })} />
+                        <TextArea placeholder='What can we help you with?' onChange={(e) => this.handleChange({ message: e.target.value })} />
+                        <ButtonDiv>
                             <button onClick={this.props.cancel()}>Cancel</button>
                             <button>Send</button>
-                        </div>
+                        </ButtonDiv>
                     </Modal>
                 </Background>
             )
@@ -76,5 +93,10 @@ class ContactUs extends Component {
 
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.userInfo
+    }
+}
 
-export default ContactUs;
+export default connect(mapStateToProps)(ContactUs)
