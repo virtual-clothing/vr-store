@@ -15,6 +15,7 @@
     "massive": "^4.8.0",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-popup": "^0.9.2",
