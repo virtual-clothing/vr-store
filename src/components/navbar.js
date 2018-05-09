@@ -71,8 +71,10 @@ const SearchBox = styled.input`
 
 
 class Nav extends Component {
+  
 
   render() {
+    console.log(process.env.REACT_APP_LOGIN)
     return (
       <NavBody>
 
@@ -96,7 +98,10 @@ class Nav extends Component {
           {/* </Desktop> */}
 
           <Cats2>
-            <h3>login/signup</h3>
+            <a href={process.env.REACT_APP_LOGIN}>
+              <h3>login/signup</h3>
+            </a>
+            
             <Link to='/cart'><CartIcon src={ Cart } alt='cart'/></Link>
           </Cats2>
 
