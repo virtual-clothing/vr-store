@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import ContactUs from './components/ContactUs';
 import { connect } from 'react-redux';
 import { openCloseContact } from './components/ducks/reducer';
+import { withRouter } from 'react-router-dom';
+
 
 const Body = styled.div`
   min-height: 100vh;
@@ -42,4 +44,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {openCloseContact})(App);
+export default withRouter(connect(mapStateToProps, {openCloseContact})(App));
