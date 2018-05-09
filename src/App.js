@@ -14,6 +14,8 @@ class App extends Component {
     return (
       <div className="App">
         <Nav />
+        {/* delete Body tag below, just using to test nav and footer */}
+        <Body/>
         <Routes />
         <Footer />
 

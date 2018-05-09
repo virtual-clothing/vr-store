@@ -5,9 +5,8 @@ create table users (
     profile_img text
 )
 
-insert into users (username, auth_id, profile_img)values ('Harry Potter', 'dfsjfksdjfsdf', ‘@myprofileimg.com’)
+insert into users (username, auth_id, profile_img)values ('Harry Potter', 'dfsjfksdjfsdf', '@myprofileimg.com')
 insert into users (username, auth_id, profile_img) values ('Hermany', '34wefdsf3', '@herprofileimg.com')
-
 
 create table products (    
     id SERIAL PRIMARY KEY,    

@@ -7,6 +7,8 @@ import Women from './components/Women';
 import Kids from './components/Kids';
 import Cart from './components/Cart';
 import Favorites from './components/Favorites';
+import Login from './components/auth/Login';
+import Failure from './components/auth/Failure';
 
 export default () => {
     return (
@@ -17,6 +19,8 @@ export default () => {
             <Route path='/kids' component={Kids} />
             <Route path='/cart' component={Cart} />
             <Route path='/favorites' component={Favorites} />
+            <Route path='/login' component={Login} />
+            <Route path='/failure' component={Failure} />
         </Switch>
     )
 }

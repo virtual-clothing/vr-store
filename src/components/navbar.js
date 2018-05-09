@@ -214,6 +214,9 @@ class Nav extends Component {
           </CatsDesktop>
 
           <Cats2>
+            <a href={process.env.REACT_APP_LOGIN}>
+              <h3>login/signup</h3>
+            </a>
 
             <DesktopDisplay>
               <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>login/signup</Link>
