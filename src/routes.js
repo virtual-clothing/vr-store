@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Men from './components/Men';
 import Women from './components/Women';
 import Kids from './components/Kids';
@@ -13,7 +13,7 @@ import Failure from './components/auth/Failure';
 export default () => {
     return (
         <Switch>
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={Home} exact/>
             <Route path='/men' component={Men} />
             <Route path='/women' component={Women} />
             <Route path='/kids' component={Kids} />

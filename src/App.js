@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import ContactUs from './components/ContactUs';
 import { connect } from 'react-redux';
 import { openCloseContact } from './components/ducks/reducer';
+import { withRouter } from 'react-router-dom';
+
 
 const Body = styled.div`
   min-height: 100vh;
@@ -15,13 +17,21 @@ const Body = styled.div`
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Nav />
-        {/* delete Body tag below, just using to test nav and footer */}
+      <div>
+
+        <div style={{ position: 'relative', zIndex: "2" }}>
+          <Nav/>
+        </div>
         
-        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>>
-        <Routes />
-        <Footer />
+        <div style={{ position: 'relative', zIndex: "1" }}>
+          <Routes />
+        </div>
+
+        <div style={{ position: 'relative', zIndex: "2" }}>
+          <Footer />
+        </div>
+
+        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
 
       </div>
     );
@@ -34,4 +44,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {openCloseContact})(App);
+export default withRouter(connect(mapStateToProps, {openCloseContact})(App));
