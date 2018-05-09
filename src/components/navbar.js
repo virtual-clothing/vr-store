@@ -69,7 +69,7 @@ const SearchBox = styled.input`
   height: 20px;
   border-radius: 3px;
   border: none;
-  left: 33%;
+  
   font-size: 1rem;
   justify-content: space-around;
   align-items: center;
@@ -105,6 +105,9 @@ const SearchIcon = styled.img`
 
 const DesktopDisplay = styled.div`
   display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 740px) {
   display: none;
@@ -171,14 +174,27 @@ const CatSelect = styled.div`
   
     // }
 
+  const SearchElements = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 30%;
+  `
+
 class Nav extends Component {
     constructor(){
       super()
 
       this.state = {
-        toggleMenu: false
+        toggleMenu: false,
+        search: ''
       }
 
+    }
+
+    handleChange(val){
+      this.setState({search: val})
     }
 
   render() {
@@ -187,22 +203,26 @@ class Nav extends Component {
       <NavBody>
 
         <Top>
-          <SearchBox placeholder='Search'></SearchBox>
-          <SearchB>
-            <SearchIcon src={searchIcon} alt='search'/>
-          </SearchB>
+          <SearchElements>
+            <SearchBox placeholder='Search' onChange={(e) => this.handleChange(e.target.value)}></SearchBox>
+            <Link to={`/search/${this.state.search}`}><SearchB>
+              <SearchIcon src={searchIcon} alt='search'/>
+            </SearchB></Link>
+          </SearchElements>
         </Top>
 
         <Bottom>
 
             {/* these will disappear in desktop view */}
           <MobileDisplay>
-            <Link to='/profile'><ProfileIcon src={profileIcon} alt='profile'/></Link>
+            <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+              <ProfileIcon src={profileIcon} alt='profile'/>
+            </a>
             <ProfileIcon src={chatIcon} alt='profile'/>
           </MobileDisplay>
 
           <Cats2>
-            <h2>Logo</h2>
+            <Link to='/' style={{ textDecoration: 'none', color: 'black' }}><h2>Logo</h2></Link>
           </Cats2>
 
             {/* these will disappear in mobile view and will be replaced by icon */}
@@ -214,12 +234,11 @@ class Nav extends Component {
           </CatsDesktop>
 
           <Cats2>
-            <a href={process.env.REACT_APP_LOGIN}>
-              <h3>login/signup</h3>
-            </a>
 
             <DesktopDisplay>
-              <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>login/signup</Link>
+              <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+                <p>login/signup</p>
+              </a>
               <ProfileIcon src={chatIcon} alt='profile'/>
             </DesktopDisplay>
 
