@@ -11,11 +11,23 @@ class ContactUs extends Component {
 
     handleChange(obj) {
 
-        
+
 
     }
 
     render() {
+
+        const Background = styled.div`
+            position: fixed;
+            top: 0;
+            background-color: black;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `
 
         const Modal = styled.div`
             background-color: white;
@@ -46,15 +58,17 @@ class ContactUs extends Component {
         } else {
 
             return (
-                <Modal>
-                    <Input placeholder='Name'/>
-                    <Input placeholder='Subject'/>
-                    <TextArea placeholder='What can we help you with?'/>
-                    <div>
-                        <button onClick={this.props.cancel()}>Cancel</button>
-                        <button>Send</button>
-                    </div>
-                </Modal>
+                <Background>
+                    <Modal>
+                        <Input placeholder='Name' />
+                        <Input placeholder='Subject' />
+                        <TextArea placeholder='What can we help you with?' />
+                        <div>
+                            <button onClick={this.props.cancel()}>Cancel</button>
+                            <button>Send</button>
+                        </div>
+                    </Modal>
+                </Background>
             )
         }
 

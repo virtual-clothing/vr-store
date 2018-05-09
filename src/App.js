@@ -18,11 +18,9 @@ class App extends Component {
       <div className="App">
         <Nav />
         {/* delete Body tag below, just using to test nav and footer */}
-        
-        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>>
         <Routes />
         <Footer />
-
+        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
       </div>
     );
   }

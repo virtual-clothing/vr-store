@@ -18,7 +18,7 @@ export default (state = initState, action) => {
       return { ...state, userInfo: action.payload }
 
     case CONTACT_IS_OPEN:
-      console.log('ContactUS is open: ',state.contactIsOpen)
+      console.log('ContactUS is open: ', !state.contactIsOpen)
       return Object.assign({}, state, {contactIsOpen: !state.contactIsOpen})
 
     default:
