@@ -26,9 +26,10 @@ app.use( passport.session() );
 passport.use( new Auth0Strategy(
   {domain, clientID, clientSecret, callbackURL, successRedirect, failureRedirect},
  function(accessToken, refreshToken, extraParams, profile, done) {
+   console.log(profile)
     app.get('db').findUser([profile.id]).then(userInfo => {
       if (!userInfo[0]) {
-        app.get('db').createUser([profile.displayName, profile.id, profile.picture]).then(user => {
+        app.get('db').createUser([profile.displayName, profile.id, profile.picture, profile._json.gender, profile._json.nickname, profile._json.email ]).then(user => {
           return done(null, user[0].id);
         });
       } else {

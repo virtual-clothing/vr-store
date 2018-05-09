@@ -2,11 +2,14 @@ create table users (
     id SERIAL PRIMARY KEY,    
     username text,    
     auth_id text,    
-    profile_img text
+    profile_img text,
+    gender text,
+    nickname text,
+    email text
 )
 
-insert into users (username, auth_id, profile_img)values ('Harry Potter', 'dfsjfksdjfsdf', '@myprofileimg.com')
-insert into users (username, auth_id, profile_img) values ('Hermany', '34wefdsf3', '@herprofileimg.com')
+insert into users (username, auth_id, profile_img, gender, nickname, email)values ('Harry Potter', 'dfsjfksdjfsdf', '@myprofileimg.com', 'man', 'Potter', 'potter@gmail.com')
+insert into users (username, auth_id, profile_img, gender, nickname, email) values ('Hermany', '34wefdsf3', '@herprofileimg.com', 'female', 'Hernickname', 'hermany@gmail.com')
 
 create table products (    
     id SERIAL PRIMARY KEY,    
