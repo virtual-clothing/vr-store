@@ -18,6 +18,7 @@ const Body = styled.div`
   position: relative;
   top: 40px;
   overflow: hidden;
+  padding-bottom: 40px;
 `;
 
 const TestImages = styled.img`
@@ -91,7 +92,6 @@ export default class Home extends Component {
                     <EnterVR>Enter VR Store</EnterVR>
                 </VR>
 
-                HOME
             </Body>
         )
     }

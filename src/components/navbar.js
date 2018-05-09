@@ -198,7 +198,6 @@ class Nav extends Component {
     }
 
   render() {
-    console.log(process.env.REACT_APP_LOGIN)
     return (
       <NavOutter>
       <NavBody>

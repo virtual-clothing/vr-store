@@ -13,7 +13,7 @@ import Failure from './components/auth/Failure';
 export default () => {
     return (
         <Switch>
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={Home} exact/>
             <Route path='/men' component={Men} />
             <Route path='/women' component={Women} />
             <Route path='/kids' component={Kids} />

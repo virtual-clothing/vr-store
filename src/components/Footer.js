@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { openCloseContact } from './ducks/reducer';
+import ContactUs from './ContactUs';
 
-export default class Footer extends Component {
 
+class Footer extends Component {
 
     render() {
 
-        const StyledFooter = styled.div`
+        const DesktopFooter = styled.div`
             align-items: center;
             border: 2px solid black;
+            bottom: 0;
             display: flex;
             height: 10vh;
             justify-content: space-around;
+            left: 0;
+            position: fixed;
             width: 100%;
         `;
 
@@ -30,15 +36,23 @@ export default class Footer extends Component {
         `
 
         return (
-            <StyledFooter>
-                <button onClick={() => alert('contact us')}>CONTACT US</button>
+            <DesktopFooter>
+                <button onClick={() => this.props.openCloseContact()}>CONTACT US</button>
                 <SocialMediaLinks>
                     <StyledATag><img src='./twitter.png' alt='twitter' height='50%' width='50%'/></StyledATag>
                     <StyledATag><img src='./facebook.png' alt='facebook' height='50%' width='50%'/></StyledATag>
                     <StyledATag><img src='./instagram.png' alt='instagram' height='50%' width='50%'/></StyledATag>
                 </SocialMediaLinks>
                 <button>CHAT</button>
-            </StyledFooter>
+            </DesktopFooter>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        contactIsOpen: state.contactIsOpen
+    }
+};
+
+export default connect(mapStateToProps, { openCloseContact})(Footer);
