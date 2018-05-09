@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
+const nodemailer = require('nodemailer');
 const PORT = process.env.PORT || 4444;
 const {
   domain, clientID, clientSecret, callbackURL, successRedirect, failureRedirect
@@ -61,4 +62,38 @@ app.get('/api/userinfo', (req, res) => {
   })
 });
 
-app.listen(PORT, () => console.log(`VR is running on port ${PORT}`));
+// NodeMailer
+
+const smtpTransport = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'djrocks911@gmail.com',
+    pass: 'Sfboy1995'
+  }
+});
+
+app.post('/email', function create(req, res, next) {
+
+  var mail = {
+    from: req.params.email,
+    to: 'djrocks911@gmail.com',
+    subject: req.params.subject,
+    html: "name: <br/>" + req.params.name + "<br/> Message: <br/>" + req.params.message + "<br/> email <br/>" + req.params.email,
+  }
+
+  smtpTransport.sendMail(mail, function(error, response) {
+    if(error) {
+      console.log('email sending error');
+      console.log(error);
+    } else {
+      console.log('email sent')
+    }
+    smtpTransport.close();
+
+  });
+
+  res.send(200, req.body);
+});
+
+
+app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)); 

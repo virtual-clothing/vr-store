@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class ContactUs extends Component {
+    constructor() {
+        super();
 
-    state = {
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+        this.state = {
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+        }
+
+    }
+
+    componentDidMount() {
+        
     }
 
     handleChange(obj) {
 
         this.setState(obj);
+        console.log(this.state.name)
+
+    }
+
+    sendEmail(obj) {
+
+        console.log(obj)
+        axios.post('/email', {name: this.props.user.username, email: this.props.user.email, subject: this.state.subject, message: this.state.message}).then((res => console.log(res)))
 
     }
 
@@ -22,7 +39,7 @@ class ContactUs extends Component {
         const Background = styled.div`
             position: fixed;
             top: 0;
-            background-color: rgba(0, 0, 0, .8);
+            background: rgba(0, 0, 0, .8);
             opacity: 0.5;
             width: 100%;
             height: 100%;
@@ -33,7 +50,7 @@ class ContactUs extends Component {
 
         const Modal = styled.div`
             opacity: 1.0;
-            background-color: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 1);
             border: 2px solid black;
             width: 50%;
             height: 50%;
@@ -44,6 +61,7 @@ class ContactUs extends Component {
             align-items: center;
             position: fixed;
             padding: 10px;
+            
         `
         const Input = styled.input`
             width: 100%;
@@ -82,7 +100,7 @@ class ContactUs extends Component {
                         <TextArea placeholder='What can we help you with?' onChange={(e) => this.handleChange({ message: e.target.value })} />
                         <ButtonDiv>
                             <button onClick={this.props.cancel()}>Cancel</button>
-                            <button>Send</button>
+                            <button onClick={() => this.sendEmail(this.state)}>Send</button>
                         </ButtonDiv>
                     </Modal>
                 </Background>
