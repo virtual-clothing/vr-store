@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Popup from 'react-popup';
+import ContactUs from './ContactUs';
+
 
 export default class Footer extends Component {
 
     state = {
-        name: '',
-        subject: '',
-        message: ''
+        contactIsOpen: false
     }
 
-    sendMessage(obj) {
+    openModal() {
+        this.setState({ contactIsOpen: true })
+      }
+  
+      closeModal() {
+        this.setState({ contactIsOpen: false })
+      }
+    
 
-    }
 
     render() {
 
-        const StyledFooter = styled.div`
+        const DesktopFooter = styled.div`
             align-items: center;
             border: 2px solid black;
+            bottom: 0;
             display: flex;
             height: 10vh;
             justify-content: space-around;
+            left: 0;
+            position: fixed;
             width: 100%;
         `;
 
@@ -38,39 +46,18 @@ export default class Footer extends Component {
         const StyledATag = styled.a`
             margin: 10px;
         `
-        const Content = () => {
-            return (
-                <div>
-                    <input placeholder='name'/>
-                    <input placeholder='subject'/>
-                    <input/>
-                </div>
-            )
-        }
-        return (
-            <StyledFooter>
-                <button onClick={() => Popup.create({
-                    title: 'CONTACT US',
-                    content:  <Content/>,
-                    buttons: {
-                        left: [{
-                            text: 'Cancel',
-                            action: () => {Popup.close()}
-                        }],
 
-                        right: [{
-                            text: 'Send',
-                            action: this.sendMessage({})
-                        }]
-                    }
-                })}>CONTACT US</button>
+        return (
+            <DesktopFooter>
+                <ContactUs isOpen={this.state.contactIsOpen} cancel={() => this.closeModal.bind(this)}/>
+                <button onClick={() => this.openModal()}>CONTACT US</button>
                 <SocialMediaLinks>
                     <StyledATag><img src='./twitter.png' alt='twitter' height='50%' width='50%'/></StyledATag>
                     <StyledATag><img src='./facebook.png' alt='facebook' height='50%' width='50%'/></StyledATag>
                     <StyledATag><img src='./instagram.png' alt='instagram' height='50%' width='50%'/></StyledATag>
                 </SocialMediaLinks>
                 <button>CHAT</button>
-            </StyledFooter>
+            </DesktopFooter>
         )
     }
 }
