@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
@@ -120,7 +119,6 @@ app.post('/email', function create(req, res, next) {
 });
 
 
-app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)); 
 //____________________STRIPE
 app.post('/api/payment', function(req, res, next){
   console.log(req.body)

@@ -13,7 +13,7 @@ import bJacket from './itemImages/brownjacket.jpg';
 import gJacket from './itemImages/greenjacket.jpeg';
 import pJacket from './itemImages/puffy.jpg';
 
-import { ParallaxProvider, Parallax, Image } from 'react-scroll-parallax';
+import { ParallaxProvider, Parallax, ParallaxBanner } from 'react-scroll-parallax';
 
 const Body = styled.div`
   min-height: 100vh;
@@ -168,7 +168,7 @@ export default class Home extends Component {
                 </VR> */}
 
 
-                <Parallax
+                {/* <Parallax
                     className="custom-class"
                     offsetYMax={2000}
                     offsetYMin={-20}
@@ -180,11 +180,32 @@ export default class Home extends Component {
                     className="custom-class"
                     offsetYMax={20}
                     offsetYMin={-20}
-                    slowerScrollRate={.0000005}
+                    slowerScrollRate={100}
                     tag="figure"
                 >
                     <img src={image3} />
-                </Parallax>
+                </Parallax> */}
+
+                {/* <ParallaxBanner
+                    className="your-class"
+                    layers={[
+                        {
+                            image: image1,
+                            amount: 0.1,
+                            slowerScrollRate: 3,
+                        },
+                        {
+                            image: image2,
+                            amount: 0.2,
+                            slowerScrollRate: 4,
+                        },
+                    ]}
+                    style={{
+                        height: '500px',
+                    }}
+                >
+                    <h1>Banner Children</h1>
+                </ParallaxBanner> */}
 
 
             </Body>
