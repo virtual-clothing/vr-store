@@ -13,6 +13,7 @@ import bJacket from './itemImages/brownjacket.jpg';
 import gJacket from './itemImages/greenjacket.jpeg';
 import pJacket from './itemImages/puffy.jpg';
 
+import { ParallaxProvider, Parallax, Image } from 'react-scroll-parallax';
 
 const Body = styled.div`
   min-height: 100vh;
@@ -129,6 +130,7 @@ export default class Home extends Component {
           };
 
         return (
+            <ParallaxProvider>
             <Body>
 
                 <Slider {...settings} className='carousel'>
@@ -161,11 +163,32 @@ export default class Home extends Component {
                     </ItemClass>
                 </Featured>
 
-                <VR>
+                {/* <VR>
                     <EnterVR>Enter VR Store</EnterVR>
-                </VR>
+                </VR> */}
+
+
+                <Parallax
+                    className="custom-class"
+                    offsetYMax={2000}
+                    offsetYMin={-20}
+                    tag="figure"
+                >
+                    <img src={image2} />
+                </Parallax>
+                <Parallax
+                    className="custom-class"
+                    offsetYMax={20}
+                    offsetYMin={-20}
+                    slowerScrollRate={.0000005}
+                    tag="figure"
+                >
+                    <img src={image3} />
+                </Parallax>
+
 
             </Body>
+            </ParallaxProvider>
         )
     }
 }
