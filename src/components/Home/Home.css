@@ -4,11 +4,11 @@
 .carousel{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     padding: 0px;
     width: 100%;
-   
     position: relative;
-    top: 30px;;
-    
+    top: 30px;
+    max-height: 520px;
+    margin-bottom: 100px;
 }

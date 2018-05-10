@@ -31,7 +31,9 @@ class App extends Component {
           <Footer />
         </div>
 
+        <div style={{ position: 'relative', zIndex: "3" }}>
         <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
+        </div>
 
       </div>
     );

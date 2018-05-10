@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
@@ -39,7 +38,7 @@ app.use( passport.session() );
 passport.use( new Auth0Strategy(
   {domain, clientID, clientSecret, callbackURL, successRedirect, failureRedirect},
  function(accessToken, refreshToken, extraParams, profile, done) {
-   console.log(profile)
+  //  console.log(profile)
     app.get('db').findUser([profile.id]).then(userInfo => {
       if (!userInfo[0]) {
         app.get('db').createUser([profile.displayName, profile.id, profile.picture, profile._json.gender, profile._json.nickname, profile._json.email ]).then(user => {
@@ -84,6 +83,17 @@ const smtpTransport = nodemailer.createTransport({
   }
 });
 
+// check if user is logged in
+app.get('/checkauth', (req, res) => {
+  if(req.user){
+      res.status(200).send([true])
+      console.log(req.user,"is a user")
+  }else{
+      res.status(200).send([false])
+      console.log("no user")
+  }
+})
+
 app.post('/email', function create(req, res, next) {
 
   console.log('req', req.body)
@@ -109,7 +119,6 @@ app.post('/email', function create(req, res, next) {
 });
 
 
-app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)); 
 //____________________STRIPE
 app.post('/api/payment', function(req, res, next){
   console.log(req.body)
