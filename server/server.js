@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
@@ -16,6 +17,8 @@ app.use(session({
   saveUninitialized: true,
   secret: process.env.SECRET_SESSION
 }))
+
+app.use(bodyParser.json())
 
 massive(process.env.SERVER_CONNECTION).then(db => {
   console.log('DB is running I__________I')
@@ -59,7 +62,7 @@ app.get('/api/userinfo', (req, res) => {
   db.getUserInfo([req.user]).then(userInfo => {
     console.log(req.user)
     res.status(200).send(userInfo);
-  })
+  });
 });
 
 // NodeMailer
@@ -67,18 +70,19 @@ app.get('/api/userinfo', (req, res) => {
 const smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'djrocks911@gmail.com',
-    pass: 'Sfboy1995'
+    user: 'vrclothingstore@gmail.com',
+    pass: 'virtualstore'
   }
 });
 
 app.post('/email', function create(req, res, next) {
 
+  console.log('req', req.body)
   var mail = {
-    from: req.params.email,
-    to: 'djrocks911@gmail.com',
-    subject: req.params.subject,
-    html: "name: <br/>" + req.params.name + "<br/> Message: <br/>" + req.params.message + "<br/> email <br/>" + req.params.email,
+    from: req.body.email,
+    to: 'vrclothingstore@gmail.com',
+    subject: req.body.subject,
+    html: "name: <br/>" + req.body.name + "<br/> Message: <br/>" + req.body.message + "<br/> email <br/>" + req.body.email,
   }
 
   smtpTransport.sendMail(mail, function(error, response) {
