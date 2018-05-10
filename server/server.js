@@ -1,9 +1,11 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
+const nodemailer = require('nodemailer');
 require('dotenv').config()
 const app = express();
 
@@ -24,6 +26,8 @@ app.use(session({
   saveUninitialized: true,
   secret: process.env.SECRET_SESSION
 }))
+
+app.use(bodyParser.json())
 
 massive(process.env.SERVER_CONNECTION).then(db => {
   console.log('DB is running I__________I')
@@ -67,9 +71,45 @@ app.get('/api/userinfo', (req, res) => {
   db.getUserInfo([req.user]).then(userInfo => {
     console.log(req.user)
     res.status(200).send(userInfo);
-  })
+  });
 });
 
+// NodeMailer
+
+const smtpTransport = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.NODE_MAILER_USER,
+    pass: process.env.NODE_MAILER_PASSWORD
+  }
+});
+
+app.post('/email', function create(req, res, next) {
+
+  console.log('req', req.body)
+  var mail = {
+    from: req.body.email,
+    to: process.env.NODE_MAILER_USER,
+    subject: req.body.subject,
+    html: "name: <br/>" + req.body.name + "<br/> Message: <br/>" + req.body.message + "<br/> email <br/>" + req.body.email,
+  }
+
+  smtpTransport.sendMail(mail, function(error, response) {
+    if(error) {
+      console.log('email sending error');
+      console.log(error);
+    } else {
+      console.log('email sent')
+    }
+    smtpTransport.close();
+
+  });
+
+  res.send(200, req.body);
+});
+
+
+app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)); 
 //____________________STRIPE
 app.post('/api/payment', function(req, res, next){
   console.log(req.body)
