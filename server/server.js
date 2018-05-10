@@ -5,6 +5,7 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const nodemailer = require('nodemailer');
+const controller = require('./controller');
 require('dotenv').config()
 const app = express();
 
@@ -65,13 +66,10 @@ app.get('/callback', passport.authenticate('auth0', {
 }))
 
 // getUserInfo
-app.get('/api/userinfo', (req, res) => {
-  const db = req.app.get('db');
-  db.getUserInfo([req.user]).then(userInfo => {
-    console.log(req.user)
-    res.status(200).send(userInfo);
-  });
-});
+app.get('/api/userinfo', controller.getUserInfo);
+
+// getUserCart
+app.get('/cart', controller.getUserCart);
 
 // NodeMailer
 
@@ -93,6 +91,8 @@ app.get('/checkauth', (req, res) => {
       console.log("no user")
   }
 })
+
+// NODE MAILER
 
 app.post('/email', function create(req, res, next) {
 
