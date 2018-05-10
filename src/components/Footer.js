@@ -97,4 +97,4 @@ function mapStateToProps(state) {
     }
 };
 
-export default connect(mapStateToProps, { openCloseContact })(Footer);
+export default connect(mapStateToProps, { openCloseContact})(Footer);
