@@ -5,11 +5,14 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const PORT = process.env.PORT || 4444;
+const socket = require('socket.io');
+const bodyParser = require('body-parser');
 const {
   domain, clientID, clientSecret, callbackURL, successRedirect, failureRedirect
 } = process.env;
 
 const app = express();
+app.use(bodyParser.json());
 app.use(session({
   resave: false,
   saveUninitialized: true,
@@ -61,4 +64,13 @@ app.get('/api/userinfo', (req, res) => {
   })
 });
 
-app.listen(PORT, () => console.log(`VR is running on port ${PORT}`));
+const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)))
+
+io.on('connection', socket => {
+  socket.on('emit message', input => {
+    console.log('blast');
+    socket.emit('BOT') // bot
+    io.sockets.emit('generate response', input);
+  });
+});
+

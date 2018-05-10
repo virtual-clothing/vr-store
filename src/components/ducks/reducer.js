@@ -26,13 +26,11 @@ export default (state = initState, action) => {
   }
 }
 
-
 export const openCloseContact = () => {
 
   return {
     type: CONTACT_IS_OPEN
   }
-
 }
 
 export const getUserInfo = () => {
