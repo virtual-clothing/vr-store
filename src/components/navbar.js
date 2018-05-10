@@ -6,6 +6,7 @@ import profileIcon from './media/person.png';
 import searchIcon from './media/searchIcon.png';
 import chatIcon from './media/chat.png';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NavBody = styled.div`
     width: 100%;
@@ -188,23 +189,33 @@ class Nav extends Component {
 
       this.state = {
         toggleMenu: false,
-        search: ''
+        search: '',
+        user: []
       }
 
     }
 
+
+    componentWillMount(){
+      axios.get('/checkauth').then( res => {
+        this.setState({user: res.data }, console.log(res.data))
+      })
+      
+    }
+
     handleChange(val){
-      this.setState({search: val})
+      this.setState(val)
     }
 
   render() {
+    var toggle = this.state.user[0];
     return (
       <NavOutter>
       <NavBody>
 
         <Top>
           <SearchElements>
-            <SearchBox placeholder='Search' onChange={(e) => this.handleChange(e.target.value)}></SearchBox>
+            <SearchBox placeholder='Search' onChange={(e) => this.handleChange({search: e.target.value})}></SearchBox>
             <Link to={`/search/${this.state.search}`}><SearchB>
               <SearchIcon src={searchIcon} alt='search'/>
             </SearchB></Link>
@@ -215,9 +226,17 @@ class Nav extends Component {
 
             {/* these will disappear in desktop view */}
           <MobileDisplay>
-            <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
-              <ProfileIcon src={profileIcon} alt='profile'/>
-            </a>
+
+            {toggle === false ? <div>{
+              <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+                <ProfileIcon src={profileIcon} alt='profile'/>
+              </a>
+            }</div> :
+              <Link to='/profile'>
+                <ProfileIcon src={profileIcon} alt='profile'/>
+              </Link>
+            }
+
             <ProfileIcon src={chatIcon} alt='profile'/>
           </MobileDisplay>
 
@@ -236,10 +255,19 @@ class Nav extends Component {
           <Cats2>
 
             <DesktopDisplay>
-              <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
-                <p>login/signup</p>
-              </a>
+
+                {toggle === false ? <div>{
+                  <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+                    <p>login/signup</p>
+                  </a>
+                }</div> :
+                  <Link to='/profile' style={{ textDecoration: 'none', color: 'black' }}>
+                    <p>Account</p>
+                  </Link>
+                }
+
               <ProfileIcon src={chatIcon} alt='profile'/>
+              
             </DesktopDisplay>
 
             <Link to='/cart'><CartIcon src={ Cart } alt='cart'/></Link>

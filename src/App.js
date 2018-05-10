@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div>
-
+       
         <div style={{ position: 'relative', zIndex: "2" }}>
           <Nav/>
         </div>
@@ -34,7 +34,9 @@ class App extends Component {
         </div>
 
 
+        <div style={{ position: 'relative', zIndex: "3" }}>
         <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
+        </div>
 
       </div>
     );

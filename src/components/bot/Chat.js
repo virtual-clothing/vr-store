@@ -4,8 +4,27 @@ import styled from 'styled-components';
 const socket = io('http://localhost:4444');
 
 const ChatRoom = styled.div`
+  margin-bottom: 200px
+`;
 
-`
+const Messages = styled.div`
+
+`;
+
+const ChatFooter = styled.div`
+
+`;
+
+const Input = styled.input`
+
+`;
+
+const Button = styled.button`
+
+`;
+
+
+
 
 class Chat extends Component {
   constructor(props) {
@@ -34,25 +53,24 @@ class Chat extends Component {
     const chat = this.state.chat.map((e, i) => <p key={i}>{e}</p>);
     return (
       <ChatRoom>
-        <div>
+        <Messages>
         {chat}
-
-          <label>New Message</label>
-          <input
-            type="text"
-            value={this.state.newMessage}
-            onChange={e => {
-              this.handleChange(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              this.sendMessage(this.state.newMessage, 'emit');
-            }}
-          >
-            Emit
-          </button>
-        </div>
+        </Messages>
+        <ChatFooter>
+        <Input           
+          type="text"
+          value={this.state.newMessage}
+          onChange={e => {
+            this.handleChange(e.target.value);
+          }} />
+        <Button
+          onClick={() => {
+            this.sendMessage(this.state.newMessage, 'emit');
+          }}
+        >
+          Send
+        </Button>
+        </ChatFooter>
       </ChatRoom>
     );
   }
