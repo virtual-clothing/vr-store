@@ -26,7 +26,7 @@ app.use( passport.session() );
 passport.use( new Auth0Strategy(
   {domain, clientID, clientSecret, callbackURL, successRedirect, failureRedirect},
  function(accessToken, refreshToken, extraParams, profile, done) {
-   console.log(profile)
+  //  console.log(profile)
     app.get('db').findUser([profile.id]).then(userInfo => {
       if (!userInfo[0]) {
         app.get('db').createUser([profile.displayName, profile.id, profile.picture, profile._json.gender, profile._json.nickname, profile._json.email ]).then(user => {
@@ -60,5 +60,17 @@ app.get('/api/userinfo', (req, res) => {
     res.status(200).send(userInfo);
   })
 });
+
+// check if user is logged in
+app.get('/checkauth', (req, res) => {
+  if(req.user){
+      res.status(200).send([true])
+      console.log(req.user,"is a user")
+  }else{
+      res.status(200).send([false])
+      console.log("no user")
+  }
+})
+
 
 app.listen(PORT, () => console.log(`VR is running on port ${PORT}`));
