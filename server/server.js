@@ -5,8 +5,13 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const nodemailer = require('nodemailer');
-require('dotenv').config()
+const Botmaster = require('botmaster');
+const SocketioBot = require('botmaster-socket.io');
+
 const app = express();
+
+// Routing for index.html
+app.use(express.static(__dirname + '/public')); //added
 
 const bodyParser = require('body-parser')
     , cors = require('cors')
@@ -162,7 +167,35 @@ app.post('/api/payment', function(req, res, next){
 });
 
 
+
+
 const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)))
+
+//_______________bot
+const botmaster = new Botmaster({io});
+
+
+const socketioSettings = {
+  id: 'SOME_BOT_ID_OF_YOUR_CHOOSING',
+  server: botmaster.server, // this is required for socket.io. You can set it to another node server object if you wish to. But in this example, we will use the one created by botmaster under the hood
+};
+
+const socketioBot = new SocketioBot(socketioSettings);
+botmaster.addBot(socketioBot);
+
+botmaster.use({
+  type: 'incoming',
+  name: 'my-middleware',
+  controller: (bot, update) => {
+    return bot.reply(update, 'Hello world!');
+  }
+});
+
+botmaster.on('error', (bot, err) => { // added
+  console.log(err.stack); // added
+}); // added
+//_______________
+
 
 io.on('connection', socket => {
   socket.on('emit message', input => {

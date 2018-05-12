@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { openCloseContact } from './ducks/reducer';
+import { openCloseContact, toggleChat } from './ducks/reducer';
 import ContactUs from './ContactUs';
 
 const DesktopDisplay = styled.div`
@@ -53,7 +53,7 @@ class Footer extends Component {
                         <StyledATag><img src='./facebook.png' alt='facebook' height='50%' width='50%' /></StyledATag>
                         <StyledATag><img src='./instagram.png' alt='instagram' height='50%' width='50%' /></StyledATag>
                     </SocialMediaLinks>
-                    <button>CHAT</button>
+                    <button onClick={() => this.props.toggleChat()}>CHAT</button>
                 </DesktopDisplay>
             </FooterComponent>
         )
@@ -62,8 +62,14 @@ class Footer extends Component {
 
 function mapStateToProps(state) {
     return {
-        contactIsOpen: state.contactIsOpen
+        contactIsOpen: state.contactIsOpen,
+        chatIsOpen: state.chatIsOpen
     }
 };
 
-export default connect(mapStateToProps, { openCloseContact})(Footer);
+const actionCreators = {
+    openCloseContact,
+    toggleChat
+}
+
+export default connect(mapStateToProps, actionCreators)(Footer);

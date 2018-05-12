@@ -27,8 +27,6 @@ class App extends Component {
           <Routes />
         </div>
 
-        <Chat />
-
         <div style={{ position: 'relative', zIndex: "2" }}>
           <Footer />
         </div>
