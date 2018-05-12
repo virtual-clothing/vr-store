@@ -19,11 +19,11 @@ class App extends Component {
     return (
       <div>
        
-        <div style={{ position: 'relative', zIndex: "2" }}>
+        <div style={{ position: 'fixed', top: '0', zIndex: "2" }}>
           <Nav/>
         </div>
         
-        <div style={{ position: 'relative', zIndex: "1" }}>
+        <div style={{ position: 'relative', zIndex: "1", marginTop: '40px' }}>
           <Routes />
         </div>
 

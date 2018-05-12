@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 const Botmaster = require('botmaster');
 const SocketioBot = require('botmaster-socket.io');
 
+const controller = require('./controller');
 const app = express();
 
 // Routing for index.html
@@ -72,13 +73,10 @@ app.get('/callback', passport.authenticate('auth0', {
 }))
 
 // getUserInfo
-app.get('/api/userinfo', (req, res) => {
-  const db = req.app.get('db');
-  db.getUserInfo([req.user]).then(userInfo => {
-    console.log(req.user)
-    res.status(200).send(userInfo);
-  });
-});
+app.get('/api/userinfo', controller.getUserInfo);
+
+// getUserCart
+app.get('/cart', controller.getUserCart);
 
 // NodeMailer
 
@@ -100,6 +98,8 @@ app.get('/checkauth', (req, res) => {
       console.log("no user")
   }
 })
+
+// NODE MAILER
 
 app.post('/email', function create(req, res, next) {
 
@@ -171,7 +171,7 @@ app.post('/api/payment', function(req, res, next){
 
 const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)))
 
-//_______________bot
+//________________________________bot
 const botmaster = new Botmaster({io});
 
 
@@ -194,7 +194,6 @@ botmaster.use({
 botmaster.on('error', (bot, err) => { // added
   console.log(err.stack); // added
 }); // added
-//_______________
 
 
 io.on('connection', socket => {

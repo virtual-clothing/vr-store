@@ -44,6 +44,56 @@ const FooterComponent = styled.div`
 class Footer extends Component {
 
     render() {
+        const DesktopDisplay = styled.div`
+            align-items: center;
+            border-top: 1px solid black;
+            display: flex;
+            height: 100%;
+            justify-content: space-around;
+            width: 100%;
+
+            @media (max-width: 740px) {
+                display: none;
+            }
+        `;
+
+        const SocialMediaLinks = styled.div`
+            align-items: center;
+            display: flex;
+            
+            justify-content: center;
+            width: 20%;
+        `;
+
+        const StyledATag = styled.a`
+            margin: 10px;
+        `
+        const MobileDisplay = styled.div`
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @media (min-width: 740px) {
+                display: none;
+            }
+        `
+        const MobileButtons = styled.div`
+            width:100%;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        `
+
+        const Footer = styled.div`
+            background-color: lightgray;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+
+        `
         return (
             <FooterComponent>
                 <DesktopDisplay>

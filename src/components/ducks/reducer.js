@@ -3,10 +3,12 @@ import axios from 'axios';
 const initState = {
   userInfo: {},
   contactIsOpen: false,
-  chatIsOpen: false
+  chatIsOpen: false,
+  userCart: []
 }
 
 const GET_USER_INFO = "GET_USER_INFO";
+const GET_USER_CART = "GET_USER_CART";
 const CONTACT_IS_OPEN = "CONTACT_IS_OPEN";
 const TOGGLE_CHAT = "TOGGLE_CHAT";
 
@@ -15,6 +17,8 @@ export default (state = initState, action) => {
     case GET_USER_INFO + '_FULFILLED':
       console.log(action.payload)
       return { ...state, userInfo: action.payload }
+    case GET_USER_CART + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload});
     case CONTACT_IS_OPEN:
       console.log('ContactUS is open: ', !state.contactIsOpen)
       return Object.assign({}, state, {contactIsOpen: !state.contactIsOpen});
@@ -34,6 +38,15 @@ export const openCloseContact = () => {
 export const toggleChat = () => {
   return {
     type: TOGGLE_CHAT
+  }
+}
+
+export const getUserCart = () => {
+  const promise = axios.get('/cart').then(res => res.data)
+
+  return {
+    type: GET_USER_CART,
+    payload: promise
   }
 }
 
