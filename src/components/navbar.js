@@ -6,7 +6,10 @@ import profileIcon from './media/person.png';
 import searchIcon from './media/searchIcon.png';
 import chatIcon from './media/chat.png';
 import { Link } from 'react-router-dom';
+import Chat from './bot/Chat';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {toggleChat} from './ducks/reducer';
 
 const NavBody = styled.div`
     width: 100%;
@@ -186,7 +189,6 @@ const CatSelect = styled.div`
 class Nav extends Component {
     constructor(){
       super()
-
       this.state = {
         toggleMenu: false,
         search: '',
@@ -194,7 +196,6 @@ class Nav extends Component {
       }
 
     }
-
 
     componentWillMount(){
       axios.get('/checkauth').then( res => {
@@ -237,7 +238,7 @@ class Nav extends Component {
               </Link>
             }
 
-            <ProfileIcon src={chatIcon} alt='profile'/>
+            <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
           </MobileDisplay>
 
           <Cats2>
@@ -266,7 +267,7 @@ class Nav extends Component {
                   </Link>
                 }
 
-              <ProfileIcon src={chatIcon} alt='profile'/>
+              <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
               
             </DesktopDisplay>
 
@@ -288,10 +289,23 @@ class Nav extends Component {
             <CatSelect><Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}>Fitting Room</Link></CatSelect>
           </DropMenu>
         }</div> : <div/>}
+        {
+          this.props.chatIsOpen
+          ?
+          <Chat />
+          :
+          null
+        }
 
       </NavOutter>
     );
   }
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+  return {
+    chatIsOpen: state.chatIsOpen
+  }
+}
+
+export default connect(mapStateToProps, {toggleChat})(Nav);

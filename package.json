@@ -7,6 +7,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "botmaster": "^3.2.0",
+    "botmaster-socket.io": "^1.0.3",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -16,6 +18,7 @@
     "nodemailer": "^4.6.4",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
+    "prettier": "^1.12.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -31,6 +34,7 @@
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0",
     "stripe": "^5.9.0",
     "styled-components": "^3.2.6"
   },
@@ -41,6 +45,10 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
   }
 }
