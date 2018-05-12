@@ -7,7 +7,7 @@ import ContactUs from './components/ContactUs';
 import { connect } from 'react-redux';
 import { openCloseContact } from './components/ducks/reducer';
 import { withRouter } from 'react-router-dom';
-
+import Chat from './components/bot/Chat';
 
 const Body = styled.div`
   min-height: 100vh;
@@ -30,6 +30,7 @@ class App extends Component {
         <div style={{ position: 'relative', zIndex: "2" }}>
           <Footer />
         </div>
+
 
         <div style={{ position: 'relative', zIndex: "3" }}>
         <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
