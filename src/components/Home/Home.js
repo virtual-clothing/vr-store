@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {   Component} from 'react';
 import styled from 'styled-components';
 import Slider from "react-slick-16";
 import image1 from './testCarouselImages/image1.jpeg';
@@ -154,7 +154,7 @@ export default class Home extends Component {
                     <div><TestImages src={image2} alt='2'/></div>
                     <div><TestImages src={image3} alt='3'/></div>
                     <div><TestImages src={image4} alt='4'/></div>
-                    <div><TestImages src={image5} alt='5'/></div>
+                    <div  ><  TestImages src={image5} alt='5'   /> </div>
                     <div><TestImages src={image6} alt='6'/></div>
                 </Slider>
 
