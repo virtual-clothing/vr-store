@@ -12,6 +12,7 @@ class Footer extends Component {
 
         const DesktopDisplay = styled.div`
             align-items: center;
+            border-top: 1px solid black;
             display: flex;
             height: 100%;
             justify-content: space-around;
