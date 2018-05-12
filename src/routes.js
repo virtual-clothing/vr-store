@@ -9,6 +9,7 @@ import Favorites from './components/Favorites';
 import Login from './components/auth/Login';
 import Failure from './components/auth/Failure';
 import Item from './components/itemView/item';
+import Account from './components/account/account';
 
 export default () => {
     return (
@@ -22,6 +23,7 @@ export default () => {
             <Route path='/login' component={Login} />
             <Route path='/failure' component={Failure} />
             <Route path='/item' component={ Item } />
+            <Route path='/account' component={ Account }/>
         </Switch>
     )
 }

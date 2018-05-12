@@ -22,6 +22,8 @@ import store3 from './testCarouselImages/store4.jpeg';
 
 import { ParallaxProvider, Parallax, ParallaxBanner } from 'react-scroll-parallax';
 
+
+//use this for other views
 const Body = styled.div`
   min-height: 100vh;
   height: auto;
@@ -178,12 +180,6 @@ export default class Home extends Component {
                         </ItemBuy>
                     </ItemClass>
                 </Featured>
-
-                {/* <VR>
-                    <EnterVR>Enter VR Store</EnterVR>
-                </VR> */}
-
-
 
                 <ParallaxBanner
                     className="pBanner"
