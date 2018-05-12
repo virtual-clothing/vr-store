@@ -262,7 +262,7 @@ class Nav extends Component {
                     <p>login/signup</p>
                   </a>
                 }</div> :
-                  <Link to='/profile' style={{ textDecoration: 'none', color: 'black' }}>
+                  <Link to='/account' style={{ textDecoration: 'none', color: 'black' }}>
                     <p>Account</p>
                   </Link>
                 }

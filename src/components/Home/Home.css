@@ -12,3 +12,25 @@
     max-height: 520px;
     margin-bottom: 100px;
 }
+
+.parallax1{
+    position: relative;
+    z-index: 1;
+}
+
+.parallax2{
+    position: relative;
+    z-index: 2;
+}
+
+.pBanner{
+    margin-top: 100px;
+    margin-bottom: 110px;
+}
+
+.par{
+    width: 50px;
+    position: relative;
+    left: 80px;
+    top: 100px;
+}
