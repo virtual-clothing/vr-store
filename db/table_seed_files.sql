@@ -1,3 +1,4 @@
+-- just a note, phonenumber column in users needs to be bigint not int. int will only allow 8 character input
 create table users (    
     id SERIAL PRIMARY KEY,    
     username text,    

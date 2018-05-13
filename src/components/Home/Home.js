@@ -28,7 +28,6 @@ const Body = styled.div`
   min-height: 100vh;
   height: auto;
   position: relative;
-  top: 40px;
   overflow: hidden;
   padding-bottom: 40px;
 `;
@@ -57,6 +56,8 @@ const EnterVR = styled.button`
     bottom: 350px;
     z-index: 2;
 `;
+
+
 
 const Featured = styled.div`
     width: 100%;
@@ -142,8 +143,8 @@ export default class Home extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 5000,
-            pauseOnHover: true,
+            autoplaySpeed: 4000,
+            pauseOnHover: false,
             fade: true
           };
 
@@ -186,16 +187,16 @@ export default class Home extends Component {
                     layers={[
                         {
                             image: store3,
-                            amount: .4,
-                            fasterScrollRate: 20,
-                            offsetYMin: '200%'
+                        amount: .4,
+                        fasterScrollRate: 20,
+                        offsetYMin: '200%'
                         },
                     ]}
                     style={{
                         height: '400px',
                     }}
                 >
-
+                    
                     <Parallax
                         className="parallax2"
                         offsetYMax='0%'

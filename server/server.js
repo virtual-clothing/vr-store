@@ -78,6 +78,13 @@ app.get('/api/userinfo', controller.getUserInfo);
 // getUserCart
 app.get('/cart', controller.getUserCart);
 
+// check if user is logged in
+app.get('/checkauth', controller.checkAuth);
+
+// update users account
+app.put('/updateaccount', controller.updateAccount);
+
+
 // NodeMailer
 
 const smtpTransport = nodemailer.createTransport({
@@ -88,16 +95,6 @@ const smtpTransport = nodemailer.createTransport({
   }
 });
 
-// check if user is logged in
-app.get('/checkauth', (req, res) => {
-  if(req.user){
-      res.status(200).send([true])
-      console.log(req.user,"is a user")
-  }else{
-      res.status(200).send([false])
-      console.log("no user")
-  }
-})
 
 // NODE MAILER
 

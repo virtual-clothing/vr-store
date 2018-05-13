@@ -17,4 +17,23 @@ module.exports = {
         })
     },
 
+    checkAuth: (req, res) => {
+        if(req.user){
+            res.status(200).send([true])
+            console.log(req.user,"is a user")
+        }else{
+            res.status(200).send([false])
+            console.log("no user")
+        }
+    },
+
+    updateAccount: (req, res) => {
+        const {username, address, phoneNumber, email} = req.body;
+        const db = req.app.get('db');
+        console.log(username, address, phoneNumber, email, req.user, "req.user")
+        db.updateAccount(username, address, phoneNumber, email, req.user).then( resp => {
+            res.status(200).send(resp)
+        })
+    },
+
 }
