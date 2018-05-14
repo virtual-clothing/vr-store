@@ -77,6 +77,8 @@ app.get('/api/userinfo', controller.getUserInfo);
 app.get('/cart', controller.getUserCart);
 app.delete('/cart/:index', controller.remFromCart)
 app.get('/api/all', controller.getAllItems);
+app.get('/favorites', controller.getFavorites);
+app.post('/favorites', controller.addToFavorites);
 
 
 // NodeMailer
