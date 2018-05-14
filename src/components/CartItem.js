@@ -44,7 +44,6 @@ const Item = styled.div`
 const ImageDiv = styled.div`
     height: 100%;
     width: 20%;
-    background-color: blue;
     margin-right: 10px;
 `
 const DescriptionDiv = styled.div`
