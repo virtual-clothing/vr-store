@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import Favorites from './favorites';
 
 
 //use this for other views
@@ -66,7 +67,7 @@ const UpdateInput = styled.input`
     border: 1px solid grey;
 `;
 
-const Favorites = styled.div`
+const FavoritesDiv = styled.div`
     width: 100%;
     border: 1px solid grey;
     display: flex;
@@ -226,9 +227,9 @@ export default class Account extends Component {
                 </TopElements>
 
                 {/* {this.state.favoriteToggle ? <div>{ */}
-                <Favorites>
-                    {favorites}
-                </Favorites>
+                <FavoritesDiv>
+                    <Favorites/>
+                </FavoritesDiv>
                 {/* }</div> : <div/>} */}
 
             </Body>
