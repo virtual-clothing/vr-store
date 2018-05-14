@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Image from './Image';
+import {remFromFavorites, addToFavorites} from '../../ducks/reducer';
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ class ImgContainer extends Component {
       if (this.props.searchKeyWord === 'View All') {
         if (item.gender === this.props.category) {
           return (
-            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
           )
         } 
       } else {
@@ -34,13 +35,13 @@ class ImgContainer extends Component {
         if (this.props.searchKeyWord) {
           if (item.gender === this.props.category && this.props.searchKeyWord === item.category) {
             return (
-              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
             )
           }
         } else if (item.gender === this.props.category) {
           // When user access to men || women || kids
           return (
-            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
           )
         } 
       }
@@ -60,4 +61,4 @@ const mapStateToProps = (state) => {
     searchKeyWord: state.searchKeyWord
   }
 }
-export default connect(mapStateToProps)(ImgContainer);
+export default connect(mapStateToProps, {remFromFavorites, addToFavorites})(ImgContainer);
