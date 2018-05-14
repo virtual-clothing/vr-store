@@ -67,5 +67,21 @@ module.exports = {
         db.getReviews(req.query.id).then( reviews => {
             res.status(200).send(reviews)
         })
+    },
+
+    submitReview: (req, res) => {
+        const db = req.app.get('db');
+        const {pID, review, name, rating, today} = req.body;
+        db.submitReview(pID, review, name, rating, today).then( reviews => {
+            res.status(200).send(reviews)
+        })
+    },
+
+    addToCart: (req, res) => {
+        const db = req.app.get('db');
+        const {pID} = req.body;
+        db.addToCart(pID, req.user).then( cart => {
+            res.status(200).send("success")
+        })
     }
 }
