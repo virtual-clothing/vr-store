@@ -6,7 +6,8 @@ const initState = {
   chatIsOpen: false,
   userCart: [],
   allItems: [],
-  searchKeyWord: ''
+  searchKeyWord: '',
+  favorites: []
 }
 
 const GET_USER_INFO = "GET_USER_INFO";
@@ -16,6 +17,8 @@ const CONTACT_IS_OPEN = "CONTACT_IS_OPEN";
 const TOGGLE_CHAT = "TOGGLE_CHAT";
 const GET_ALL_ITEMS = "GET_ALL_ITEMS";
 const GET_SEARCH_KEYWORD = "GET_SEARCH_KEYWORD";
+const GET_FAVORITES = "GET_FAVORITES";
+const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -35,7 +38,34 @@ export default (state = initState, action) => {
       return state;
     case GET_SEARCH_KEYWORD:
       return {...state, searchKeyWord: action.payload};
+    case GET_FAVORITES + '_FULFILLED':
+      return Object.assign({}, state, {favorites: action.payload});
+    case ADD_TO_FAVORITES:
+      return Object.assign({}, state, {favorites: action.payload});
   }
+}
+
+export const getFavorites = () => {
+  const promise = axios.get('/favorites').then(res => res.data)
+
+  return {
+    type: GET_FAVORITES,
+    payload: promise
+  }
+}
+
+export const addToFavorites = (id) => {
+  const promise = axios.post('/favorites', {id}).then(res => res.data)
+
+  return {
+    type: ADD_TO_FAVORITES,
+    payload: promise
+  }
+}
+
+export const remFromFavorites = () => {
+
+
 }
 
 export const openCloseContact = () => {
@@ -59,8 +89,8 @@ export const getUserCart = () => {
   }
 }
 
-export const remFromCart = (item) => {
-  const promise = axios.delete(`/cart/${item}`).then(res => res.data)
+export const remFromCart = (id) => {
+  const promise = axios.delete(`/cart/${id}`).then(res => res.data)
 
   return {
     type: REM_FROM_CART,

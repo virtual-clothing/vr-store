@@ -75,8 +75,10 @@ app.get('/callback', passport.authenticate('auth0', {
 // End Points___________________________________
 app.get('/api/userinfo', controller.getUserInfo);
 app.get('/cart', controller.getUserCart);
-app.delete('/cart/:index', controller.remFromCart)
+app.delete('/cart/:id', controller.remFromCart)
 app.get('/api/all', controller.getAllItems);
+app.get('/favorites', controller.getFavorites);
+app.post('/favorites', controller.addToFavorites);
 
 // check if user is logged in
 app.get('/checkauth', controller.checkAuth);

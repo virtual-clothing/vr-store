@@ -42,7 +42,7 @@ module.exports = {
 
     remFromCart: (req, res) =>  {
         const db = req.app.get('db');
-        db.remFromCart([req.user, req.params.index]).then(cart => {
+        db.remFromCart([req.user, req.params.id]).then(cart => {
             res.status(200).send(cart);
         })
     },
@@ -53,7 +53,21 @@ module.exports = {
             res.status(200).send(items);
         })
     },
-    
+
+    getFavorites: (req, res) => {
+        const db = req.app.get('db');
+        db.getFavorites([req.user]).then(favs => {
+            res.status(200).send(favs);
+        })
+    },
+
+    addToFavorites: (req, res) => {
+        const db = req.app.get('db');
+        db.addToFavorites([req.user, req.body.id]).then(favs => {
+            res.status(200).send(favs);
+        })
+    },
+
     getItemById: (req, res) => {
         const db = req.app.get('db');
         db.getItem(req.query.id).then( item => {
