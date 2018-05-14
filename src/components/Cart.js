@@ -105,10 +105,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        cart: state.cart
-    }
-}
-
 export default connect(mapStateToProps, { getUserCart, remFromCart })(Cart)
