@@ -72,14 +72,13 @@ app.get('/callback', passport.authenticate('auth0', {
   failureRedirect
 }))
 
-// getUserInfo
+// End Points___________________________________
 app.get('/api/userinfo', controller.getUserInfo);
-
-// getUserCart
 app.get('/cart', controller.getUserCart);
+app.get('/api/all', controller.getAllItems);
+
 
 // NodeMailer
-
 const smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
   auth: {

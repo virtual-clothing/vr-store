@@ -14,4 +14,10 @@ module.exports = {
         })
     },
 
+    getAllItems: (req, res) => {
+        const db = req.app.get('db');
+        db.getAllItems().then(items => {
+            res.status(200).send(items);
+        })
+    }
 }
