@@ -12,9 +12,20 @@ import './Home.css';
 import bJacket from './itemImages/brownjacket.jpg';
 import gJacket from './itemImages/greenjacket.jpeg';
 import pJacket from './itemImages/puffy.jpg';
+import vrGuy from './testCarouselImages/vrGuy.png';
+
+// import vrGuy2 from './testCarouselImages/vrGuy2.png';
+import store3 from './testCarouselImages/store4.jpeg';
+// import rack from './testCarouselImages/rack.png';
+// import people from './testCarouselImages/people2.png';
+// import vrHeadset from './testCarouselImages/vr_headset.png';
 
 import { ParallaxProvider, Parallax, ParallaxBanner } from 'react-scroll-parallax';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getAllItems } from '../ducks/reducer';
 
+//use this for other views
 const Body = styled.div`
   min-height: 100vh;
   height: auto;
@@ -28,15 +39,14 @@ const TestImages = styled.img`
     width: 100%;
 `;
 
-const VR = styled.div`
-    width: 100%;
-    height: 150px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-image: url(media/fence2.jpeg);
-`;
+// const VR = styled.div`
+//     width: 100%;
+//     height: 150px;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+// `;
 
 const EnterVR = styled.button`
     width: 150px;
@@ -44,6 +54,10 @@ const EnterVR = styled.button`
     border-radius: 5px;
     border: none;
     background-color: rgb(179, 177, 177);
+    position: relative;
+    left: 70%;
+    bottom: 350px;
+    z-index: 2;
 `;
 
 const Featured = styled.div`
@@ -111,12 +125,20 @@ const ItemText = styled.h2`
     opacity: 4;
 `;
 
+const Pimage1 = styled.img`
+        width: 300px;
+        position: relative;
+        left: 80px;
+        top: 120px;
+`;
 
-export default class Home extends Component {
+class Home extends Component {
+
+    componentDidMount() {
+        this.props.getAllItems();
+    }
     
-
     render() {
-
         var settings = {
             // dots: true,
             infinite: true,
@@ -138,78 +160,77 @@ export default class Home extends Component {
                     <div><TestImages src={image2} alt='2'/></div>
                     <div><TestImages src={image3} alt='3'/></div>
                     <div><TestImages src={image4} alt='4'/></div>
-                    <div><TestImages src={image5} alt='5'/></div>
+                    <div  ><  TestImages src={image5} alt='5'   /> </div>
                     <div><TestImages src={image6} alt='6'/></div>
                 </Slider>
 
                 <Featured>
-                    <ItemClass>
-                        <ItemImage src={bJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
-                    <ItemClass>
-                        <ItemImage src={gJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
-                    <ItemClass>
-                        <ItemImage src={pJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
+                    <Link to='/men'>
+                        <ItemClass>
+                            <ItemImage src={bJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
+                    <Link to='/women'>
+                        <ItemClass>
+                            <ItemImage src={gJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
+                    <Link to='/kids'>
+                        <ItemClass>
+                            <ItemImage src={pJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
                 </Featured>
 
-                {/* <VR>
-                    <EnterVR>Enter VR Store</EnterVR>
-                </VR> */}
-
-
-                {/* <Parallax
-                    className="custom-class"
-                    offsetYMax={2000}
-                    offsetYMin={-20}
-                    tag="figure"
-                >
-                    <img src={image2} />
-                </Parallax>
-                <Parallax
-                    className="custom-class"
-                    offsetYMax={20}
-                    offsetYMin={-20}
-                    slowerScrollRate={100}
-                    tag="figure"
-                >
-                    <img src={image3} />
-                </Parallax> */}
-
-                {/* <ParallaxBanner
-                    className="your-class"
+                <ParallaxBanner
+                    className="pBanner"
                     layers={[
                         {
-                            image: image1,
-                            amount: 0.1,
-                            slowerScrollRate: 3,
-                        },
-                        {
-                            image: image2,
-                            amount: 0.2,
-                            slowerScrollRate: 4,
+                            image: store3,
+                            amount: .4,
+                            fasterScrollRate: 20,
+                            offsetYMin: '200%'
                         },
                     ]}
                     style={{
-                        height: '500px',
+                        height: '400px',
                     }}
                 >
-                    <h1>Banner Children</h1>
-                </ParallaxBanner> */}
 
+                    <Parallax
+                        className="parallax2"
+                        offsetYMax='0%'
+                        offsetY='0%'
+                        // offsetYMin='-500%'
+                        slowerScrollRate='10'
+
+                    >
+                        <Pimage1 src={vrGuy} />
+                    </Parallax>
+
+                </ParallaxBanner>
+
+                <EnterVR>Shop in VR</EnterVR>
 
             </Body>
             </ParallaxProvider>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        allItems: state.allItems
+    }
+}
+
+export default connect(mapStateToProps, {getAllItems})(Home)
