@@ -148,7 +148,7 @@ const Pimage1 = styled.img`
         top: 120px;
 `;
 
-export default class Home extends Component {
+class Home extends Component {
     constructor(){
         super()
 
@@ -162,7 +162,6 @@ export default class Home extends Component {
            this.setState({buttonPress: false}) 
         }, 200);
     }
-class Home extends Component {
 
     componentDidMount() {
         this.props.getAllItems();

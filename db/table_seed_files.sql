@@ -105,3 +105,15 @@ on a.id = p.attr_id
 join users u
 on u.id = f.user_id
 
+
+create table reviews (
+    product_id int,
+    review varchar(200),
+    name varchar(80),
+    rating int,
+    date varchar(80)
+)
+insert into reviews (product_id, review, name, rating, date) values (1, 'its awesome', 'ben', 3, '01/13/2019')
+insert into reviews (product_id, review, name, rating, date) values (1, 'dumb', 'Joe', 1, '04/03/2019')
+
+

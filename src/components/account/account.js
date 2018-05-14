@@ -173,6 +173,8 @@ export default class Account extends Component {
     logout(){
         axios.get('/logout').then( res => {
             console.log('logout got response')
+            this.props.history.push('/');
+            window.location.reload();
         })
     }
 
@@ -220,8 +222,6 @@ export default class Account extends Component {
                         </InputRow>
                             <button onClick={() => this.updateAccount()}>Update Account</button>
                     </UpdateA>
-
-
 
                 </TopElements>
 

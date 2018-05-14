@@ -86,6 +86,11 @@ app.put('/updateaccount', controller.updateAccount);
 // user logout
 app.get('/logout', controller.logout)
 
+//get item for item view
+app.get('/getItemById', controller.getItemById)
+
+//get reviews
+app.get('/itemReviews', controller.getItemReviews)
 
 // NodeMailer
 const smtpTransport = nodemailer.createTransport({
