@@ -1,4 +1,4 @@
-import React, {   Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Slider from "react-slick-16";
 import image1 from './testCarouselImages/image1.jpeg';
@@ -21,7 +21,9 @@ import store3 from './testCarouselImages/store4.jpeg';
 // import vrHeadset from './testCarouselImages/vr_headset.png';
 
 import { ParallaxProvider, Parallax, ParallaxBanner } from 'react-scroll-parallax';
-
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getAllItems } from '../ducks/reducer';
 
 //use this for other views
 const Body = styled.div`
@@ -130,11 +132,13 @@ const Pimage1 = styled.img`
         top: 120px;
 `;
 
-export default class Home extends Component {
+class Home extends Component {
+
+    componentDidMount() {
+        this.props.getAllItems();
+    }
     
-
     render() {
-
         var settings = {
             // dots: true,
             infinite: true,
@@ -161,24 +165,30 @@ export default class Home extends Component {
                 </Slider>
 
                 <Featured>
-                    <ItemClass>
-                        <ItemImage src={bJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
-                    <ItemClass>
-                        <ItemImage src={gJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
-                    <ItemClass>
-                        <ItemImage src={pJacket} alt='jacket'/>
-                        <ItemBuy>
-                            <ItemText>$149.99</ItemText>
-                        </ItemBuy>
-                    </ItemClass>
+                    <Link to='/men'>
+                        <ItemClass>
+                            <ItemImage src={bJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
+                    <Link to='/women'>
+                        <ItemClass>
+                            <ItemImage src={gJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
+                    <Link to='/kids'>
+                        <ItemClass>
+                            <ItemImage src={pJacket} alt='jacket'/>
+                            <ItemBuy>
+                                <ItemText>$149.99</ItemText>
+                            </ItemBuy>
+                        </ItemClass>
+                    </Link>
                 </Featured>
 
                 <ParallaxBanner
@@ -216,3 +226,11 @@ export default class Home extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        allItems: state.allItems
+    }
+}
+
+export default connect(mapStateToProps, {getAllItems})(Home)

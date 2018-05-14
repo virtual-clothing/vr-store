@@ -7,11 +7,13 @@ create table users (
     profile_img text,
     gender text,
     nickname text,
-    email text
+    email text,
+    phone int,
+    address varchar(160)
 )
 
-insert into users (username, auth_id, profile_img, gender, nickname, email)values ('Harry Potter', 'dfsjfksdjfsdf', '@myprofileimg.com', 'man', 'Potter', 'potter@gmail.com')
-insert into users (username, auth_id, profile_img, gender, nickname, email) values ('Hermany', '34wefdsf3', '@herprofileimg.com', 'female', 'Hernickname', 'hermany@gmail.com')
+insert into users (username, auth_id, profile_img, gender, nickname, email, phone, address)values ('Harry Potter', 'dfsjfksdjfsdf', '@myprofileimg.com', 'man', 'Potter', 'potter@gmail.com', 4159999999, '643 8th ave, SanFrancisco CA')
+insert into users (username, auth_id, profile_img, gender, nickname, email, phone, address) values ('Hermany', '34wefdsf3', '@herprofileimg.com', 'female', 'Hernickname', 'hermany@gmail.com', 4151111111, '234 10th ave, SanFrancisco CA')
 
 -- Products table
 create table products (    

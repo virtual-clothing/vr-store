@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import image1 from './img1.jpg';
 import image2 from './img2.jpg';
 import image3 from './img3.jpg';
-
+import { connect } from 'react-redux';
 
 const Body = styled.div `
   min-height: 100vh;
@@ -111,10 +111,10 @@ const ReviewTop = styled.div `
 `
 
 
-export default class Item extends Component {
+class Item extends Component {
     constructor() {
         super()
-
+        
         this.state = {
             item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!1 lkjds dslkj dfsljdsl dfs" }],
             mainImage: '',
@@ -137,17 +137,26 @@ export default class Item extends Component {
                 <ReviewTop >
                 <h1 > { `Stars ${review.rating}  ` } </h1> <h2 > { `${review.name}` } </h2> <h3 > { review.date } </h3> </ReviewTop> <h1 > { review.review } </h1> </Review>
             )
-        })
+        });
+
+        // I'm adding this block of code to just showing redux is connected here, so you can take it from here to keep implement this component
+        // Can you make the component name to Capitalize? but not Item, I used it in the details component. Thank you!
+        let {id} = this.props.match.params;
+        let item = this.props.allItems.filter(product => {
+            if (product.id === +id) {
+                return product;
+            }
+        });
 
         return ( <Body >
 
             <TopElements >
             <AllImages >
-            <MainImage src = { this.state.mainImage }
+            <MainImage src = { item[0].product_img }
             alt = 'main' />
 
             <  OtherImageCon >
-            <OtherImage src = { images.img1 }
+            <OtherImage src = { item[0].product_img }
             alt = 'productImage'
             onClick = {
                 () => this.setState({ mainImage: images.img1 }) }
@@ -185,3 +194,11 @@ export default class Item extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        allItems: state.allItems
+    }
+}
+
+export default connect(mapStateToProps)(Item);
