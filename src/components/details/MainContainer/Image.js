@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import heart from './icon/heart.svg';
 import blackHeart from './icon/blackHeart.svg';
 
 const Container = styled.div`

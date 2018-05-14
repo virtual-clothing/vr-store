@@ -23,7 +23,7 @@ export default class CartItem extends Component {
                 </PriceDiv>
                 <QuantityDiv>
                     <p>QTY: {this.props.item.quantity}</p>
-                    <button>remove</button>
+                    <button onClick={this.props.removeFn(this.props.item.name)}>remove</button>
                 </QuantityDiv>
                 <TotalDiv>
                     <p>${this.props.item.quantity * this.props.item.price}</p>
