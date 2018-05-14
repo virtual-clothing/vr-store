@@ -5,9 +5,9 @@ import Routes from './routes.js';
 import styled from 'styled-components';
 import ContactUs from './components/ContactUs';
 import { connect } from 'react-redux';
-import { openCloseContact } from './components/ducks/reducer';
 import { withRouter } from 'react-router-dom';
 import Chat from './components/bot/Chat';
+import { openCloseContact } from './components/ducks/reducer';
 
 const Body = styled.div`
   min-height: 100vh;
@@ -31,7 +31,7 @@ class App extends Component {
 
 
         <div style={{ position: 'relative', zIndex: "3" }}>
-        <ContactUs isOpen={this.props.contactIsOpen} cancel={() => this.props.openCloseContact}/>
+        <ContactUs isOpen={this.props.contactIsOpen} cancel={this.props.openCloseContact}/>
         </div>
 
       </div>
@@ -45,4 +45,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {openCloseContact})(App));
+export default withRouter(connect(mapStateToProps,{openCloseContact})(App));

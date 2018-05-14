@@ -14,6 +14,13 @@ module.exports = {
         })
     },
 
+    remFromCart: (req, res) =>  {
+        const db = req.app.get('db');
+        db.remFromCart([req.user, req.params.index]).then(cart => {
+            res.status(200).send(cart);
+        })
+    },
+
     getAllItems: (req, res) => {
         const db = req.app.get('db');
         db.getAllItems().then(items => {
