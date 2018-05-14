@@ -84,8 +84,8 @@ export const getUserCart = () => {
   }
 }
 
-export const remFromCart = (item) => {
-  const promise = axios.delete(`/cart/${item}`).then(res => res.data)
+export const remFromCart = (id) => {
+  const promise = axios.delete(`/cart/${id}`).then(res => res.data)
 
   return {
     type: REM_FROM_CART,

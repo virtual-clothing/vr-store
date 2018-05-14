@@ -42,7 +42,7 @@ module.exports = {
 
     remFromCart: (req, res) =>  {
         const db = req.app.get('db');
-        db.remFromCart([req.user, req.params.index]).then(cart => {
+        db.remFromCart([req.user, req.params.id]).then(cart => {
             res.status(200).send(cart);
         })
     },
