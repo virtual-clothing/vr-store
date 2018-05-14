@@ -67,7 +67,7 @@ const ImageWrapper = props => {
       <Image src={props.src}  />
     </div>
   )
-}
+};
 
 const Text = styled.p`
   margin: 3px;
@@ -105,7 +105,8 @@ export default class Images extends Component {
           <ImageWrapper src={this.props.img} />
           <Wrapper title={this.props.title} price={this.props.price}/>
         </Link>
-        <CircleWrapper toggle={() => this.toggle()} addedToFavorite={this.state.addedToFavorite}/>
+        <CircleWrapper toggle={() => this.toggle()} onClick={this.state.addedToFavorites ? this.props.remFromFavorites(this.props.id) : 
+          this.props.addToFavorites(this.props.id)} addedToFavorite={this.state.addedToFavorite}/>
       </Container>
     )
   }
