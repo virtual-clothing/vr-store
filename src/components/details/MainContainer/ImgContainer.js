@@ -17,6 +17,7 @@ const Container = styled.div`
 `
 
 class ImgContainer extends Component {
+
   
   render() {
     let images = this.props.allItems.map(item => {

@@ -14,7 +14,6 @@ export default class CartItem extends Component {
                 </ImageDiv>
                 <DescriptionDiv>
                     <p>{this.props.item.name}</p>
-                    <p>SKU</p>
                     <p>Size: {this.props.item.size}</p>
                     <p>Color: {this.props.item.color}</p>
                 </DescriptionDiv>
