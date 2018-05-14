@@ -18,7 +18,7 @@ class Favorites extends Component {
 
         const favItems = this.props.favorites.map((item, index) => {
             return (
-                <FavItem/>
+                <FavItem item={item}/>
               )
         })
 

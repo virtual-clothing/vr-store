@@ -63,6 +63,11 @@ export const addToFavorites = (id) => {
   }
 }
 
+export const remFromFavorites = () => {
+
+
+}
+
 export const openCloseContact = () => {
   return {
     type: CONTACT_IS_OPEN
