@@ -40,6 +40,13 @@ module.exports = {
             // res.redirect(`https://munkhtegsh.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost:3000&client_id=${process.env.clientID}`)
     },
 
+    remFromCart: (req, res) =>  {
+        const db = req.app.get('db');
+        db.remFromCart([req.user, req.params.index]).then(cart => {
+            res.status(200).send(cart);
+        })
+    },
+
     getAllItems: (req, res) => {
         const db = req.app.get('db');
         db.getAllItems().then(items => {

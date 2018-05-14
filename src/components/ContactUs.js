@@ -27,14 +27,20 @@ class ContactUs extends Component {
     sendEmail() {
         const { name, email, subject, message } = this.state
 
-        axios.post('/email', { name: name, email: email, subject: subject, message: message }).then(this.setState({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-        }))
+        axios.post('/email', { name: name, email: email, subject: subject, message: message }).then(() => {
+            this.setState({
+                name: '',
+                email: '',
+                subject: '',
+                message: ''
+            })
+        })
 
+    }
+
+    sendClick() {
         this.props.cancel()
+        this.sendEmail()
     }
 
     render() {
@@ -52,11 +58,8 @@ class ContactUs extends Component {
                         <Input placeholder='Subject' onChange={(e) => this.handleChange({ subject: e.target.value })} />
                         <TextArea placeholder='What can we help you with?' onChange={(e) => this.handleChange({ message: e.target.value })} />
                         <ButtonDiv>
-                            <button onClick={this.props.cancel()}>Cancel</button>
-                            <button onClick={() => {
-                                this.sendEmail();
-                                this.props.cancel();
-                            }}>Send</button>
+                            <button onClick={() => this.props.cancel()}>Cancel</button>
+                            <button onClick={() => this.sendClick()}>Send</button>
                         </ButtonDiv>
                     </Modal>
                 </Background>
@@ -111,7 +114,7 @@ const ButtonDiv = styled.div`
 
 function mapStateToProps(state) {
     return {
-        user: state.userInfo
+        user: state.userInfo,
     }
 }
 

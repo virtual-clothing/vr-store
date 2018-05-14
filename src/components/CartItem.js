@@ -23,7 +23,7 @@ export default class CartItem extends Component {
                 </PriceDiv>
                 <QuantityDiv>
                     <p>QTY: {this.props.item.quantity}</p>
-                    <button>remove</button>
+                    <button onClick={this.props.removeFn(this.props.item.name)}>remove</button>
                 </QuantityDiv>
                 <TotalDiv>
                     <p>${this.props.item.quantity * this.props.item.price}</p>
@@ -44,7 +44,6 @@ const Item = styled.div`
 const ImageDiv = styled.div`
     height: 100%;
     width: 20%;
-    background-color: blue;
     margin-right: 10px;
 `
 const DescriptionDiv = styled.div`

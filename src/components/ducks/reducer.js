@@ -11,6 +11,7 @@ const initState = {
 
 const GET_USER_INFO = "GET_USER_INFO";
 const GET_USER_CART = "GET_USER_CART";
+const REM_FROM_CART = "REM_FROM_CART";
 const CONTACT_IS_OPEN = "CONTACT_IS_OPEN";
 const TOGGLE_CHAT = "TOGGLE_CHAT";
 const GET_ALL_ITEMS = "GET_ALL_ITEMS";
@@ -21,6 +22,8 @@ export default (state = initState, action) => {
     case GET_USER_INFO + '_FULFILLED':
       return { ...state, userInfo: action.payload }
     case GET_USER_CART + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload});
+    case REM_FROM_CART + '_FULFILLED':
       return Object.assign({}, state, {userCart: action.payload});
     case CONTACT_IS_OPEN:
       return Object.assign({}, state, {contactIsOpen: !state.contactIsOpen});
@@ -52,6 +55,15 @@ export const getUserCart = () => {
 
   return {
     type: GET_USER_CART,
+    payload: promise
+  }
+}
+
+export const remFromCart = (item) => {
+  const promise = axios.delete(`/cart/${item}`).then(res => res.data)
+
+  return {
+    type: REM_FROM_CART,
     payload: promise
   }
 }
