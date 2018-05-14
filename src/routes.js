@@ -22,8 +22,8 @@ export default () => {
             <Route path='/favorites' component={Favorites} />
             <Route path='/login' component={Login} />
             <Route path='/failure' component={Failure} />
-            <Route path='/item' component={ Item } />
-            <Route path='/account' component={ Account }/>
+            <Route path='/item/:id' component={Item} />
+            <Route path='/account' component={Account}/>
         </Switch>
     )
 }

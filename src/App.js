@@ -12,8 +12,6 @@ import Chat from './components/bot/Chat';
 const Body = styled.div`
   min-height: 100vh;
 `
-
-
 class App extends Component {
   render() {
     return (

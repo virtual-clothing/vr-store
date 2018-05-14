@@ -5,8 +5,8 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const nodemailer = require('nodemailer');
-const Botmaster = require('botmaster');
-const SocketioBot = require('botmaster-socket.io');
+// const Botmaster = require('botmaster');
+// const SocketioBot = require('botmaster-socket.io');
 
 const controller = require('./controller');
 const app = express();
@@ -72,11 +72,10 @@ app.get('/callback', passport.authenticate('auth0', {
   failureRedirect
 }))
 
-// getUserInfo
+// End Points___________________________________
 app.get('/api/userinfo', controller.getUserInfo);
-
-// getUserCart
 app.get('/cart', controller.getUserCart);
+app.get('/api/all', controller.getAllItems);
 
 // check if user is logged in
 app.get('/checkauth', controller.checkAuth);
@@ -89,7 +88,6 @@ app.get('/logout', controller.logout)
 
 
 // NodeMailer
-
 const smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -172,28 +170,28 @@ app.post('/api/payment', function(req, res, next){
 const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)))
 
 //________________________________bot
-const botmaster = new Botmaster({io});
+// const botmaster = new Botmaster({io});
 
 
-const socketioSettings = {
-  id: 'SOME_BOT_ID_OF_YOUR_CHOOSING',
-  server: botmaster.server, // this is required for socket.io. You can set it to another node server object if you wish to. But in this example, we will use the one created by botmaster under the hood
-};
+// const socketioSettings = {
+//   id: 'SOME_BOT_ID_OF_YOUR_CHOOSING',
+//   server: botmaster.server, // this is required for socket.io. You can set it to another node server object if you wish to. But in this example, we will use the one created by botmaster under the hood
+// };
 
-const socketioBot = new SocketioBot(socketioSettings);
-botmaster.addBot(socketioBot);
+// const socketioBot = new SocketioBot(socketioSettings);
+// botmaster.addBot(socketioBot);
 
-botmaster.use({
-  type: 'incoming',
-  name: 'my-middleware',
-  controller: (bot, update) => {
-    return bot.reply(update, 'Hello world!');
-  }
-});
+// botmaster.use({
+//   type: 'incoming',
+//   name: 'my-middleware',
+//   controller: (bot, update) => {
+//     return bot.reply(update, 'Hello world!');
+//   }
+// });
 
-botmaster.on('error', (bot, err) => { // added
-  console.log(err.stack); // added
-}); // added
+// botmaster.on('error', (bot, err) => { // added
+//   console.log(err.stack); // added
+// }); // added
 
 
 io.on('connection', socket => {
