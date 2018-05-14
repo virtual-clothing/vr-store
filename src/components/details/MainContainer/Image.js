@@ -71,7 +71,7 @@ const ImageWrapper = props => {
 
 const Text = styled.p`
   margin: 3px;
-  text-decoration: none
+  text-decoration: none;
 `
 
 const Details = styled.div`
