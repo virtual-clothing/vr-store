@@ -121,13 +121,14 @@ export default class Account extends Component {
             phoneNumber: 'phone number',
             email: 'email',
             profileImage: '',
-            favoriteToggle: false,
+            //changing favorites button/toggle to log out
+            // favoriteToggle: false,
             colorToggle1: "Green",
             colorToggle2: "Green",
             colorToggle3: "Green",
             colorToggle4: "Green",
 
-            favorites: [{test: "test"},{test: "test"},{test: "test"}]
+            favorites: [{test: "test"},{test: "test"},{test: "test"}],
 
         }
     }
@@ -142,7 +143,7 @@ export default class Account extends Component {
             if(res.data[0]){ this.setState({user: res.data, username: res.data[0].username, email: res.data[0].email, profileImage: res.data[0].profile_img, address: res.data[0].address, phoneNumber: res.data[0].phone}, () => console.log(this.state))}
         })
 
-        //need endpoint to grab user favorites. will build with there are products in db
+        //need endpoint to grab users favorites. will build when there are products in db
     }
 
     handleChange(prop, val){
@@ -169,6 +170,12 @@ export default class Account extends Component {
 
     }
 
+    logout(){
+        axios.get('/logout').then( res => {
+            console.log('logout got response')
+        })
+    }
+
     render() {
 
         var favorites = this.state.favorites.map( (fav, i) => {
@@ -188,7 +195,9 @@ export default class Account extends Component {
                             <UserImg src={this.state.profileImage}/>
                         </UserImageCon> 
                         <Link to='/cart'><Button1>Cart</Button1></Link>
-                        <Button1 onClick={() => this.setState({favoriteToggle: !this.state.favoriteToggle})}>Favorites</Button1>
+                        {/* <a href='http://localhost:3001/logout' style={{textDecoration: 'none', color: 'white'}}> */}
+                            <Button1 onClick={() => this.logout()}>Log out</Button1>
+                        {/* </a> */}
                     </TwoButtons>
 
                     <UpdateA>
@@ -209,16 +218,18 @@ export default class Account extends Component {
                             <h3>Email</h3>
                             <UpdateInput style={{ color: this.state.colorToggle4 }} value={this.state.email} onChange={(e) => this.handleChange('email', e.target.value)}/>
                         </InputRow>
-                        <button onClick={() => this.updateAccount()}>Update Account</button>
+                            <button onClick={() => this.updateAccount()}>Update Account</button>
                     </UpdateA>
 
 
 
                 </TopElements>
 
-                {this.state.favoriteToggle ? <div>{<Favorites>
+                {/* {this.state.favoriteToggle ? <div>{ */}
+                <Favorites>
                     {favorites}
-                </Favorites>}</div> : <div/>}
+                </Favorites>
+                {/* }</div> : <div/>} */}
 
             </Body>
         )

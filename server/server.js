@@ -84,6 +84,9 @@ app.get('/checkauth', controller.checkAuth);
 // update users account
 app.put('/updateaccount', controller.updateAccount);
 
+// user logout
+app.get('/logout', controller.logout)
+
 
 // NodeMailer
 

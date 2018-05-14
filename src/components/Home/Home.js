@@ -50,11 +50,26 @@ const EnterVR = styled.button`
     height: 50px;
     border-radius: 5px;
     border: none;
-    background-color: rgb(179, 177, 177);
+    background-color: rgb(244, 244, 245);
     position: relative;
     left: 70%;
     bottom: 350px;
     z-index: 2;
+    border: none;
+`;
+
+const EnterVR2 = styled.button`
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(194, 194, 197);
+    position: relative;
+    left: 70%;
+    bottom: 350px;
+    z-index: 2;
+    box-shadow: 0 0 10px 5px;
+    border: none;
 `;
 
 
@@ -132,7 +147,19 @@ const Pimage1 = styled.img`
 `;
 
 export default class Home extends Component {
-    
+    constructor(){
+        super()
+
+        this.state = {
+            buttonPress: false,
+        }
+    }
+
+    switchBack(){
+        setTimeout(() => {
+           this.setState({buttonPress: false}) 
+        }, 200);
+    }
 
     render() {
 
@@ -209,8 +236,12 @@ export default class Home extends Component {
                     </Parallax>
 
                 </ParallaxBanner>
-
-                <EnterVR>Shop in VR</EnterVR>
+                
+                {!this.state.buttonPress ? <div>{
+                    <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
+                }</div> : 
+                    <EnterVR2>Shop in VR</EnterVR2>
+                }
 
             </Body>
             </ParallaxProvider>

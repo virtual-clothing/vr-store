@@ -36,4 +36,11 @@ module.exports = {
         })
     },
 
+    logout: (req, res) => {
+        console.log('hit logout in server')
+            req.logOut();
+            res.redirect( process.env.failureRedirect )
+            // res.redirect(`https://munkhtegsh.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost:3001&client_id=${process.env.clientID}`)
+    }
+
 }
