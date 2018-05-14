@@ -30,7 +30,6 @@ const Body = styled.div`
   min-height: 100vh;
   height: auto;
   position: relative;
-  top: 40px;
   overflow: hidden;
   padding-bottom: 40px;
 `;
@@ -53,12 +52,29 @@ const EnterVR = styled.button`
     height: 50px;
     border-radius: 5px;
     border: none;
-    background-color: rgb(179, 177, 177);
+    background-color: rgb(244, 244, 245);
     position: relative;
     left: 70%;
     bottom: 350px;
     z-index: 2;
+    border: none;
 `;
+
+const EnterVR2 = styled.button`
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(194, 194, 197);
+    position: relative;
+    left: 70%;
+    bottom: 350px;
+    z-index: 2;
+    box-shadow: 0 0 10px 5px;
+    border: none;
+`;
+
+
 
 const Featured = styled.div`
     width: 100%;
@@ -133,6 +149,19 @@ const Pimage1 = styled.img`
 `;
 
 class Home extends Component {
+    constructor(){
+        super()
+
+        this.state = {
+            buttonPress: false,
+        }
+    }
+
+    switchBack(){
+        setTimeout(() => {
+           this.setState({buttonPress: false}) 
+        }, 200);
+    }
 
     componentDidMount() {
         this.props.getAllItems();
@@ -146,8 +175,8 @@ class Home extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 5000,
-            pauseOnHover: true,
+            autoplaySpeed: 4000,
+            pauseOnHover: false,
             fade: true
           };
 
@@ -196,16 +225,16 @@ class Home extends Component {
                     layers={[
                         {
                             image: store3,
-                            amount: .4,
-                            fasterScrollRate: 20,
-                            offsetYMin: '200%'
+                        amount: .4,
+                        fasterScrollRate: 20,
+                        offsetYMin: '200%'
                         },
                     ]}
                     style={{
                         height: '400px',
                     }}
                 >
-
+                    
                     <Parallax
                         className="parallax2"
                         offsetYMax='0%'
@@ -218,8 +247,12 @@ class Home extends Component {
                     </Parallax>
 
                 </ParallaxBanner>
-
-                <EnterVR>Shop in VR</EnterVR>
+                
+                {!this.state.buttonPress ? <div>{
+                    <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
+                }</div> : 
+                    <EnterVR2>Shop in VR</EnterVR2>
+                }
 
             </Body>
             </ParallaxProvider>

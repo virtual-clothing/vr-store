@@ -8,7 +8,6 @@
     padding: 0px;
     width: 100%;
     position: relative;
-    top: 30px;
     max-height: 520px;
     margin-bottom: 100px;
 }
@@ -33,4 +32,8 @@
     position: relative;
     left: 80px;
     top: 100px;
+}
+
+.testclass{
+    color: rgb(194, 194, 197);
 }
