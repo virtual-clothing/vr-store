@@ -19,6 +19,7 @@ const GET_ALL_ITEMS = "GET_ALL_ITEMS";
 const GET_SEARCH_KEYWORD = "GET_SEARCH_KEYWORD";
 const GET_FAVORITES = "GET_FAVORITES";
 const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+const REM_FROM_FAVORITES = "REM_FROM_FAVORITES";
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -40,7 +41,9 @@ export default (state = initState, action) => {
       return {...state, searchKeyWord: action.payload};
     case GET_FAVORITES + '_FULFILLED':
       return Object.assign({}, state, {favorites: action.payload});
-    case ADD_TO_FAVORITES:
+    case ADD_TO_FAVORITES + '_FULFILLED':
+      return Object.assign({}, state, {favorites: action.payload});
+    case REM_FROM_FAVORITES + '_FULFILLED':
       return Object.assign({}, state, {favorites: action.payload});
   }
 }
@@ -63,9 +66,13 @@ export const addToFavorites = (id) => {
   }
 }
 
-export const remFromFavorites = () => {
+export const remFromFavorites = (id) => {
+  const promise = axios.delete(`/favorites/${id}`).then(res => res.data)
 
-
+  return {
+    type: REM_FROM_FAVORITES,
+    payload: promise
+  }
 }
 
 export const openCloseContact = () => {

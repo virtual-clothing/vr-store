@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFavorites } from '../ducks/reducer';
+import { getFavorites, addToFavorites, remFromFavorites } from '../ducks/reducer';
 import FavItem from './favItem';
+import styled from 'styled-components';
+
+
+const FavoritesDiv = styled.div`
+    display: flex;
+    flex-wrap: auto;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+`
 
 class Favorites extends Component {
     constructor() {
@@ -10,6 +20,7 @@ class Favorites extends Component {
 
     componentDidMount() {
         this.props.getFavorites();
+        console.log(this.props.favorites)
     }
 
     
@@ -18,15 +29,15 @@ class Favorites extends Component {
 
         const favItems = this.props.favorites.map((item, index) => {
             return (
-                <FavItem item={item}/>
+                <FavItem item={item} key={index} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
               )
         })
 
 
         return (
-            <div>
+            <FavoritesDiv>
                 {favItems}
-            </div>
+            </FavoritesDiv>
           )
     }
 }
@@ -37,4 +48,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {getFavorites})(Favorites)
+export default connect(mapStateToProps, {getFavorites, addToFavorites, remFromFavorites})(Favorites)
