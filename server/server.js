@@ -75,8 +75,26 @@ app.get('/callback', passport.authenticate('auth0', {
 // End Points___________________________________
 app.get('/api/userinfo', controller.getUserInfo);
 app.get('/cart', controller.getUserCart);
+app.delete('/cart/:id', controller.remFromCart)
 app.get('/api/all', controller.getAllItems);
+app.get('/favorites', controller.getFavorites);
+app.post('/favorites', controller.addToFavorites);
+app.delete('/favorites/:id', controller.remFromFavorites);
 
+// check if user is logged in
+app.get('/checkauth', controller.checkAuth);
+
+// update users account
+app.put('/updateaccount', controller.updateAccount);
+
+// user logout
+app.get('/logout', controller.logout)
+
+//get item for item view
+app.get('/getItemById', controller.getItemById)
+
+//get reviews
+app.get('/itemReviews', controller.getItemReviews)
 
 // NodeMailer
 const smtpTransport = nodemailer.createTransport({
@@ -87,16 +105,6 @@ const smtpTransport = nodemailer.createTransport({
   }
 });
 
-// check if user is logged in
-app.get('/checkauth', (req, res) => {
-  if(req.user){
-      res.status(200).send([true])
-      console.log(req.user,"is a user")
-  }else{
-      res.status(200).send([false])
-      console.log("no user")
-  }
-})
 
 // NODE MAILER
 

@@ -10,20 +10,19 @@ export default class CartItem extends Component {
         return (
             <Item>
                 <ImageDiv>
-                    <img src={this.props.item.url} height='100%' width='100%'/>
+                    <img src={this.props.item.product_img} height='100%' width='100%'/>
                 </ImageDiv>
                 <DescriptionDiv>
-                    <p>{this.props.item.name}</p>
+                    <p>{this.props.item.title}</p>
                     <p>SKU</p>
                     <p>Size: {this.props.item.size}</p>
-                    <p>Color: {this.props.item.color}</p>
                 </DescriptionDiv>
                 <PriceDiv>
                     <p>${this.props.item.price}</p>
                 </PriceDiv>
                 <QuantityDiv>
                     <p>QTY: {this.props.item.quantity}</p>
-                    <button>remove</button>
+                    <button onClick={() => this.props.removeFn(this.props.item.product_id)}>remove</button>
                 </QuantityDiv>
                 <TotalDiv>
                     <p>${this.props.item.quantity * this.props.item.price}</p>
@@ -44,7 +43,6 @@ const Item = styled.div`
 const ImageDiv = styled.div`
     height: 100%;
     width: 20%;
-    background-color: blue;
     margin-right: 10px;
 `
 const DescriptionDiv = styled.div`

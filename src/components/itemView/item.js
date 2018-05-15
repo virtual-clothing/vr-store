@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import image1 from './img1.jpg';
 import image2 from './img2.jpg';
 import image3 from './img3.jpg';
+import starE from './media/startEmpty.png';
+import starG from './media/goldStar.png';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const Body = styled.div `
   min-height: 100vh;
@@ -108,7 +111,85 @@ const Review = styled.div `
 const ReviewTop = styled.div `
     display: flex;
     flex-direction: row;
-`
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+`;
+
+const RR = styled.div`
+    border-bottom: 1px solid grey;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 2%;
+`;
+
+const NewReview = styled.button`
+    width: 110px;
+    height: 40px;
+    border-radius: 5px;
+
+`;
+
+const WriteReview = styled.div`
+    align-items: center;
+    background: rgba(0,0,0,.8);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    right: 0%;
+    z-index: 2;
+`;
+
+const Modal = styled.div`
+    align-items: center;
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: flex-start;
+    padding: 10px;
+    position: fixed;
+    width: 50%;
+    z-index: 99;
+`;
+
+
+const Input = styled.input`
+    margin: 5px;
+    width: 100%;
+`;
+
+const TextArea = styled.textarea`
+    height: 60%;
+    margin: 10px;
+    width: 100%;
+`;
+
+const ButtonDiv = styled.button`
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+`;
+
+const Star = styled.img`
+    width: 20px;
+    height: 20px;
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
 
 
 class Item extends Component {
@@ -116,51 +197,129 @@ class Item extends Component {
         super()
         
         this.state = {
-            item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!1 lkjds dslkj dfsljdsl dfs" }],
+            item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!" }],
+            item2:[{title: '', price: 0, product_img: '', type: ''}],
             mainImage: '',
+
             size: 'm',
-            reviews: [{ name: 'Joe', rating: 3, review: "loved it", date: '01/2017' }, { name: 'Ben', rating: 3, review: "loved it", date: '01/2018' }]
+            reviews: [{}],
+            writeReview: false,
+            rating: [],
+            name: '',
+            review: ''
         }
     }
 
     componentDidMount() {
-        var images = this.state.item[0]
-        this.setState({ mainImage: images.img1 })
+
+        //end point to grab item
+        axios.get(`/getItemById?id=${this.props.match.params.id}`).then( res => {
+            this.setState({item2: res.data, mainImage: res.data[0].product_img, img1: res.data[0].product_img}, () => console.log(this.state.item2, 'item2'))
+        })
+        axios.get(`/itemReviews?id=${this.props.match.params.id}`).then( res => {
+            this.setState({reviews: res.data})
+        })
+    }
+
+    submitReview(){
+        // const {rating.} = this.state;
+        axios.post('/submitreview', {}).then( res => {
+            this.setState({reviews: res.data})
+        })
     }
 
 
     render() {
         var images = this.state.item[0]
+        var item = this.state.item2[0]
 
         var allReviews = this.state.reviews.map((review, i) => {
             return ( <Review key = { i } >
-                <ReviewTop >
-                <h1 > { `Stars ${review.rating}  ` } </h1> <h2 > { `${review.name}` } </h2> <h3 > { review.date } </h3> </ReviewTop> <h1 > { review.review } </h1> </Review>
+                        <ReviewTop >
+                            <h1 > { `Stars ${review.rating}  ` } </h1> 
+                            <h2 > { `${review.name}` } </h2> 
+                            <h3 > { review.date } </h3> 
+                        </ReviewTop> 
+                        <RR > { review.review } </RR> 
+
+                    </Review>
             )
         });
 
         // I'm adding this block of code to just showing redux is connected here, so you can take it from here to keep implement this component
         // Can you make the component name to Capitalize? but not Item, I used it in the details component. Thank you!
-        let {id} = this.props.match.params;
-        let item = this.props.allItems.filter(product => {
-            if (product.id === +id) {
-                return product;
-            }
-        });
 
+
+        // let {id} = this.props.match.params;
+        // console.log(id, "id from props.match.params")
+        // let item = this.props.allItems.filter(product => {
+        //     if (product.id === +id) {
+        //         return product;
+        //     }
+        // });
+        // console.log(item, "item from filter")
+        
+        
         return ( <Body >
+            {this.state.writeReview ? <div>{
+            <WriteReview>
+                <Modal>
+                    <Input placeholder='name'/>
+
+                    <Row>
+                        {!this.state.rating[0] ? <div>{
+                        <Star src={starE} onClick={() => this.setState({rating: [1]})}/>
+                        }</div> : 
+                        <Star src={starG} onClick={() => this.setState({rating: [1]})}/>
+                        }
+
+                        {!this.state.rating[1] ? <div>{
+                        <Star src={starE} onClick={() => this.setState({rating: [1,1]})}/>
+                        }</div> : 
+                        <Star src={starG} onClick={() => this.setState({rating: [1,1]})}/>
+                        }
+
+                        {!this.state.rating[2] ? <div>{
+                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1]})}/>
+                        }</div> : 
+                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1]})}/>
+                        }
+
+                        {!this.state.rating[3] ? <div>{
+                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1,1]})}/>
+                        }</div> : 
+                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1,1]})}/>
+                        }
+
+                        {!this.state.rating[4] ? <div>{
+                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1,1,1]})}/>
+                        }</div> : 
+                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1,1,1]})}/>
+                        }
+                    </Row>
+
+                    <TextArea placeholder="Review"/>
+
+                    <Row>
+                        <ButtonDiv onClick={() => this.setState({writeReview: false})}>cancel</ButtonDiv>
+                        <ButtonDiv>submit</ButtonDiv>
+                    </Row>
+
+                </Modal>
+            </WriteReview>
+            }</div> : <div/>}
 
             <TopElements >
             <AllImages >
-            <MainImage src = { item[0].product_img }
+            <MainImage src = { this.state.mainImage }
             alt = 'main' />
 
-            <  OtherImageCon >
-            <OtherImage src = { item[0].product_img }
+            <OtherImageCon>
+            <OtherImage src = { item.product_img }
             alt = 'productImage'
             onClick = {
-                () => this.setState({ mainImage: images.img1 }) }
-            /> < OtherImage src = { images.img2 }
+                () => this.setState({ mainImage: item.product_img}) }
+            /> <OtherImage src = { images.img2 }
             alt = 'productImage'
             onClick = {
                 () => this.setState({ mainImage: images.img2 }) }
@@ -171,8 +330,8 @@ class Item extends Component {
             /> </OtherImageCon> </AllImages>
 
             <ItemSpecs >
-            <h1 > { images.name } </h1> 
-            <h1 > { images.price } </h1> 
+            <h1 > { item.title } </h1> 
+            <h1 > { item.price } </h1> 
             < AllImages >
             <PSE > xs </PSE> 
             <PSE > s </PSE> 
@@ -187,8 +346,14 @@ class Item extends Component {
             </TopElements>
 
             <h1 > Customer Reviews </h1> 
-            <ReviewCon > { allReviews } 
+            <ReviewCon > 
+                { allReviews }
+                <NewReview onClick={() => this.setState({writeReview: true })}>Write Review</NewReview>
             </ReviewCon>
+            
+
+
+
 
             </Body>
         )

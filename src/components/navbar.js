@@ -10,6 +10,7 @@ import Chat from './bot/Chat';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {toggleChat} from './ducks/reducer';
+import Logo from './media/rubik.png';
 
 const NavBody = styled.div`
     width: 100%;
@@ -172,7 +173,7 @@ const CatSelect = styled.div`
   flex-direction: row;
   padding-left: 8px;
   align-items: center;
-  `
+  `;
     // &:hover{
     //   background-color: rgb(216, 211, 211);
   
@@ -184,7 +185,15 @@ const CatSelect = styled.div`
     align-items: center;
     position: relative;
     left: 30%;
-  `
+  `;
+
+  const SiteLogo = styled.img`
+    width: 44px;
+    /* height: 50px; */
+    position: relative;
+    bottom: 14px;
+    /* transform: rotate(180deg); */
+  `;
 
 class Nav extends Component {
     constructor(){
@@ -233,7 +242,7 @@ class Nav extends Component {
                 <ProfileIcon src={profileIcon} alt='profile'/>
               </a>
             }</div> :
-              <Link to='/profile'>
+              <Link to='/account'>
                 <ProfileIcon src={profileIcon} alt='profile'/>
               </Link>
             }
@@ -241,8 +250,10 @@ class Nav extends Component {
             <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
           </MobileDisplay>
 
+
+              {/* replace h2 with logo */}
           <Cats2>
-            <Link to='/' style={{ textDecoration: 'none', color: 'black' }}><h2>Logo</h2></Link>
+            <Link to='/' style={{ textDecoration: 'none', color: 'black' }}><SiteLogo src={Logo} alt='Logo'/></Link>
           </Cats2>
 
             {/* these will disappear in mobile view and will be replaced by icon */}

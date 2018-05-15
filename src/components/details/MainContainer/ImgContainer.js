@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Image from './Image';
+import {remFromFavorites, addToFavorites} from '../../ducks/reducer';
 
 const Container = styled.div`
   display: flex;
@@ -16,9 +17,9 @@ const Container = styled.div`
   }
 `
 class ImgContainer extends Component {
+
   
   render() {
-    console.log(this.props.sizes[this.props.sizes.length - 1], this.props.colors[this.props.colors.length - 1])
     let images = this.props.allItems.map(item => {
       // Check user selected any size or color
       if (!this.props.sizes[0] && !this.props.colors[0]) {
@@ -46,10 +47,6 @@ class ImgContainer extends Component {
         }
         // the case that user selected color and size________
       } else if (this.props.sizes[0] && this.props.colors[0]) {
-          // loop through arr
-            // which sizes user chose
-              // when I get the sizes , I need to pull down all the items has that size
-                // after needs to loop through colors and also needs to pull down the colors
         // Filter all items buy gender
         if (this.props.searchKeyWord === 'View All') {
           if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
@@ -78,7 +75,7 @@ class ImgContainer extends Component {
         if (this.props.searchKeyWord === 'View All') {
           if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
             return (
-              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
             )
           } 
         } else {
