@@ -9,41 +9,114 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: purple;
+  background: #fafafa;
   padding: 1rem;
 
   @media(max-width: 450px) {
     display: block;
   }
 `
-
 class ImgContainer extends Component {
 
   
   render() {
     let images = this.props.allItems.map(item => {
+      // Check user selected any size or color
+      if (!this.props.sizes[0] && !this.props.colors[0]) {
+        // Filter all items buy gender
+        if (this.props.searchKeyWord === 'View All') {
+          if (item.gender === this.props.category && item.size === 'm') {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        } else {
+          // Filter all items by type
+          if (this.props.searchKeyWord) {
+            if (item.gender === this.props.category && this.props.searchKeyWord === item.category && item.size === 'm') {
+              return (
+                <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              )
+            }          
+          // When user access to men || women || kids
+          } else if (item.gender === this.props.category && item.size === 'm') {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        }
+        // the case that user selected color and size________
+      } else if (this.props.sizes[0] && this.props.colors[0]) {
+        // Filter all items buy gender
+        if (this.props.searchKeyWord === 'View All') {
+          if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        } else {
+          // Filter all items by type
+          if (this.props.searchKeyWord) {
+            if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
+              return (
+                <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              )
+            }          
+          // When user access to men || women || kids
+          } else if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        }
+          // THE CASE THAT USER SELECTED COLOR
+      } else if (this.props.colors[0] && item.size === 'm') {
 
-      // Filter all items buy gender
-      if (this.props.searchKeyWord === 'View All') {
-        if (item.gender === this.props.category) {
-          return (
-            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
-          )
-        } 
-      } else {
-        // Filter all items by type
-        if (this.props.searchKeyWord) {
-          if (item.gender === this.props.category && this.props.searchKeyWord === item.category) {
+        if (this.props.searchKeyWord === 'View All') {
+          if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
             return (
               <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
             )
-          }
-        } else if (item.gender === this.props.category) {
+          } 
+        } else {
+          // Filter all items by type
+          if (this.props.searchKeyWord) {
+            if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
+              return (
+                <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              )
+            }          
           // When user access to men || women || kids
-          return (
-            <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
-          )
-        } 
+          } else if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        }
+        // THE CASE THAT USER SELECTD SIZE
+      } else if (this.props.sizes[0]) {
+
+        if (this.props.searchKeyWord === 'View All') {
+          if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        } else {
+          // Filter all items by type
+          if (this.props.searchKeyWord) {
+            if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+              return (
+                <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+              )
+            }          
+          // When user access to men || women || kids
+          } else if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+            return (
+              <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+            )
+          } 
+        }
       }
     })
     
@@ -58,7 +131,12 @@ class ImgContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     allItems: state.allItems,
-    searchKeyWord: state.searchKeyWord
+    searchKeyWord: state.searchKeyWord,
+    sizes: state.sizes,
+    colors: state.colors
   }
 }
-export default connect(mapStateToProps, {remFromFavorites, addToFavorites})(ImgContainer);
+export default connect(mapStateToProps)(ImgContainer);
+
+
+

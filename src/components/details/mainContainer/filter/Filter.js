@@ -1,26 +1,26 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import DropDownFilter from './DropDownFilter';
-import arrowDown from './icon/arrowDown.svg';
-import arrowUp from './icon/arrowUp.svg';
+import arrowDown from '../icon/arrowDown.svg';
+import arrowUp from '../icon/arrowUp.svg';
+import { clearSizesColors } from '../../../ducks/reducer';
+import { connect } from 'react-redux';
 
 const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: red;
+  background: #E0E0E0;
   height: 3rem;
   padding: 0 1rem;
 `
 const Text = styled.p`
   margin: 0;
 `
-
 const Image = styled.img`
   width: 20px;
 `
-
-export default class Filter extends Component {
+class Filter extends Component {
   constructor() {
     super();
     this.state = {
@@ -31,7 +31,10 @@ export default class Filter extends Component {
   render() {
     return (
       <div>
-      <FilterContainer onClick={() => this.setState({toggle: !this.state.toggle})}>
+      <FilterContainer onClick={() =>  {
+        this.setState({toggle: !this.state.toggle})
+        this.props.clearSizesColors()
+      }}>
         <Text> Filter </Text>
         {
           !!this.state.toggle
@@ -52,3 +55,5 @@ export default class Filter extends Component {
     )
   }
 }
+
+export default connect(null, {clearSizesColors})(Filter);

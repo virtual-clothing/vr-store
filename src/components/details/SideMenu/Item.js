@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { getSearchKeyWord } from '../../ducks/reducer';
 import { connect } from 'react-redux';
 
 const Container = styled.div`
-  border: solid black 1px;
+  border-bottom: solid black 1px;
   padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   box-sizing: border-box;
 `
 const Item = props => {
