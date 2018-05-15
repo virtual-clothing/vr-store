@@ -113,6 +113,7 @@ create table reviews (
     rating int,
     date varchar(80)
 )
+
 insert into reviews (product_id, review, name, rating, date) values (1, 'its awesome', 'ben', 3, '01/13/2019')
 insert into reviews (product_id, review, name, rating, date) values (1, 'dumb', 'Joe', 1, '04/03/2019')
 

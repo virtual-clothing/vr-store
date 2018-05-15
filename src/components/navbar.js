@@ -10,7 +10,7 @@ import Chat from './bot/Chat';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {toggleChat} from './ducks/reducer';
-import Logo from './media/rubik.png';
+import Logo from './media/mountain2.png';
 
 const NavBody = styled.div`
     width: 100%;
@@ -26,7 +26,7 @@ const NavBody = styled.div`
 
 const Top = styled.div`
   width: 100%;
-  height: 60px;
+  height: 25px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -188,10 +188,10 @@ const CatSelect = styled.div`
   `;
 
   const SiteLogo = styled.img`
-    width: 44px;
+    width: 75px;
     /* height: 50px; */
     position: relative;
-    bottom: 14px;
+    bottom: -4px;
     /* transform: rotate(180deg); */
   `;
 
@@ -224,12 +224,12 @@ class Nav extends Component {
       <NavBody>
 
         <Top>
-          <SearchElements>
+          {/* <SearchElements>
             <SearchBox placeholder='Search' onChange={(e) => this.handleChange({search: e.target.value})}></SearchBox>
             <Link to={`/search/${this.state.search}`}><SearchB>
               <SearchIcon src={searchIcon} alt='search'/>
             </SearchB></Link>
-          </SearchElements>
+          </SearchElements> */}
         </Top>
 
         <Bottom>

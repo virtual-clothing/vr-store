@@ -13,13 +13,14 @@ const Body = styled.div `
   height: auto;
   position: relative;
   /* delete top prop */
-  top: 40px;
+  top: 0px;
   overflow: hidden;
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgb(248, 247, 247);
 `;
 
 const TopElements = styled.div `
@@ -30,9 +31,26 @@ const TopElements = styled.div `
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    bottom: 25px;
+
+    @media (max-width: 777px) {
+        flex-direction: column;
+    }
 `;
 
 const AllImages = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 777px) {
+        flex-direction: column;
+    }
+`;
+
+const Sizes = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -46,26 +64,38 @@ const MainImageCon = styled.div `
 
 const MainImage = styled.img `
     margin-top: 30px;
-    width: 300px;
+    width: 500px;
     height: auto;
     border: 1px solid black;
+
+    @media (max-width: 777px) {
+        width: 300px;
+    }
 `;
 
 const OtherImageCon = styled.div `
     margin-top: 200px;
-    width: 15%;
     margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    `;
+
+    @media (max-width: 777px) {
+        flex-direction: row;
+        position: relative;
+    }
+`;
 
 const OtherImage = styled.img `
     width: 100px;
     margin: 5px;
     border: 1px solid black;
     padding: 10px;
+
+    @media (max-width: 777px) {
+        width: 70px;
+    }
 `;
 
 const ItemSpecs = styled.div `
@@ -86,6 +116,20 @@ const PSE = styled.div `
     border: 1px solid black;
     margin: 5px;
 `;
+
+const PSE2 = styled.div `
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5px;
+    background-color: black;
+    color: white;
+`;
+
 
 const ProductDescription = styled.div `
     width: 200px;
@@ -113,6 +157,7 @@ const ReviewTop = styled.div `
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 `;
 
 const RR = styled.div`
@@ -124,6 +169,10 @@ const RR = styled.div`
     justify-content: center;
     position: relative;
     /* right: 1.7%; */
+`;
+
+const RRR = styled.h3`
+    margin: 10px;
 `;
 
 const NewReview = styled.button`
@@ -194,6 +243,10 @@ const StarsCon = styled.div`
     width: 105px;
 `;
 
+const ReviewName = styled.h2`
+    width: 160px;
+`;
+
 
 class Item extends Component {
     constructor() {
@@ -202,7 +255,7 @@ class Item extends Component {
         this.state = {
 
             item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!" }],
-            item2:[{title: '', price: 0, product_img: '', type: '', img_view_2: '', img_view_3: ''}],
+            item2:[{title: '', price: 0, product_img: '', type: '', img_view_2: '', img_view_3: '', size: ''}],
             mainImage: '',
 
             size: 'm',
@@ -215,7 +268,7 @@ class Item extends Component {
     }
 
     componentDidMount() {
-
+        window.scrollTo(0,0);
         //end point to grab item
         axios.get(`/getItemById?id=${this.props.match.params.id}`).then( res => {
             this.setState({item2: res.data, mainImage: res.data[0].product_img, img1: res.data[0].product_img}, () => console.log(this.state.item2, 'item2'))
@@ -268,6 +321,10 @@ class Item extends Component {
                 return (
                     <StarsCon>
                         <Star src={starG}/>
+                        <Star src={starE} />
+                        <Star src={starE} />
+                        <Star src={starE} />
+                        <Star src={starE} />
                     </StarsCon>
                 )
             }else if(num === 2){
@@ -275,6 +332,9 @@ class Item extends Component {
                     <StarsCon>
                         <Star src={starG}/>
                         <Star src={starG}/>
+                        <Star src={starE} />
+                        <Star src={starE} />
+                        <Star src={starE} />
                     </StarsCon>
                 )
             }else if(num === 3){
@@ -283,6 +343,8 @@ class Item extends Component {
                         <Star src={starG}/>
                         <Star src={starG}/>
                         <Star src={starG}/>
+                        <Star src={starE} />
+                        <Star src={starE} />
                     </StarsCon>
                 )
             }else if(num === 4){
@@ -292,6 +354,7 @@ class Item extends Component {
                     <Star src={starG}/>
                     <Star src={starG}/>
                     <Star src={starG}/>
+                    <Star src={starE} />
                 </StarsCon>
                 )
             }else if(num === 5){
@@ -311,10 +374,10 @@ class Item extends Component {
             return ( <Review key = { i } >
                         <ReviewTop >
                             <div>{starGen(review.rating)}</div>
-                            <h2 > { `${review.name}` } </h2> 
+                            <ReviewName > { `${review.name}` } </ReviewName> 
                             <h3 > { review.date } </h3> 
                         </ReviewTop> 
-                        <RR > { review.review } </RR> 
+                        <RR> <RRR>{ review.review }</RRR> </RR> 
                     </Review>
             )
         });
@@ -383,45 +446,62 @@ class Item extends Component {
             }</div> : <div/>}
 
             <TopElements >
-            <AllImages >
-            <MainImage src = { this.state.mainImage }
-            alt = 'main' />
+                <AllImages>
+                    <MainImage src = { this.state.mainImage }
+                    alt = 'main' />
 
-            <OtherImageCon>
-            <OtherImage src = { item.product_img }
-            alt = 'productImage'
-            onClick = {
-                () => this.setState({ mainImage: item.product_img}) }
-            /> <OtherImage src = { item.img_view_2 }
-            alt = 'productImage'
-            onClick = {
-                () => this.setState({ mainImage: item.img_view_2 }) }
-            /> <OtherImage src = { item.img_view_3 }
-            alt = 'productImage'
-            onClick = {
-                () => this.setState({ mainImage: item.img_view_3 }) }
-            /> </OtherImageCon> </AllImages>
+                    <OtherImageCon>
+                    <OtherImage src = { item.product_img }
+                    alt = 'productImage'
+                    onClick = {
+                        () => this.setState({ mainImage: item.product_img}) }
+                    /> <OtherImage src = { item.img_view_2 }
+                    alt = 'productImage'
+                    onClick = {
+                        () => this.setState({ mainImage: item.img_view_2 }) }
+                    /> <OtherImage src = { item.img_view_3 }
+                    alt = 'productImage'
+                    onClick = {
+                        () => this.setState({ mainImage: item.img_view_3 }) }
+                    /> 
+                    </OtherImageCon>
+                </AllImages>
 
-            <ItemSpecs >
-            <h1 > { item.title } </h1> 
-            <h1 > { item.price } </h1> 
+                <ItemSpecs >
+                <h1 > { item.title } </h1> 
+                <h1 > { `$${item.price}` } </h1> 
 
-            {/* sizes */}
-            < AllImages >
-            <PSE > xs </PSE> 
-            <PSE > s </PSE> 
-            <PSE > m </PSE>
-            <PSE > l </PSE> 
-            <PSE > xl </PSE> 
-            </AllImages> 
-            <ProductDescription >
-            <h3 > { images.description } </h3> 
-            </ProductDescription> 
-            <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
-            </ItemSpecs> 
+                {/* sizes */}
+                <Sizes>
+                    {this.state.item2[0].size === 'xs' ? <div>{
+                        <PSE2>xs</PSE2> 
+                    }</div> : <PSE>xs</PSE>}
+
+                    {this.state.item2[0].size === 's' ? <div>{
+                        <PSE2>s</PSE2> 
+                    }</div> : <PSE>s</PSE>}
+
+                    {this.state.item2[0].size === 'm' ? <div>{
+                        <PSE2>m</PSE2> 
+                    }</div> : <PSE>m</PSE>}
+
+                    {this.state.item2[0].size === 'l' ? <div>{
+                        <PSE2>l</PSE2> 
+                    }</div> : <PSE>l</PSE>}
+
+                    {this.state.item2[0].size === 'xl' ? <div>{
+                        <PSE2>xl</PSE2> 
+                    }</div> : <PSE>xl</PSE>}
+
+                </Sizes> 
+                <ProductDescription >
+                <h3 > { images.description } </h3> 
+                </ProductDescription> 
+                <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
+                </ItemSpecs> 
             </TopElements>
 
-            <h1 > Customer Reviews </h1> 
+            <h1> Customer Reviews </h1> 
                 <ReviewCon > 
                     { allReviews }
                 <NewReview onClick={() => this.setState({writeReview: true })}>Write Review</NewReview>

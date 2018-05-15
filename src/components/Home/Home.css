@@ -9,7 +9,7 @@
     width: 100%;
     position: relative;
     max-height: 520px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .parallax1{
@@ -23,8 +23,8 @@
 }
 
 .pBanner{
-    margin-top: 100px;
-    margin-bottom: 110px;
+    margin-top: 50px;
+    margin-bottom: 0px;
 }
 
 .par{
