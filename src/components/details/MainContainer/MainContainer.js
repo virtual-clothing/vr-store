@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopBanner from './TopBanner';
-import Filter from './Filter';
+import Filter from './filter/Filter';
 import ImgContainer from './ImgContainer';
 
 const MainContainer = styled.div`

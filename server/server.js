@@ -127,7 +127,7 @@ app.post('/email', function create(req, res, next) {
 
 //____________________STRIPE
 app.post('/api/payment', function(req, res, next){
-  console.log(req.body)
+  // console.log(req.body)
   //convert amount to pennies
   const amountArray = req.body.amount.toString().split('');
   const pennies = [];

@@ -46,6 +46,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",

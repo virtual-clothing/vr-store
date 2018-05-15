@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
   display: inline-block;
   width: 25%;
-  height: 80vh;
   box-sizing: border-box;
   float: left;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 
   @media(max-width: 450px) {
     float: none;
@@ -16,8 +18,7 @@ const Container = styled.div`
   }
 `
 const MenuList = props => {
-  const types = ["View All", "T-shirt & Tank Tops", "Shirts", "Hoodies & Sweatshirts", 
-  "Jeans", "Pants", "Jackets & Suits", "Shorts", "SwimWear", "Shoes", "Bags"];
+  const types = ["View All", "Shirts", "Hoodies & Jackets", "Pants", "Shorts", "SwimWear", "Shoes", "Bags"];
   let item = types.map(item => 
     <Link to={`/${props.category}/${item}`} key={item} style={{ textDecoration: 'none' }}>
       <Item type={item} category={props.category}/>
@@ -30,3 +31,6 @@ const MenuList = props => {
 }
 
 export default MenuList;
+
+// "View All", "T-shirt & Tank Tops", "Shirts", "Hoodies & Sweatshirts", 
+//   "Jeans", "Pants", "Jackets & Suits", "Shorts", "SwimWear", "Shoes", "Bags"
