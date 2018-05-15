@@ -7,6 +7,8 @@ const initState = {
   userCart: [],
   allItems: [],
   searchKeyWord: '',
+  sizes: [],
+  colors: [],
   favorites: []
 }
 
@@ -17,6 +19,9 @@ const CONTACT_IS_OPEN = "CONTACT_IS_OPEN";
 const TOGGLE_CHAT = "TOGGLE_CHAT";
 const GET_ALL_ITEMS = "GET_ALL_ITEMS";
 const GET_SEARCH_KEYWORD = "GET_SEARCH_KEYWORD";
+const GET_SIZES = "GET_SIZES";
+const GET_COLORS = "GET_COLORS";
+const CLEAR_SIZES_COLORS = "CLEAR_SIZES_COLORS";
 const GET_FAVORITES = "GET_FAVORITES";
 const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 const REM_FROM_FAVORITES = "REM_FROM_FAVORITES";
@@ -34,11 +39,17 @@ export default (state = initState, action) => {
     case TOGGLE_CHAT:
       return {...state, chatIsOpen: !state.chatIsOpen};
     case GET_ALL_ITEMS + '_FULFILLED':
-      return {...state, allItems: action.payload}
-    default:
-      return state;
+      return {...state, allItems: action.payload};
     case GET_SEARCH_KEYWORD:
       return {...state, searchKeyWord: action.payload};
+    case GET_SIZES:
+      return {...state, sizes: action.payload};
+    case GET_COLORS:
+      return {...state, colors: action.payload};
+    case CLEAR_SIZES_COLORS:
+      return {...state, sizes: [], colors: []};
+    default:
+      return state;
     case GET_FAVORITES + '_FULFILLED':
       return Object.assign({}, state, {favorites: action.payload});
     case ADD_TO_FAVORITES + '_FULFILLED':
@@ -134,3 +145,22 @@ export const getSearchKeyWord = (keyword) => {
   }
 }
 
+export const getSizes = (sizes) => {
+  return {
+    type: GET_SIZES,
+    payload: sizes
+  }
+}
+
+export const getColors = (colors) => {
+  return {
+    type: GET_COLORS,
+    payload: colors
+  }
+}
+
+export const clearSizesColors = () => {
+  return {
+    type: CLEAR_SIZES_COLORS
+  }
+}

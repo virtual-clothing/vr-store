@@ -6,9 +6,8 @@ import blackHeart from './icon/blackHeart.svg';
 const Container = styled.div`
   width: 49%;
   margin: 1rem 0;
-  background: #fafafa;
+  background: #EEEEEE;
   position: relative;
-
   @media(max-width: 450px) {
     width: 100%;
   }
@@ -59,8 +58,6 @@ const Image = styled.img`
   height: auto;
   background: contain;
 `
-// position: relative;
-
 const ImageWrapper = props => {
   return (
     <div style={{position: "relative"}}>
@@ -76,6 +73,7 @@ const Text = styled.p`
 
 const Details = styled.div`
   padding: 0.5rem;
+  color: black;
 `
 const Wrapper = props => (
   <div>
