@@ -68,6 +68,13 @@ module.exports = {
         })
     },
 
+    remFromFavorites: (req, res) => {
+        const db = req.app.get('db');
+        db.remFromFavorites([req.user, req.params.id]).then(favs => {
+            res.status(200).send(favs);
+        })
+    },
+
     getItemById: (req, res) => {
         const db = req.app.get('db');
         db.getItem(req.query.id).then( item => {

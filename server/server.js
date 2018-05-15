@@ -79,6 +79,7 @@ app.delete('/cart/:id', controller.remFromCart)
 app.get('/api/all', controller.getAllItems);
 app.get('/favorites', controller.getFavorites);
 app.post('/favorites', controller.addToFavorites);
+app.delete('/favorites/:id', controller.remFromFavorites);
 
 // check if user is logged in
 app.get('/checkauth', controller.checkAuth);
