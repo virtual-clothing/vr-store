@@ -5,6 +5,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import Favorites from './favorites';
+import { connect } from 'react-redux';
+import { getAllItems, getUserInfo } from '../ducks/reducer';
 
 
 //use this for other views
@@ -109,7 +111,7 @@ const InputRow = styled.div`
 `;
 
 
-export default class Account extends Component {
+class Account extends Component {
     constructor(){
         super()
 
@@ -139,10 +141,10 @@ export default class Account extends Component {
 
         window.scrollTo(0, 0);
 
-            //when users table is updated to have address and phonenumber, set them to state as well
         axios.get('/api/userinfo').then( res => {
             if(res.data[0]){ this.setState({user: res.data, username: res.data[0].username, email: res.data[0].email, profileImage: res.data[0].profile_img, address: res.data[0].address, phoneNumber: res.data[0].phone}, () => console.log(this.state))}
         })
+        this.props.getAllItems();
 
         //need endpoint to grab users favorites. will build when there are products in db
     }
@@ -236,3 +238,5 @@ export default class Account extends Component {
         )
     }
 }
+
+export default connect(state => state, {getAllItems, getUserInfo})(Account)

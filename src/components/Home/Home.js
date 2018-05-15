@@ -9,9 +9,9 @@ import image5 from './testCarouselImages/image5.jpeg';
 import image6 from './testCarouselImages/image6.jpeg';
 // import store from './testCarouselImages/store.jpg';
 import './Home.css';
-import bJacket from './itemImages/brownjacket.jpg';
-import gJacket from './itemImages/greenjacket.jpeg';
-import pJacket from './itemImages/puffy.jpg';
+import bJacket from './itemImages/mens2.jpg';
+import gJacket from './itemImages/womens2.jpg';
+import pJacket from './itemImages/kids2.jpeg';
 import vrGuy from './testCarouselImages/vrGuy.png';
 
 // import vrGuy2 from './testCarouselImages/vrGuy2.png';
@@ -83,7 +83,7 @@ const Featured = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0px;
 
     @media (max-width: 777px) {
         flex-direction: column;
@@ -198,7 +198,7 @@ class Home extends Component {
                         <ItemClass>
                             <ItemImage src={bJacket} alt='jacket'/>
                             <ItemBuy>
-                                <ItemText>$149.99</ItemText>
+                                <ItemText>Men</ItemText>
                             </ItemBuy>
                         </ItemClass>
                     </Link>
@@ -206,7 +206,7 @@ class Home extends Component {
                         <ItemClass>
                             <ItemImage src={gJacket} alt='jacket'/>
                             <ItemBuy>
-                                <ItemText>$149.99</ItemText>
+                                <ItemText>Women</ItemText>
                             </ItemBuy>
                         </ItemClass>
                     </Link>
@@ -214,7 +214,7 @@ class Home extends Component {
                         <ItemClass>
                             <ItemImage src={pJacket} alt='jacket'/>
                             <ItemBuy>
-                                <ItemText>$149.99</ItemText>
+                                <ItemText>Kids</ItemText>
                             </ItemBuy>
                         </ItemClass>
                     </Link>

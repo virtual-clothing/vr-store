@@ -96,6 +96,13 @@ app.get('/getItemById', controller.getItemById)
 //get reviews
 app.get('/itemReviews', controller.getItemReviews)
 
+//submit review
+app.post('/submitreview', controller.submitReview)
+
+//add to cart
+app.post('/addtocart', controller.addToCart)
+
+
 // NodeMailer
 const smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
