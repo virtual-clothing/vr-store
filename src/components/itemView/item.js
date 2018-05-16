@@ -66,7 +66,7 @@ const MainImage = styled.img `
     margin-top: 30px;
     width: 500px;
     height: auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
     @media (max-width: 777px) {
         width: 300px;
@@ -88,13 +88,14 @@ const OtherImageCon = styled.div `
 `;
 
 const OtherImage = styled.img `
-    width: 100px;
+    width: 80px;
     margin: 5px;
     border: 1px solid black;
     padding: 10px;
 
     @media (max-width: 777px) {
-        width: 70px;
+        width: 44px;
+        margin: 3px;
     }
 `;
 
@@ -255,7 +256,7 @@ class Item extends Component {
         this.state = {
 
             item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!" }],
-            item2:[{title: '', price: 0, product_img: '', type: '', img_view_2: '', img_view_3: '', size: ''}],
+            item2:[{title: '', price: 0, product_img: '', img_back: '', type: '', img_view_2: '', img_view_3: '', size: ''}],
             mainImage: '',
 
             size: 'm',
@@ -283,6 +284,8 @@ class Item extends Component {
         var rating = this.state.rating.length;
         var pID = this.props.match.params.id
 
+
+        //date generator
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1;
@@ -294,7 +297,6 @@ class Item extends Component {
         if(mm<10) {
             mm = '0'+mm
         } 
-
         today = mm + '/' + dd + '/' + yyyy;
 
         axios.post('/submitreview', {pID, review, name, rating, today}).then( res => {
@@ -308,8 +310,13 @@ class Item extends Component {
 
     addToCart(){
         var pID = this.props.match.params.id
+
         axios.post('/addtocart', {pID}).then( res => {
-            alert('added to cart!');
+            if(res.data == "success"){
+                alert('added to cart!');
+            }else{
+                alert('please login to add item to cart')
+            }
         })
     }
 
@@ -451,19 +458,38 @@ class Item extends Component {
                     alt = 'main' />
 
                     <OtherImageCon>
-                    <OtherImage src = { item.product_img }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.product_img}) }
-                    /> <OtherImage src = { item.img_view_2 }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.img_view_2 }) }
-                    /> <OtherImage src = { item.img_view_3 }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.img_view_3 }) }
-                    /> 
+                        {!item.product_img == '' ? <div>{
+                            <OtherImage src = { item.product_img }
+                            alt = 'productImage'
+                            onClick = {
+                                () => this.setState({ mainImage: item.product_img}) }
+                            />
+                        }</div> : <div/>}
+
+                        {!item.img_back == '' ? <div>{
+                            <OtherImage src = { item.img_back }
+                            alt = 'productImage'
+                            onClick = {
+                                () => this.setState({ mainImage: item.img_back}) }
+                            /> 
+                        }</div> : <div/>}
+
+                        {!item.img_view_2 == '' ? <div>{
+                            <OtherImage src = { item.img_view_2 }
+                            alt = 'productImage'
+                            onClick = {
+                                () => this.setState({ mainImage: item.img_view_2 }) }
+                            /> 
+                        }</div> : <div/>}
+                        
+                        {!item.img_view_3 == '' ? <div>{
+                            <OtherImage src = { item.img_view_3 }
+                            alt = 'productImage'
+                            onClick = {
+                                () => this.setState({ mainImage: item.img_view_3 }) }
+                            /> 
+                        }</div> : <div/>}
+
                     </OtherImageCon>
                 </AllImages>
 
@@ -473,25 +499,26 @@ class Item extends Component {
 
                 {/* sizes */}
                 <Sizes>
-                    {this.state.item2[0].size === 'xs' ? <div>{
+
+                    {this.state.size === 'xs' ? <div>{
                         <PSE2>xs</PSE2> 
-                    }</div> : <PSE>xs</PSE>}
+                    }</div> : <PSE onClick={() => this.setState({size: 'xs'})}>xs</PSE>}
 
-                    {this.state.item2[0].size === 's' ? <div>{
+                    {this.state.size === 's' ? <div>{
                         <PSE2>s</PSE2> 
-                    }</div> : <PSE>s</PSE>}
+                    }</div> : <PSE onClick={() => this.setState({size: 's'})}>s</PSE>}
 
-                    {this.state.item2[0].size === 'm' ? <div>{
+                    {this.state.size === 'm' ? <div>{
                         <PSE2>m</PSE2> 
-                    }</div> : <PSE>m</PSE>}
+                    }</div> : <PSE onClick={() => this.setState({size: 'm'})}>m</PSE>}
 
-                    {this.state.item2[0].size === 'l' ? <div>{
+                    {this.state.size === 'l' ? <div>{
                         <PSE2>l</PSE2> 
-                    }</div> : <PSE>l</PSE>}
+                    }</div> : <PSE onClick={() => this.setState({size: 'l'})}>l</PSE>}
 
-                    {this.state.item2[0].size === 'xl' ? <div>{
+                    {this.state.size === 'xl' ? <div>{
                         <PSE2>xl</PSE2> 
-                    }</div> : <PSE>xl</PSE>}
+                    }</div> : <PSE onClick={() => this.setState({size: 'xl'})}>xl</PSE>}
 
                 </Sizes> 
                 <ProductDescription >
