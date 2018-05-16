@@ -21,7 +21,7 @@ class ImgContainer extends Component {
   
   render() {
     let images = this.props.allItems.map(item => {
-      // Check user selected any size or color
+      // THE CASE THAT USER NOT SELECTED SIZE & COLOR
       if (!this.props.sizes[0] && !this.props.colors[0]) {
         // Filter all items buy gender
         if (this.props.searchKeyWord === 'View All') {
@@ -33,7 +33,7 @@ class ImgContainer extends Component {
         } else {
           // Filter all items by type
           if (this.props.searchKeyWord) {
-            if (item.gender === this.props.category && this.props.searchKeyWord === item.category && item.size === 'm') {
+            if (item.gender === this.props.category && this.props.searchKeyWord === item.type && item.size === 'm') {
               return (
                 <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
               )
@@ -45,10 +45,17 @@ class ImgContainer extends Component {
             )
           } 
         }
-        // the case that user selected color and size________
+
+         // THE CASE THAT USER SELECTED SIZE & COLOR
       } else if (this.props.sizes[0] && this.props.colors[0]) {
         // Filter all items buy gender
         if (this.props.searchKeyWord === 'View All') {
+          
+          // need to filter the colors here
+
+
+
+
           if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
             return (
               <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
@@ -57,7 +64,7 @@ class ImgContainer extends Component {
         } else {
           // Filter all items by type
           if (this.props.searchKeyWord) {
-            if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
+            if (this.props.searchKeyWord === item.type && item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1] && item.color === this.props.colors[this.props.colors.length - 1]) {
               return (
                 <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
               )
@@ -69,6 +76,7 @@ class ImgContainer extends Component {
             )
           } 
         }
+
           // THE CASE THAT USER SELECTED COLOR
       } else if (this.props.colors[0] && item.size === 'm') {
 
@@ -81,7 +89,7 @@ class ImgContainer extends Component {
         } else {
           // Filter all items by type
           if (this.props.searchKeyWord) {
-            if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
+            if (this.props.searchKeyWord === item.type && item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
               return (
                 <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
               )
@@ -93,9 +101,9 @@ class ImgContainer extends Component {
             )
           } 
         }
+
         // THE CASE THAT USER SELECTD SIZE
       } else if (this.props.sizes[0]) {
-
         if (this.props.searchKeyWord === 'View All') {
           if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
             return (
@@ -105,7 +113,7 @@ class ImgContainer extends Component {
         } else {
           // Filter all items by type
           if (this.props.searchKeyWord) {
-            if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+            if (this.props.searchKeyWord === item.type && item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
               return (
                 <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
               )
