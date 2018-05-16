@@ -4,7 +4,6 @@ import MenuList from './details/sideMenu/MenuList';
 import MainContainer from './details/mainContainer/MainContainer';
 import Title from './details/Title';
 
-
 const MenComponent = styled.div`
     margin-top: 80px;
 `
