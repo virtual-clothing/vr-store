@@ -117,4 +117,13 @@ create table reviews (
 insert into reviews (product_id, review, name, rating, date) values (1, 'its awesome', 'ben', 3, '01/13/2019')
 insert into reviews (product_id, review, name, rating, date) values (1, 'dumb', 'Joe', 1, '04/03/2019')
 
+--Order Table
+create table orders (
+    id serial PRIMARY KEY,
+    product_id int REFERENCES products(id),
+    user_id int REFERENCES users(id) ,
+    date date,
+    order_total float
+)
 
+insert into orders (product_id,user_id,date,order_total)values(1,1,CURRENT_DATE,100)

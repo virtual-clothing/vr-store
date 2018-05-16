@@ -108,5 +108,16 @@ module.exports = {
         }else{
             res.status(200).send("failure")
         }
+    },
+    createUserOrder:(req,res)=>{
+        const db = req.app.get('db');
+        
+    },
+    getUserOrders: (req,res) => {
+        const db = req.app.get('db');
+        db.getUserOrders(req.user).then( order => {
+            res.status(200).send(order)
+        }
+        )
     }
 }

@@ -9,7 +9,8 @@ const initState = {
   searchKeyWord: '',
   sizes: [],
   colors: [],
-  favorites: []
+  favorites: [],
+  orders:[]
 }
 
 const GET_USER_INFO = "GET_USER_INFO";
@@ -25,6 +26,7 @@ const CLEAR_SIZES_COLORS = "CLEAR_SIZES_COLORS";
 const GET_FAVORITES = "GET_FAVORITES";
 const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 const REM_FROM_FAVORITES = "REM_FROM_FAVORITES";
+const GET_USER_ORDERS = "GET_USER_ORDERS";
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -56,9 +58,19 @@ export default (state = initState, action) => {
       return Object.assign({}, state, {favorites: action.payload});
     case REM_FROM_FAVORITES + '_FULFILLED':
       return Object.assign({}, state, {favorites: action.payload});
+    case GET_USER_ORDERS + '_FULFILLED':
+      return Object.assign({}, state, {orders: action.payload})
   }
 }
-
+export const getOrders = () => {
+  const promise = axios.get('/orders').then(res => {
+    res.data
+  })
+  return {
+    type: GET_USER_ORDERS,
+    payload: promise
+  }
+}
 export const getFavorites = () => {
   const promise = axios.get('/favorites').then(res => res.data)
 

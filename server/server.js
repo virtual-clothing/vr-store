@@ -97,6 +97,8 @@ app.post('/submitreview', controller.submitReview)
 //add to cart
 app.post('/addtocart', controller.addToCart)
 
+app.get('/orders', controller.getUserOrder)
+
 
 // NodeMailer
 const smtpTransport = nodemailer.createTransport({
