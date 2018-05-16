@@ -6,6 +6,16 @@ export default class CartItem extends Component {
         super();
     }
 
+    removeItem(id) {
+        if(this.props.item.qty > 1) {
+            this.props.remCartQtyFn(id)
+            return
+        } else {
+
+            this.props.removeFn(id)
+        }
+    }
+
     render() {
         return (
             <Item>
@@ -14,18 +24,18 @@ export default class CartItem extends Component {
                 </ImageDiv>
                 <DescriptionDiv>
                     <p>{this.props.item.title}</p>
-                    <p>SKU</p>
+                    
                     <p>Size: {this.props.item.size}</p>
                 </DescriptionDiv>
                 <PriceDiv>
                     <p>${this.props.item.price}</p>
                 </PriceDiv>
                 <QuantityDiv>
-                    <p>QTY: {this.props.item.quantity}</p>
-                    <button onClick={() => this.props.removeFn(this.props.item.product_id)}>remove</button>
+                    <p>QTY: {this.props.item.qty}</p>
+                    <button onClick={() => this.removeItem(this.props.item.product_id)}>remove</button>
                 </QuantityDiv>
                 <TotalDiv>
-                    <p>${this.props.item.quantity * this.props.item.price}</p>
+                    <p>${this.props.item.qty * this.props.item.price}</p>
                 </TotalDiv>
             </Item>
         )

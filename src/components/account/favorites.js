@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const FavoritesDiv = styled.div`
     display: flex;
-    flex-wrap: auto;
+    flex-wrap: wrap;
     width: 100%;
     height: auto;
     padding: 10px;
