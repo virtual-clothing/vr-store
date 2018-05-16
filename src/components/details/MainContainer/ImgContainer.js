@@ -51,6 +51,7 @@ class ImgContainer extends Component {
         // Filter all items buy gender
         if (this.props.searchKeyWord === 'View All') {
           
+<<<<<<< HEAD
           // need to filter the colors here
 
 
@@ -74,11 +75,49 @@ class ImgContainer extends Component {
             return (
               <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
             )
+=======
+          let colors = this.props.colors;
+          for (let i = 0; i < colors.length; i++) {
+            if (colors[i] === item.color) {
+              if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+                return (
+                  <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+                )
+              } 
+            }
+          }
+        } else {
+          // Filter all items by type
+          if (this.props.searchKeyWord) {
+            let colors = this.props.colors;
+
+            for (let i = 0; i < colors.length; i++) {
+              if (colors[i] === item.color) {
+                if (this.props.searchKeyWord === item.type && item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+                  return (
+                    <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+                  )
+                } 
+              }
+            }
+         
+          // When user access to men || women || kids
+          } else if (item.gender === this.props.category && item.size === this.props.sizes[this.props.sizes.length - 1]) {
+            let colors = this.props.colors;
+            for (let i = 0; i < colors.length; i++) {
+              if (colors[i] === item.color) {
+                return (
+                  <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+                )
+              }
+            }
+>>>>>>> master
           } 
         }
 
           // THE CASE THAT USER SELECTED COLOR
       } else if (this.props.colors[0] && item.size === 'm') {
+<<<<<<< HEAD
 
         if (this.props.searchKeyWord === 'View All') {
           if (item.gender === this.props.category && item.color === this.props.colors[this.props.colors.length - 1]) {
@@ -100,6 +139,33 @@ class ImgContainer extends Component {
               <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
             )
           } 
+=======
+        let colors = this.props.colors;
+        for (var i = 0; i < colors.length; i++) {
+          if (colors[i] === item.color) {
+            if (this.props.searchKeyWord === 'View All') {
+              if (item.gender === this.props.category) {
+                return (
+                  <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price} addToFavorites={this.props.addToFavorites} remFromFavorites={this.props.remFromFavorites}/>
+                )
+              } 
+            } else {
+              // Filter all items by type
+              if (this.props.searchKeyWord) {
+                if (this.props.searchKeyWord === item.type && item.gender === this.props.category) {
+                  return (
+                    <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+                  )
+                }          
+              // When user access to men || women || kids
+              } else if (item.gender === this.props.category) {
+                return (
+                  <Image key={item.id} img={item.product_img} id={item.id} title={item.title} price={item.price}/>
+                )
+              } 
+            }
+          }
+>>>>>>> master
         }
 
         // THE CASE THAT USER SELECTD SIZE
