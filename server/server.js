@@ -93,9 +93,9 @@ app.get('/getItemById', controller.getItemById)
 app.get('/itemReviews', controller.getItemReviews)
 //submit review
 app.post('/submitreview', controller.submitReview)
-
 //add to cart
 app.post('/addtocart', controller.addToCart)
+
 
 
 // NodeMailer
