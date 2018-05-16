@@ -7,8 +7,9 @@ import starE from './media/startEmpty.png';
 import starG from './media/goldStar.png';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { addCartQuantity, addToCart } from '../ducks/reducer';
 
-const Body = styled.div `
+const Body = styled.div`
   min-height: 100vh;
   height: auto;
   position: relative;
@@ -23,7 +24,7 @@ const Body = styled.div `
   background-color: rgb(248, 247, 247);
 `;
 
-const TopElements = styled.div `
+const TopElements = styled.div`
     width: 100%;
     height: auto;
     padding: 20px;
@@ -39,7 +40,7 @@ const TopElements = styled.div `
     }
 `;
 
-const AllImages = styled.div `
+const AllImages = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -57,12 +58,12 @@ const Sizes = styled.div`
     align-items: center;
 `;
 
-const MainImageCon = styled.div `
+const MainImageCon = styled.div`
     padding: 10px;
     height: auto;
 `;
 
-const MainImage = styled.img `
+const MainImage = styled.img`
     margin-top: 30px;
     width: 500px;
     height: auto;
@@ -73,7 +74,7 @@ const MainImage = styled.img `
     }
 `;
 
-const OtherImageCon = styled.div `
+const OtherImageCon = styled.div`
     margin-top: 200px;
     margin: 20px;
     display: flex;
@@ -87,7 +88,7 @@ const OtherImageCon = styled.div `
     }
 `;
 
-const OtherImage = styled.img `
+const OtherImage = styled.img`
     width: 100px;
     margin: 5px;
     border: 1px solid black;
@@ -98,7 +99,7 @@ const OtherImage = styled.img `
     }
 `;
 
-const ItemSpecs = styled.div `
+const ItemSpecs = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -106,7 +107,7 @@ const ItemSpecs = styled.div `
 `;
 
 //product size element
-const PSE = styled.div `
+const PSE = styled.div`
     width: 30px;
     height: 30px;
     display: flex;
@@ -117,7 +118,7 @@ const PSE = styled.div `
     margin: 5px;
 `;
 
-const PSE2 = styled.div `
+const PSE2 = styled.div`
     width: 30px;
     height: 30px;
     display: flex;
@@ -131,19 +132,19 @@ const PSE2 = styled.div `
 `;
 
 
-const ProductDescription = styled.div `
+const ProductDescription = styled.div`
     width: 200px;
     height: auto;
 `;
 
-const ReviewCon = styled.div `
+const ReviewCon = styled.div`
     margin-top: 30px;
     width: 90%;
     height: auto;
     border: 1px solid grey;
 `;
 
-const Review = styled.div `
+const Review = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -151,7 +152,7 @@ const Review = styled.div `
     align-items: center;
 `;
 
-const ReviewTop = styled.div `
+const ReviewTop = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -251,11 +252,11 @@ const ReviewName = styled.h2`
 class Item extends Component {
     constructor() {
         super()
-        
+
         this.state = {
 
             item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!" }],
-            item2:[{title: '', price: 0, product_img: '', type: '', img_view_2: '', img_view_3: '', size: ''}],
+            item2: [{ title: '', price: 0, product_img: '', type: '', img_view_2: '', img_view_3: '', size: '' }],
             mainImage: '',
 
             size: 'm',
@@ -263,122 +264,135 @@ class Item extends Component {
             writeReview: false,
             rating: [],
             name: '',
-            review: ''
+            review: '',
+            alreadyInCart: false
         }
     }
 
     componentDidMount() {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         //end point to grab item
-        axios.get(`/getItemById?id=${this.props.match.params.id}`).then( res => {
-            this.setState({item2: res.data, mainImage: res.data[0].product_img, img1: res.data[0].product_img}, () => console.log(this.state.item2, 'item2'))
+        axios.get(`/getItemById?id=${this.props.match.params.id}`).then(res => {
+            this.setState({ item2: res.data, mainImage: res.data[0].product_img, img1: res.data[0].product_img }, () => console.log(this.state.item2, 'item2'))
         })
-        axios.get(`/itemReviews?id=${this.props.match.params.id}`).then( res => {
-            this.setState({reviews: res.data})
+        axios.get(`/itemReviews?id=${this.props.match.params.id}`).then(res => {
+            this.setState({ reviews: res.data })
         })
     }
 
-    submitReview(){
-        const {name, review} = this.state;
+    submitReview() {
+        const { name, review } = this.state;
         var rating = this.state.rating.length;
         var pID = this.props.match.params.id
 
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth()+1;
+        var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
 
-        if(dd<10) {
-            dd = '0'+dd
-        } 
-        if(mm<10) {
-            mm = '0'+mm
-        } 
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
 
         today = mm + '/' + dd + '/' + yyyy;
 
-        axios.post('/submitreview', {pID, review, name, rating, today}).then( res => {
-            this.setState({reviews: res.data, writeReview: false})
+        axios.post('/submitreview', { pID, review, name, rating, today }).then(res => {
+            this.setState({ reviews: res.data, writeReview: false })
         })
     }
 
-    handleChange(prop, val){
-        this.setState({[prop]: val})
+    handleChange(prop, val) {
+        this.setState({ [prop]: val })
     }
 
-    addToCart(){
+    addToCart() {
         var pID = this.props.match.params.id
-        axios.post('/addtocart', {pID}).then( res => {
-            alert('added to cart!');
+        console.log(pID)
+        this.props.cart.map((item, index) => {
+            console.log(item.product_id)
+            if (item.product_id == pID) {
+                console.log('its in there')
+                this.setState({ alreadyInCart: true })
+            }
         })
+        console.log(this.state.alreadyInCart)
+        if (this.state.alreadyInCart === true) {
+            this.props.addCartQuantity(pID);
+        } else {
+            this.props.addToCart(pID);
+            this.setState({alreadyInCart: true})
+        }
     }
 
     render() {
         var images = this.state.item[0]
         var item = this.state.item2[0]
-        var starGen = (num) => { 
-            if(num === 1){
+        var starGen = (num) => {
+            if (num === 1) {
                 return (
                     <StarsCon>
-                        <Star src={starG}/>
+                        <Star src={starG} />
                         <Star src={starE} />
                         <Star src={starE} />
                         <Star src={starE} />
                         <Star src={starE} />
                     </StarsCon>
                 )
-            }else if(num === 2){
+            } else if (num === 2) {
                 return (
                     <StarsCon>
-                        <Star src={starG}/>
-                        <Star src={starG}/>
+                        <Star src={starG} />
+                        <Star src={starG} />
                         <Star src={starE} />
                         <Star src={starE} />
                         <Star src={starE} />
                     </StarsCon>
                 )
-            }else if(num === 3){
+            } else if (num === 3) {
                 return (
                     <StarsCon>
-                        <Star src={starG}/>
-                        <Star src={starG}/>
-                        <Star src={starG}/>
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
                         <Star src={starE} />
                         <Star src={starE} />
                     </StarsCon>
                 )
-            }else if(num === 4){
+            } else if (num === 4) {
                 return (
-                <StarsCon>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starE} />
-                </StarsCon>
+                    <StarsCon>
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starE} />
+                    </StarsCon>
                 )
-            }else if(num === 5){
-                return(
-                <StarsCon>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                    <Star src={starG}/>
-                </StarsCon>
+            } else if (num === 5) {
+                return (
+                    <StarsCon>
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
+                        <Star src={starG} />
+                    </StarsCon>
                 )
             }
         }
 
         var allReviews = this.state.reviews.map((review, i) => {
-            return ( <Review key = { i } >
-                        <ReviewTop >
-                            <div>{starGen(review.rating)}</div>
-                            <ReviewName > { `${review.name}` } </ReviewName> 
-                            <h3 > { review.date } </h3> 
-                        </ReviewTop> 
-                        <RR> <RRR>{ review.review }</RRR> </RR> 
-                    </Review>
+            return (<Review key={i} >
+                <ReviewTop >
+                    <div>{starGen(review.rating)}</div>
+                    <ReviewName > {`${review.name}`} </ReviewName>
+                    <h3 > {review.date} </h3>
+                </ReviewTop>
+                <RR> <RRR>{review.review}</RRR> </RR>
+            </Review>
             )
         });
 
@@ -394,128 +408,129 @@ class Item extends Component {
         //     }
         // });
         // console.log(item, "item from filter")
-        
-        
-        return ( <Body >
+
+
+        return (<Body >
             {this.state.writeReview ? <div>{
-            <WriteReview>
-                <Modal>
-                    <Input placeholder='name' onChange={(e) => this.handleChange('name', e.target.value)}/>
+                <WriteReview>
+                    <Modal>
+                        <Input placeholder='name' onChange={(e) => this.handleChange('name', e.target.value)} />
 
-                    <Row>
-                        {!this.state.rating[0] ? <div>{
-                        <Star src={starE} onClick={() => this.setState({rating: [1]})}/>
-                        }</div> : 
-                        <Star src={starG} onClick={() => this.setState({rating: [1]})}/>
-                        }
+                        <Row>
+                            {!this.state.rating[0] ? <div>{
+                                <Star src={starE} onClick={() => this.setState({ rating: [1] })} />
+                            }</div> :
+                                <Star src={starG} onClick={() => this.setState({ rating: [1] })} />
+                            }
 
-                        {!this.state.rating[1] ? <div>{
-                        <Star src={starE} onClick={() => this.setState({rating: [1,1]})}/>
-                        }</div> : 
-                        <Star src={starG} onClick={() => this.setState({rating: [1,1]})}/>
-                        }
+                            {!this.state.rating[1] ? <div>{
+                                <Star src={starE} onClick={() => this.setState({ rating: [1, 1] })} />
+                            }</div> :
+                                <Star src={starG} onClick={() => this.setState({ rating: [1, 1] })} />
+                            }
 
-                        {!this.state.rating[2] ? <div>{
-                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1]})}/>
-                        }</div> : 
-                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1]})}/>
-                        }
+                            {!this.state.rating[2] ? <div>{
+                                <Star src={starE} onClick={() => this.setState({ rating: [1, 1, 1] })} />
+                            }</div> :
+                                <Star src={starG} onClick={() => this.setState({ rating: [1, 1, 1] })} />
+                            }
 
-                        {!this.state.rating[3] ? <div>{
-                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1,1]})}/>
-                        }</div> : 
-                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1,1]})}/>
-                        }
+                            {!this.state.rating[3] ? <div>{
+                                <Star src={starE} onClick={() => this.setState({ rating: [1, 1, 1, 1] })} />
+                            }</div> :
+                                <Star src={starG} onClick={() => this.setState({ rating: [1, 1, 1, 1] })} />
+                            }
 
-                        {!this.state.rating[4] ? <div>{
-                        <Star src={starE} onClick={() => this.setState({rating: [1,1,1,1,1]})}/>
-                        }</div> : 
-                        <Star src={starG} onClick={() => this.setState({rating: [1,1,1,1,1]})}/>
-                        }
-                    </Row>
+                            {!this.state.rating[4] ? <div>{
+                                <Star src={starE} onClick={() => this.setState({ rating: [1, 1, 1, 1, 1] })} />
+                            }</div> :
+                                <Star src={starG} onClick={() => this.setState({ rating: [1, 1, 1, 1, 1] })} />
+                            }
+                        </Row>
 
-                    <TextArea placeholder="Review" onChange={(e) => this.handleChange('review', e.target.value)}/>
+                        <TextArea placeholder="Review" onChange={(e) => this.handleChange('review', e.target.value)} />
 
-                    <Row>
-                        <ButtonDiv onClick={() => this.setState({writeReview: false})}>cancel</ButtonDiv>
-                        <ButtonDiv onClick={() => this.submitReview()}>submit</ButtonDiv>
-                    </Row>
+                        <Row>
+                            <ButtonDiv onClick={() => this.setState({ writeReview: false })}>cancel</ButtonDiv>
+                            <ButtonDiv onClick={() => this.submitReview()}>submit</ButtonDiv>
+                        </Row>
 
-                </Modal>
-            </WriteReview>
-            }</div> : <div/>}
+                    </Modal>
+                </WriteReview>
+            }</div> : <div />}
 
             <TopElements >
                 <AllImages>
-                    <MainImage src = { this.state.mainImage }
-                    alt = 'main' />
+                    <MainImage src={this.state.mainImage}
+                        alt='main' />
 
                     <OtherImageCon>
-                    <OtherImage src = { item.product_img }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.product_img}) }
-                    /> <OtherImage src = { item.img_view_2 }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.img_view_2 }) }
-                    /> <OtherImage src = { item.img_view_3 }
-                    alt = 'productImage'
-                    onClick = {
-                        () => this.setState({ mainImage: item.img_view_3 }) }
-                    /> 
+                        <OtherImage src={item.product_img}
+                            alt='productImage'
+                            onClick={
+                                () => this.setState({ mainImage: item.product_img })}
+                        /> <OtherImage src={item.img_view_2}
+                            alt='productImage'
+                            onClick={
+                                () => this.setState({ mainImage: item.img_view_2 })}
+                        /> <OtherImage src={item.img_view_3}
+                            alt='productImage'
+                            onClick={
+                                () => this.setState({ mainImage: item.img_view_3 })}
+                        />
                     </OtherImageCon>
                 </AllImages>
 
                 <ItemSpecs >
-                <h1 > { item.title } </h1> 
-                <h1 > { `$${item.price}` } </h1> 
+                    <h1 > {item.title} </h1>
+                    <h1 > {`$${item.price}`} </h1>
 
-                {/* sizes */}
-                <Sizes>
-                    {this.state.item2[0].size === 'xs' ? <div>{
-                        <PSE2>xs</PSE2> 
-                    }</div> : <PSE>xs</PSE>}
+                    {/* sizes */}
+                    <Sizes>
+                        {this.state.item2[0].size === 'xs' ? <div>{
+                            <PSE2>xs</PSE2>
+                        }</div> : <PSE>xs</PSE>}
 
-                    {this.state.item2[0].size === 's' ? <div>{
-                        <PSE2>s</PSE2> 
-                    }</div> : <PSE>s</PSE>}
+                        {this.state.item2[0].size === 's' ? <div>{
+                            <PSE2>s</PSE2>
+                        }</div> : <PSE>s</PSE>}
 
-                    {this.state.item2[0].size === 'm' ? <div>{
-                        <PSE2>m</PSE2> 
-                    }</div> : <PSE>m</PSE>}
+                        {this.state.item2[0].size === 'm' ? <div>{
+                            <PSE2>m</PSE2>
+                        }</div> : <PSE>m</PSE>}
 
-                    {this.state.item2[0].size === 'l' ? <div>{
-                        <PSE2>l</PSE2> 
-                    }</div> : <PSE>l</PSE>}
+                        {this.state.item2[0].size === 'l' ? <div>{
+                            <PSE2>l</PSE2>
+                        }</div> : <PSE>l</PSE>}
 
-                    {this.state.item2[0].size === 'xl' ? <div>{
-                        <PSE2>xl</PSE2> 
-                    }</div> : <PSE>xl</PSE>}
+                        {this.state.item2[0].size === 'xl' ? <div>{
+                            <PSE2>xl</PSE2>
+                        }</div> : <PSE>xl</PSE>}
 
-                </Sizes> 
-                <ProductDescription >
-                <h3 > { images.description } </h3> 
-                </ProductDescription> 
-                <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
-                </ItemSpecs> 
+                    </Sizes>
+                    <ProductDescription >
+                        <h3 > {images.description} </h3>
+                    </ProductDescription>
+                    <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
+                </ItemSpecs>
             </TopElements>
 
-            <h1> Customer Reviews </h1> 
-                <ReviewCon > 
-                    { allReviews }
-                <NewReview onClick={() => this.setState({writeReview: true })}>Write Review</NewReview>
+            <h1> Customer Reviews </h1>
+            <ReviewCon >
+                {allReviews}
+                <NewReview onClick={() => this.setState({ writeReview: true })}>Write Review</NewReview>
             </ReviewCon>
-            
-            </Body>
+
+        </Body>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        allItems: state.allItems
+        allItems: state.allItems,
+        cart: state.userCart
     }
 }
 
-export default connect(mapStateToProps)(Item);
+export default connect(mapStateToProps, { addCartQuantity, addToCart })(Item);

@@ -75,7 +75,9 @@ app.get('/callback', passport.authenticate('auth0', {
 // End Points___________________________________
 app.get('/api/userinfo', controller.getUserInfo);
 app.get('/cart', controller.getUserCart);
-app.delete('/cart/:id', controller.remFromCart)
+app.delete('/cart/:id', controller.remFromCart);
+app.put('/addcart', controller.addCartQuantity);
+app.put('/remcart', controller.remCartQuantity);
 app.get('/api/all', controller.getAllItems);
 app.get('/favorites', controller.getFavorites);
 app.post('/favorites', controller.addToFavorites);
@@ -100,7 +102,7 @@ app.get('/itemReviews', controller.getItemReviews)
 app.post('/submitreview', controller.submitReview)
 
 //add to cart
-app.post('/addtocart', controller.addToCart)
+app.post('/cart', controller.addToCart)
 
 
 // NodeMailer

@@ -3,7 +3,7 @@ import Checkout from './stripe/Checkout'
 import CartItem from './CartItem';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getUserCart, remFromCart } from './ducks/reducer';
+import { getUserCart, remFromCart, remCartQuantity } from './ducks/reducer';
 
 
 class Cart extends Component {
@@ -19,7 +19,7 @@ class Cart extends Component {
     subTotal() {
         var subTotal = 0;
         this.props.cart.map((item, index) => {
-            subTotal += item.price * item.quantity
+            subTotal += item.price * item.qty
         })
 
         return subTotal;
@@ -44,6 +44,7 @@ class Cart extends Component {
                     key={index}
                     item={item}
                     removeFn={this.props.remFromCart}
+                    remCartQtyFn={this.props.remCartQuantity}
                 />
             )
         })
@@ -83,7 +84,7 @@ const CartWindow = styled.div`
 const CartItems = styled.div`
     height: auto;
     margin-right: 40px;
-    width: 60%;
+    width: 80%;
 `
 const CheckoutDiv = styled.div`
     background-color: lightgray;
@@ -105,4 +106,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getUserCart, remFromCart })(Cart)
+export default connect(mapStateToProps, { getUserCart, remFromCart, remCartQuantity })(Cart)

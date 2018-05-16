@@ -14,6 +14,22 @@ module.exports = {
         })
     },
 
+    addCartQuantity: (req, res) => {
+        console.log('hitting addCartQuantity')
+        const db = req.app.get('db');
+        db.addCartQuantity([req.user, req.body.id]).then(cart => {
+            res.status(200).send(cart);
+        })
+    },
+
+    remCartQuantity: (req, res) => {
+        console.log('hitting remCartQuantity')
+        const db = req.app.get('db');
+        db.remCartQuantity([req.user, req.body.id]).then(cart => {
+            res.status(200).send(cart);
+        })
+    },
+
     checkAuth: (req, res) => {
         if(req.user){
             res.status(200).send([true])
@@ -101,9 +117,8 @@ module.exports = {
 
     addToCart: (req, res) => {
         const db = req.app.get('db');
-        const {pID} = req.body;
-        db.addToCart(pID, req.user).then( cart => {
-            res.status(200).send("success")
+        db.addToCart(req.body.id, req.user).then( cart => {
+            res.status(200).send(cart)
         })
     }
 }

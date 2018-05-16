@@ -25,12 +25,21 @@ const CLEAR_SIZES_COLORS = "CLEAR_SIZES_COLORS";
 const GET_FAVORITES = "GET_FAVORITES";
 const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 const REM_FROM_FAVORITES = "REM_FROM_FAVORITES";
+const ADD_CART_QUANTITY = "ADD_CART_QUANTITY";
+const REM_CART_QUANTITY = "REM_CART_QUANTITY";
+const ADD_TO_CART = "ADD_TO_CART";
 
 export default (state = initState, action) => {
   switch (action.type) {
     case GET_USER_INFO + '_FULFILLED':
       return { ...state, userInfo: action.payload }
     case GET_USER_CART + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload});
+    case ADD_TO_CART + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload});
+    case ADD_CART_QUANTITY + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload});
+    case REM_CART_QUANTITY + '_FULFILLED':
       return Object.assign({}, state, {userCart: action.payload});
     case REM_FROM_CART + '_FULFILLED':
       return Object.assign({}, state, {userCart: action.payload});
@@ -64,6 +73,24 @@ export const getFavorites = () => {
 
   return {
     type: GET_FAVORITES,
+    payload: promise
+  }
+}
+
+export const addToCart = (id) => {
+  const promise = axios.post('/cart', {id}).then(res => res.data)
+
+  return {
+    type: ADD_TO_CART,
+    payload: promise
+  }
+}
+
+export const remCartQuantity = (id) => {
+  const promise = axios.put('/remcart', {id}).then(res => res.data)
+
+  return {
+    type: REM_CART_QUANTITY,
     payload: promise
   }
 }
@@ -103,6 +130,15 @@ export const getUserCart = () => {
 
   return {
     type: GET_USER_CART,
+    payload: promise
+  }
+}
+
+export const addCartQuantity = (id) => {
+  const promise = axios.put('/addcart', {id}).then(res => res.data)
+
+  return {
+    type: ADD_CART_QUANTITY,
     payload: promise
   }
 }
