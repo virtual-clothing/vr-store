@@ -4,10 +4,12 @@ import styled from 'styled-components';
 const TopBanner = styled.div`
   background: aqua;
   height: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 0;
+  background-size: cover;
+`
+
+const Image = styled.img`
+  height: 10rem;
 `
 
 const Text = styled.h2`
@@ -15,8 +17,7 @@ const Text = styled.h2`
 `
 export default (props) => (
   <TopBanner>
-    <Text>
-      {props.banner}
-    </Text>
+    banner
+    <Image src={props.banner} alt=""/>
   </TopBanner>
 )    
