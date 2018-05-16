@@ -23,7 +23,7 @@ const Body = styled.div`
 
 const UpdateA = styled.div`
     width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -31,6 +31,7 @@ const UpdateA = styled.div`
     align-items: center;
     margin-bottom: 20px;
     padding: 35px;
+    background-color: rgb(231, 231, 233);
 
     @media (min-width: 740px) {
         width: 50%;

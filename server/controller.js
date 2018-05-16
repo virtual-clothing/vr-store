@@ -101,8 +101,12 @@ module.exports = {
     addToCart: (req, res) => {
         const db = req.app.get('db');
         const {pID} = req.body;
-        db.addToCart(pID, req.user).then( cart => {
-            res.status(200).send("success")
-        })
+        if(req.user){
+            db.addToCart(pID, req.user).then( cart => {
+                res.status(200).send("success")
+            })
+        }else{
+            res.status(200).send("failure")
+        }
     }
 }
