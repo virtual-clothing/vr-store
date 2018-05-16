@@ -63,6 +63,7 @@ module.exports = {
 
     addToFavorites: (req, res) => {
         const db = req.app.get('db');
+        console.log(req.body)
         db.addToFavorites([req.user, req.body.id]).then(favs => {
             res.status(200).send(favs);
         })
