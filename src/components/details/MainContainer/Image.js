@@ -93,6 +93,11 @@ export default class Images extends Component {
   }
 
   toggle() {
+    if(this.state.addedToFavorites) {
+      this.props.remFromFavorites(this.props.id)
+    } else {
+      this.props.addToFavorites(this.props.id)
+    }
     this.setState({addedToFavorite: !this.state.addedToFavorite})
   }
   

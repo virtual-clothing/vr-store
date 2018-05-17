@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import MenuList from './details/sideMenu/MenuList';
-import MainContainer from './details/mainContainer/MainContainer';
+import MenuList from './details/SideMenu/MenuList';
+import MainContainer from './details/MainContainer/MainContainer';
 import Title from './details/Title';
 
 const KidsComponent = styled.div`
