@@ -97,7 +97,8 @@ app.post('/submitreview', controller.submitReview)
 //add to cart
 app.post('/addtocart', controller.addToCart)
 
-app.get('/orders', controller.getUserOrder)
+app.get('/orders', controller.getUserOrders)
+app.post('/newOrder', controller.createUserOrder)
 
 
 // NodeMailer

@@ -71,6 +71,12 @@ export const getOrders = () => {
     payload: promise
   }
 }
+export const createUserOrder = (obj) => {
+const promise = axios.post('/newOrder', obj).then(res => {
+
+})
+
+}
 export const getFavorites = () => {
   const promise = axios.get('/favorites').then(res => res.data)
 
