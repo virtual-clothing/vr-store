@@ -86,7 +86,7 @@ export default class FavItem extends Component {
                     <ImageWrapper src={this.props.item.product_img} />
                     <Wrapper title={this.props.item.title} price={this.props.item.price} />
                 </Link>
-                <Circle onClick={() => this.props.remFromFavorites(this.props.item.product_id)}> <img src={blackHeart} alt="" style={{ width: '1rem' }}/> </Circle>
+                <Circle onClick={() => this.props.remFromFavorites(this.props.item.product_id)}> <img src='/delete.png' alt="" style={{ width: '1rem' }}/> </Circle>
             </Container>
         )
     }

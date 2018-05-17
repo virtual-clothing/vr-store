@@ -3,13 +3,22 @@ import Checkout from './stripe/Checkout'
 import CartItem from './CartItem';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getUserCart, remFromCart, remCartQuantity } from './ducks/reducer';
+import { getUserCart, addCartQuantity, remFromCart, remCartQuantity } from './ducks/reducer';
 
 
 class Cart extends Component {
     constructor() {
         super();
 
+        this.state = {
+            cart: [
+                {
+                    img: '',
+                    price: 12,
+                    qty: 2,
+                }
+            ]
+        }
     }
 
     componentDidMount() {
@@ -45,6 +54,7 @@ class Cart extends Component {
                     item={item}
                     removeFn={this.props.remFromCart}
                     remCartQtyFn={this.props.remCartQuantity}
+                    addCartQtyFn={this.props.addCartQuantity}
                 />
             )
         })
@@ -106,4 +116,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getUserCart, remFromCart, remCartQuantity })(Cart)
+export default connect(mapStateToProps, { getUserCart, addCartQuantity, remFromCart, remCartQuantity })(Cart)
