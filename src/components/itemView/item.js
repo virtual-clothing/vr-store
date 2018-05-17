@@ -249,6 +249,45 @@ const ReviewName = styled.h2`
     width: 160px;
 `;
 
+const ImageWrapper = props => {
+    return (
+        <div style={{ position: "relative" }}>
+            <Image src={props.src} />
+        </div>
+    )
+};
+
+const Image = styled.img`
+  max-width: 100%;
+  height: auto;
+  background: contain;
+`
+
+const Circle = styled.div`
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #fff;
+  border-radius: 50%;
+  bottom: 1rem;
+  margin: 8px;
+  right: 1rem;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+
+  &:hover{
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+  }
+`
 
 class Item extends Component {
     constructor() {
@@ -534,7 +573,7 @@ class Item extends Component {
                 <ProductDescription >
                 <h3 > { images.description } </h3> 
                 </ProductDescription> 
-                <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
+                <Circle onClick={() => this.addToCart()}> <img src='/plus.png' alt="" style={{ width: '1rem' }} /> </Circle>
                 </ItemSpecs> 
             </TopElements>
 
