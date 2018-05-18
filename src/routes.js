@@ -5,11 +5,12 @@ import Men from './components/Men';
 import Women from './components/Women';
 import Kids from './components/Kids';
 import Cart from './components/Cart';
-import Favorites from './components/Favorites';
 import Login from './components/auth/Login';
 import Failure from './components/auth/Failure';
 import Item from './components/itemView/item';
 import Account from './components/account/account';
+import Store from './components/vr/Store';
+import FittingRoom from './components/vr/FittingRoom';
 
 export default () => {
     return (
@@ -19,11 +20,12 @@ export default () => {
             <Route path='/women' component={Women} />
             <Route path='/kids' component={Kids} />
             <Route path='/cart' component={Cart} />
-            <Route path='/favorites' component={Favorites} />
             <Route path='/login' component={Login} />
             <Route path='/failure' component={Failure} />
             <Route path='/item/:id' component={Item} />
             <Route path='/account' component={Account}/>
+            <Route path='/store' component={Store}/>
+            <Route path='/fittingroom' component={FittingRoom}/>
         </Switch>
     )
 }
