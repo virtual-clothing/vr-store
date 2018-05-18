@@ -5,6 +5,12 @@
   "main": "server/server.js",
   "proxy": "http://localhost:4444",
   "dependencies": {
+    "aframe": "^0.8.2",
+    "aframe-animation-component": "^4.2.0",
+    "aframe-click-drag-component": "^3.0.1",
+    "aframe-particle-system-component": "^1.0.11",
+    "aframe-react": "^4.4.0",
+    "aframe-text-geometry-component": "^0.5.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "botmaster": "^3.2.0",
