@@ -9,6 +9,8 @@ import Login from './components/auth/Login';
 import Failure from './components/auth/Failure';
 import Item from './components/itemView/item';
 import Account from './components/account/account';
+import Store from './components/vr/Store';
+import FittingRoom from './components/vr/FittingRoom';
 
 export default () => {
     return (
@@ -22,6 +24,8 @@ export default () => {
             <Route path='/failure' component={Failure} />
             <Route path='/item/:id' component={Item} />
             <Route path='/account' component={Account}/>
+            <Route path='/store' component={Store}/>
+            <Route path='/fittingroom' component={FittingRoom}/>
         </Switch>
     )
 }

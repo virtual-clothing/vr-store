@@ -220,33 +220,35 @@ class Home extends Component {
                     </Link>
                 </Featured>
 
-                <ParallaxBanner
-                    className="pBanner"
-                    layers={[
-                        {
+                <Link to='/store'>
+                    <ParallaxBanner
+                        className="pBanner"
+                        layers={[
+                            {
                             image: store3,
-                        amount: .4,
-                        fasterScrollRate: 20,
-                        offsetYMin: '200%'
-                        },
-                    ]}
-                    style={{
-                        height: '400px',
-                    }}
-                >
-                    
-                    <Parallax
-                        className="parallax2"
-                        offsetYMax='0%'
-                        offsetY='0%'
-                        // offsetYMin='-500%'
-                        slowerScrollRate='10'
-
+                            amount: .4,
+                            fasterScrollRate: 20,
+                            offsetYMin: '200%'
+                            },
+                        ]}
+                        style={{
+                            height: '400px',
+                        }}
                     >
-                        <Pimage1 src={vrGuy} />
-                    </Parallax>
+                        
+                        <Parallax
+                            className="parallax2"
+                            offsetYMax='0%'
+                            offsetY='0%'
+                            // offsetYMin='-500%'
+                            slowerScrollRate='10'
 
-                </ParallaxBanner>
+                        >
+                            <Pimage1 src={vrGuy} />
+                        </Parallax>
+
+                    </ParallaxBanner>
+                </Link>
                 
                 {!this.state.buttonPress ? <div>{
                     <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
