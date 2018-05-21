@@ -109,8 +109,8 @@ class FittingRoom extends Component {
 
         
             <a-link 
-              href="/#/store" 
-              title="Store" 
+              href="/#/checkout" 
+              title="Check Out" 
               image={store}
               borderColor="blue"
               backgroundColor="red"
@@ -119,17 +119,17 @@ class FittingRoom extends Component {
               >
             </a-link>
 
-            {/* <a-link 
-              href="/#/checkout" 
-              title="Checkout" 
+            <a-link 
+              href="/#/hollywood" 
+              title="Hollywood" 
               image={store}
               borderColor="blue"
               backgroundColor="red"
               position="2.8 2 3.5"
-              rotation="0 45 0"
+              rotation="0 25 0"
               geometry="width: 10"
               >
-            </a-link> */}
+            </a-link>
 
             <a-entity 
               geometry="primitive: cylinder; openEnded: true; radius: 8; height: 9;" 

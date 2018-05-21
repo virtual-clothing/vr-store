@@ -6,6 +6,7 @@ import store from './icon/store.jpg';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getUserCart, addCartQuantity, remFromCart, remCartQuantity } from '../ducks/reducer';
+import {Link } from "react-router-dom";
 
 import animation from 'aframe-animation-component';
 import registerClickDrag from 'aframe-click-drag-component';
@@ -13,9 +14,15 @@ import registerClickDrag from 'aframe-click-drag-component';
 import deskMTL from './icon/deskObj/materials.mtl';
 import deskOBJ from './icon/deskObj/model.obj';
 
-import cashRegisterMTL from './icon/CashRegister/CashRegister.mtl';
-import cashRegisterOBJ from './icon/CashRegister/CashRegister.obj';
-import cashRegisterPNG from './icon/CashRegister/CashRegister_BaseColor.png';
+import tvMTL from './icon/TV/TV_01.mtl';
+import tvOBJ from './icon/TV/TV_01.obj';
+import Avengers from './icon/Avengers.mp4';
+
+import tvStandMTL from './icon/tvStand/materials.mtl';
+import tvStandOBJ from './icon/tvStand/model.obj';
+
+import computerMTL from './icon/computerModel/model.mtl';
+import computerOBJ from './icon/computerModel/model.obj';
 
 import personMTL from './icon/person/materials.mtl';
 import personOBJ from './icon/person/model.obj';
@@ -52,16 +59,11 @@ class CheckoutVR extends Component {
         }, 2000))
     }
 
-  render() {
-    // const {cart} = this.props;
+    cartLink(){
+      this.props.history.push('/cart')
+    }
 
-    // const cartItems = cart.map((item, i) => {
-    //     console.log()
-    //     return (
-    //             <Entity key={i} primitive="a-image" src={"https://s3-us-west-1.amazonaws.com/vr-store-inventory/Mens/Tops/vintage+nike+stripe+t-shirt/sportswear-mens-t-shirt-1mcBRv.jpg"} width='10' height='6'></Entity>
-             
-    //     )
-    // })
+  render() {
 
 
     var test = this.state.cart;
@@ -70,23 +72,12 @@ class CheckoutVR extends Component {
       <Scene background="color: #ECECEC">
         
             <a-link 
-              href="/#/store" 
-              title="Store" 
+              href="/#/fittingroom" 
+              title="Fitting Room" 
               image={store}
               borderColor="blue"
               backgroundColor="red"
               position="0 2 10.3"
-              geometry="width: 10"
-              >
-            </a-link>
-
-            <a-link 
-              href="/#/cart" 
-              title="Check Out" 
-              image={store}
-              borderColor="blue"
-              backgroundColor="red"
-              position="-2 2 -8"
               geometry="width: 10"
               >
             </a-link>
@@ -105,13 +96,25 @@ class CheckoutVR extends Component {
                 <a-animation attribute="position"  duration="4000" from="-4 4 -6" to="-4 4.5 -6" direction="alternate-reverse" repeat="indefinite" easing="ease" ></a-animation>
             </a-text>
 
+                {/* desk obj */}
             <Entity obj-model={`obj: ${deskOBJ}; mtl: ${deskMTL};`} position="0 0 -8" scale="3 3 3" rotation="0 180 0"></Entity>
 
-            {/* <Entity obj-model={`obj: ${cashRegisterOBJ}; mtl: ${cashRegisterMTL}; material: ${cashRegisterPNG}`} position="0 3 -8" scale="0.3 0.3 0.3" rotation="0 180 0"></Entity> */}
+              {/* computer obj */}
+            <Entity obj-model={`obj: ${computerOBJ}; mtl: ${computerMTL};`} position="-1.4 0.35 -7.2" scale="4 4 4" rotation="5 200 0" events={{click: this.cartLink.bind(this)}}></Entity>
 
+                {/* person obj */}
             <Entity obj-model={`obj: ${personOBJ}; mtl: ${personMTL};`} position="1.5 -0.5 -10" scale="5 5 5" rotation="0 180 0" events={{click: this.message.bind(this)}}>
                 <a-animation begin="click" attribute="rotation"  duration="4000" from="0 180 0" to="0 540 0" direction="alternate-reverse" repeat="1" easing="ease" ></a-animation>
             </Entity>
+
+                {/* tv */}
+            <Entity obj-model={`obj: ${tvOBJ}; mtl: ${tvMTL};`} position="-9 -0.5 -1.5" scale=".0095 .0095 .0095" rotation="-90 180 65"></Entity>
+
+                {/* tv stand */}
+            <Entity obj-model={`obj: ${tvStandOBJ}; mtl: ${tvStandMTL};`} position="-9 -1 -1.5" scale="2 2 2" rotation="0 65 0"></Entity>
+
+                  {/* avengers video */}
+            <a-video src={Avengers} position="-8.9 1 -1.4" rotation="0 65 0" scale="3.2 1.8 2"></a-video>
 
             <Entity 
             id="thoughtBubble"  
@@ -131,12 +134,6 @@ class CheckoutVR extends Component {
               </a-Cursor>
             </a-Camera>
 
-
-              
-            {/* <Entity position="1.5 -0.5 -11">
-                {cartItems[0]}
-            </Entity> */}
-         
       </Scene>
     );
   }

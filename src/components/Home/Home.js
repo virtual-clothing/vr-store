@@ -220,7 +220,7 @@ class Home extends Component {
                     </Link>
                 </Featured>
 
-                <Link to='/store'>
+                <Link to='/fittingroom'>
                     <ParallaxBanner
                         className="pBanner"
                         layers={[
