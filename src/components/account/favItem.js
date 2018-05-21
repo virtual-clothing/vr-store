@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import blackHeart from '../details/MainContainer/icon/blackHeart.svg';
+import blackHeart from '../details/mainContainer/icon/blackHeart.svg';
 
 const Container = styled.div`
   width: 49%;
