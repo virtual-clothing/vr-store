@@ -11,6 +11,8 @@ import Item from './components/itemView/item';
 import Account from './components/account/account';
 import Store from './components/vr/Store';
 import FittingRoom from './components/vr/FittingRoom';
+import CheckoutVR from './components/vr/CheckoutVR';
+import Hollywood from './components/vr/Hollywood';
 
 export default () => {
     return (
@@ -26,6 +28,8 @@ export default () => {
             <Route path='/account' component={Account}/>
             <Route path='/store' component={Store}/>
             <Route path='/fittingroom' component={FittingRoom}/>
+            <Route path='/checkout' component={CheckoutVR}/>
+            <Route path='/hollywood' component={Hollywood}/>
         </Switch>
     )
 }

@@ -26,14 +26,42 @@ class Store extends Component {
   render() {
     return (
       <Scene background="color: #ECECEC">
+
+        <a-assets>
+            <img id="store" src={store}/>
+          </a-assets>
         
             <a-link 
               href="/#/fittingroom" 
               title="Fitting Room" 
-              image={store}
+              image='#store'
               borderColor="blue"
               backgroundColor="red"
               position="0 2 4.5"
+              geometry="width: 10"
+              >
+              </a-link>
+
+              <a-link 
+              href="/#/checkout" 
+              title="Checkout" 
+              image="#store"
+              borderColor="blue"
+              backgroundColor="red"
+              position="5 2 3.5"
+              rotation="0 30 0"
+              geometry="width: 10"
+              >
+              </a-link>
+
+              <a-link 
+              href="/#/hollywood" 
+              title="Hollywood" 
+              image="#store"
+              borderColor="blue"
+              backgroundColor="red"
+              position="-5 2 3.5"
+              rotation="0 -30 0"
               geometry="width: 10"
               >
               </a-link>

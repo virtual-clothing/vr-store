@@ -250,11 +250,11 @@ class Home extends Component {
                     </ParallaxBanner>
                 </Link>
                 
-                {!this.state.buttonPress ? <div>{
+                {/* {!this.state.buttonPress ? <div>{
                     <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
                 }</div> : 
                     <EnterVR2>Shop in VR</EnterVR2>
-                }
+                } */}
 
             </Body>
             </ParallaxProvider>

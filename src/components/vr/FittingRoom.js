@@ -119,6 +119,18 @@ class FittingRoom extends Component {
               >
             </a-link>
 
+            {/* <a-link 
+              href="/#/checkout" 
+              title="Checkout" 
+              image={store}
+              borderColor="blue"
+              backgroundColor="red"
+              position="2.8 2 3.5"
+              rotation="0 45 0"
+              geometry="width: 10"
+              >
+            </a-link> */}
+
             <a-entity 
               geometry="primitive: cylinder; openEnded: true; radius: 5; height: 7;" 
               material="side: double"
