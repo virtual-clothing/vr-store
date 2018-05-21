@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MenuList from './details/sideMenu/MenuList';
 import MainContainer from './details/mainContainer/MainContainer';
 import Title from './details/Title';
+import kidsBanner from './details/mainContainer/icon/kidsBanner.gif';
 
 const KidsComponent = styled.div`
     margin-top: 80px;
@@ -14,7 +15,7 @@ export default class Kids extends Component {
             <KidsComponent>
                 <Title title="KIDS"/>
                 <MenuList category="kids"/>
-                <MainContainer banner="KIDS BANNER" category="Kids"/>
+                <MainContainer banner={kidsBanner} category="Kids"/>
             </KidsComponent>
         )
     }
