@@ -20,6 +20,13 @@
 .parallax2{
     position: relative;
     z-index: 2;
+    display: flex;
+    right: -80px;
+}
+@media (max-width: 777px) {
+    .parallax2{
+        right: 70px
+    }
 }
 
 .pBanner{

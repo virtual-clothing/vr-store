@@ -109,12 +109,24 @@ class FittingRoom extends Component {
 
         
             <a-link 
-              href="/#/store" 
-              title="Store" 
+              href="/#/checkout" 
+              title="Check Out" 
               image={store}
               borderColor="blue"
               backgroundColor="red"
               position="0 2 4.3"
+              geometry="width: 10"
+              >
+            </a-link>
+
+            <a-link 
+              href="/#/hollywood" 
+              title="Hollywood" 
+              image={store}
+              borderColor="blue"
+              backgroundColor="red"
+              position="2.8 2 3.5"
+              rotation="0 25 0"
               geometry="width: 10"
               >
             </a-link>
