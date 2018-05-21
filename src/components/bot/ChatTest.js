@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
-
+import axios from 'axios';
 const socket = io('http://localhost:4444');
 // const socket = io('http://localhost:4444?botmasterUserId=6');
 
@@ -93,19 +93,14 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chat: [],
+      chat: ['hello'],
       newMessage: '',
     };
-
-    socket.on('generate response', data => {
-      const chat = [...this.state.chat, data];
-      this.setState({ chat });
-    });
   }
 
-  sendMessage(message, type) {
-    console.log('message', message);
-    socket.emit(`${type} message`, message);
+  sendMessage() {
+    console.log(this.state.newMessage)
+    axios.post('/api/message', {input: this.state.newMessage, context: 'fdsff'});
   }
 
   handleChange(newMessage) {
@@ -130,7 +125,7 @@ class Chat extends Component {
             }} />
           <Button
             onClick={() => {
-              this.sendMessage(this.state.newMessage, 'emit');
+              this.sendMessage(this.state.newMessage);
             }}
           >
             Send

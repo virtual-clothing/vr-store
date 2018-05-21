@@ -120,11 +120,11 @@ class FittingRoom extends Component {
             </a-link>
 
             <a-entity 
-              geometry="primitive: cylinder; openEnded: true; radius: 5; height: 7;" 
-              material="side: double"
+              geometry="primitive: cylinder; openEnded: true; radius: 8; height: 9;" 
+              color="blue"
             >
             </a-entity>
-
+ 
             <a-plane 
               position="0 0 0" 
               rotation="-90 0 0" 
@@ -133,6 +133,14 @@ class FittingRoom extends Component {
               color="#b1a2a2"
               >
             </a-plane>
+
+
+    
+            <a-entity light="type: point; intensity: ; distance: 10; decay: 1"
+            position="0 4 0"></a-entity>
+
+            <a-entity light="type: spot; angle: 45"></a-entity>
+
 
             <a-Camera look-controls-enabled="true">
               <a-Cursor>

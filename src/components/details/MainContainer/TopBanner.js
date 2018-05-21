@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TopBanner = styled.div`
-  background: aqua;
-  height: 10rem;
   margin-top: 0;
-  background-size: cover;
+  background-size: 100% auto;
 `
 
 const Image = styled.img`
-  height: 10rem;
+ height: 100%;
+ width: 100%;
+ object-fit: contain
 `
 
 const Text = styled.h2`
@@ -17,7 +17,6 @@ const Text = styled.h2`
 `
 export default (props) => (
   <TopBanner>
-    banner
     <Image src={props.banner} alt=""/>
   </TopBanner>
 )    
