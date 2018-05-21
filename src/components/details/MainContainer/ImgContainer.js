@@ -10,7 +10,7 @@ const Container = styled.div`
   align-items: center;
   flex-wrap: wrap;
   background: #fafafa;
-  padding: 1rem;
+  padding: 0rem 1rem 1rem 1rem;
 
   @media(max-width: 450px) {
     display: block;

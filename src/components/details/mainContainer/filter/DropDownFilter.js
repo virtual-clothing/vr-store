@@ -6,10 +6,13 @@ import { connect } from 'react-redux';
 
 const DropDown = styled.div`
   padding: 1rem 0 0 1rem;
+  -webkit-animation-name: sf-slidein;
+  -webkit-transform: translate3d(0, 0, 0);
 `
 
 const Container = styled.div`
   box-sizing: border-box;
+  
 `
 const Title = styled.h3`
 

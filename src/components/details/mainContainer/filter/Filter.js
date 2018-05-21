@@ -13,6 +13,8 @@ const FilterContainer = styled.div`
   background: #E0E0E0;
   height: 3rem;
   padding: 0 1rem;
+  margin-top: 1rem;
+
 `
 const Text = styled.p`
   margin: 0;
