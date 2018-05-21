@@ -239,6 +239,7 @@ service.message({
 
 // Process the service response.
 function processResponse(err, response) {
+  let a = 5
   if (err) {
     console.error(err); // something went wrong
     return;
