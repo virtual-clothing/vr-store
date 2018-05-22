@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import Failure from './components/auth/Failure';
 import Item from './components/itemView/item';
 import Account from './components/account/account';
+import FittingRoom from './components/vr/FittingRoom';
 
 export default () => {
     return (
@@ -22,6 +23,7 @@ export default () => {
             <Route path='/failure' component={Failure} />
             <Route path='/item/:id' component={Item} />
             <Route path='/account' component={Account}/>
+            <Route path='/fittingroom' component={FittingRoom}/>
         </Switch>
     )
 }
