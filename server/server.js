@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({silent: true});
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -7,12 +7,14 @@ const massive = require('massive');
 const nodemailer = require('nodemailer');
 // const Botmaster = require('botmaster');
 // const SocketioBot = require('botmaster-socket.io');
+var watson = require('watson-developer-cloud'); // watson sdk
+
 
 const controller = require('./controller');
 const app = express();
 
 // Routing for index.html
-app.use(express.static(__dirname + '/public')); //added
+app.use(express.static(__dirname + '/public')); 
 
 const bodyParser = require('body-parser')
     , cors = require('cors')
@@ -20,6 +22,7 @@ const bodyParser = require('body-parser')
 
 app.use(bodyParser.json());
 app.use(cors())
+
 
 const PORT = process.env.PORT || 4444;
 const socket = require('socket.io');
@@ -95,9 +98,9 @@ app.get('/getItemById', controller.getItemById)
 app.get('/itemReviews', controller.getItemReviews)
 //submit review
 app.post('/submitreview', controller.submitReview)
-
 //add to cart
 app.post('/cart', controller.addToCart)
+
 
 
 // NodeMailer
@@ -207,11 +210,76 @@ const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PO
 // }); // added
 
 
-io.on('connection', socket => {
-  socket.on('emit message', input => {
-    console.log('blast');
-    socket.emit('BOT') // bot
-    io.sockets.emit('generate response', input);
-  });
+// io.on('connection', socket => {
+//   socket.on('emit message', input => {
+//     console.log('blast');
+//     socket.emit('BOT') // bot
+//     io.sockets.emit('generate response', input);
+//   });
+// });
+
+
+    // Send back the context to maintain state.
+    io.on('connection', socket => {
+      // socket.on('emit message', input => {
+      //   io.sockets.emit('generate response', input);
+      // });
+      console.log('user connect')
+      let context = {};
+      socket.on('emit message', input => {
+        // Prompt for the next round of input.
+         service.message({
+           workspace_id: workspace_id,
+           input: { text: input},
+           context: context
+         }, processResponse)
+       // console.log(response.output.text[0])
+       
+     });
+
+      service.message({
+        workspace_id: workspace_id
+      }, processResponse);
+
+      
+
+      function processResponse(err, response) {
+        if (err) {
+          console.error(err); // something went wrong
+          return;
+        }
+        context = response.context;
+      
+        // If an intent was detected, log it out to the console.
+        if (response.intents.length > 0) {
+          console.log('Detected intent: #' + response.intents[0].intent);
+        }
+      
+        // Display the output from dialog, if any.
+        if (response.output.text.length != 0) {
+            console.log(response.output.text[0]);
+        }
+        socket.emit('generate response', response.output.text[0]);
+      }
+  
+      
+    });
+
+
+
+//------------------------------------------BOT
+var AssistantV1 = require('watson-developer-cloud/assistant/v1');
+// Set up Assistant service wrapper.
+var service = new AssistantV1({
+  username: process.env.WATSON_USERNAME, 
+  password: process.env.WATSON_PASSWORD, 
+  version: '2018-02-16'
 });
+
+var workspace_id = process.env.WORKSPACE_ID; 
+
+// Start conversation with empty message.
+
+
+// Process the service response.
 

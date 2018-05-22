@@ -9,9 +9,9 @@ import image5 from './testCarouselImages/image5.jpeg';
 import image6 from './testCarouselImages/image6.jpeg';
 // import store from './testCarouselImages/store.jpg';
 import './Home.css';
-import bJacket from './itemImages/mens2.jpg';
-import gJacket from './itemImages/womens2.jpg';
-import pJacket from './itemImages/kids2.jpeg';
+import bJacket from './itemImages/mens3.jpg';
+import gJacket from './itemImages/womens3.jpg';
+import pJacket from './itemImages/kids3.jpg';
 import vrGuy from './testCarouselImages/vrGuy.png';
 
 // import vrGuy2 from './testCarouselImages/vrGuy2.png';
@@ -163,8 +163,9 @@ class Home extends Component {
         }, 200);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getAllItems();
+        window.scrollTo(0, 0);
     }
     
     render() {
@@ -185,11 +186,11 @@ class Home extends Component {
             <Body>
 
                 <Slider {...settings} className='carousel'>
-                    <div><TestImages src={image1} alt='1'/></div>
-                    <div><TestImages src={image2} alt='2'/></div>
                     <div><TestImages src={image3} alt='3'/></div>
+                    <div><TestImages src={image2} alt='2'/></div>
+                    <div><TestImages src={image1} alt='1'/></div>
                     <div><TestImages src={image4} alt='4'/></div>
-                    <div  ><  TestImages src={image5} alt='5'   /> </div>
+                    <div><TestImages src={image5} alt='5'/> </div>
                     <div><TestImages src={image6} alt='6'/></div>
                 </Slider>
 
@@ -220,39 +221,41 @@ class Home extends Component {
                     </Link>
                 </Featured>
 
-                <ParallaxBanner
-                    className="pBanner"
-                    layers={[
-                        {
+                <Link to='/fittingroom'>
+                    <ParallaxBanner
+                        className="pBanner"
+                        layers={[
+                            {
                             image: store3,
-                        amount: .4,
-                        fasterScrollRate: 20,
-                        offsetYMin: '200%'
-                        },
-                    ]}
-                    style={{
-                        height: '400px',
-                    }}
-                >
-                    
-                    <Parallax
-                        className="parallax2"
-                        offsetYMax='0%'
-                        offsetY='0%'
-                        // offsetYMin='-500%'
-                        slowerScrollRate='10'
-
+                            amount: .4,
+                            fasterScrollRate: 20,
+                            offsetYMin: '200%'
+                            },
+                        ]}
+                        style={{
+                            height: '400px',
+                        }}
                     >
-                        <Pimage1 src={vrGuy} />
-                    </Parallax>
+                        
+                        <Parallax
+                            className="parallax2"
+                            offsetYMax='0%'
+                            offsetY='0%'
+                            // offsetYMin='-500%'
+                            slowerScrollRate='10'
 
-                </ParallaxBanner>
+                        >
+                            <Pimage1 src={vrGuy} />
+                        </Parallax>
+
+                    </ParallaxBanner>
+                </Link>
                 
-                {!this.state.buttonPress ? <div>{
+                {/* {!this.state.buttonPress ? <div>{
                     <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
                 }</div> : 
                     <EnterVR2>Shop in VR</EnterVR2>
-                }
+                } */}
 
             </Body>
             </ParallaxProvider>

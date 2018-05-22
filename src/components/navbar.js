@@ -300,13 +300,8 @@ class Nav extends Component {
             <CatSelect><Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}>Fitting Room</Link></CatSelect>
           </DropMenu>
         }</div> : <div/>}
-        {
-          this.props.chatIsOpen
-          ?
-          <Chat />
-          :
-          null
-        }
+ 
+        <Chat toggle={this.props.chatIsOpen}/>
 
       </NavOutter>
     );

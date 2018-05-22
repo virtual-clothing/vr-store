@@ -17,7 +17,6 @@ const ChatRoom = styled.div`
   background-color: white;
   opacity: 9;
   color: black;
-  font-weight: bold;
   font-style: italic;
   padding: 3px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -37,14 +36,11 @@ const Header = styled.div`
   overflow: auto;
   box-sizing: border-box;
   padding: 0.5rem;
-
-
 `;
 
 const Messages = styled.div`
   background: grey;
   box-sizing: border-box;
-  width: 30%;
   border-radius: 5px;
   width: 70%;
   font-weight: 400;
@@ -67,6 +63,7 @@ const ChatFooter = styled.div`
 `;
 
 const Input = styled.input`
+margin: 0;
   width: 70%;
   height: 100%;
   outline: 0px;
@@ -86,14 +83,44 @@ const Button = styled.button`
   border: none;
   background-color: white;
   font-size: 0.6rem;
-
 `;
+
+const Ul = styled.ul`
+padding: 0;
+`
+
+const Li = styled.li`
+  list-style: none;
+  border-radius: 10px;
+
+  &:nth-child(even) {
+    text-align: right;
+    width: 70%;
+    float: right;
+    margin-bottom: 9px;
+    background-color: #1db954;
+    color: white;
+    padding-right: 8px;
+    box-sizing: border-box;
+  }
+
+  &:nth-child(odd) {
+    text-align: left;
+    width: 70%;
+    float: left;
+    margin-bottom: 9px;
+    background-color: #efeeee;
+    padding-left: 8px;
+    box-sizing: border-box;
+  }
+
+`
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chat: ['hello', 'hi there'],
+      chat: [],
       newMessage: '',
     };
 
@@ -103,7 +130,21 @@ class Chat extends Component {
     });
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   sendMessage(message, type) {
+    let chat = [...this.state.chat, this.state.newMessage];
+    this.setState({chat})
     console.log('message', message);
     socket.emit(`${type} message`, message);
   }
@@ -112,22 +153,34 @@ class Chat extends Component {
     this.setState({ newMessage });
   }
 
+  handleKeyPress (e) {
+    if(e.which === 13){
+      this.setState({newMessage: e.target.value}, () => {
+        this.sendMessage(this.state.newMessage, 'emit');
+      })
+
+      e.target.value = '';
+    }
+  }
+
   render() {
-    const chat = this.state.chat.map((e, i) => <p key={i}>{e}</p>);
+    const chat = this.state.chat.map((e, i) => <Li key={i}>{e}</Li>);
     return (
-      <ChatRoom>
+      <ChatRoom style={{display: this.props.toggle}}>
         <Header>
-          <Messages>
+          <Ul>
             {chat}
-          </Messages>
+            <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
+          </Ul>
         </Header>
         <ChatFooter>
           <Input
+            placeholder="Type here..."
             type="text"
-            value={this.state.newMessage}
-            onChange={e => {
-              this.handleChange(e.target.value);
-            }} />
+            onKeyPress={(e) => this.handleKeyPress(e)}
+            />
           <Button
             onClick={() => {
               this.sendMessage(this.state.newMessage, 'emit');

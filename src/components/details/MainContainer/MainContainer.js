@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import TopBanner from './TopBanner';
 import Filter from './filter/Filter';
 import ImgContainer from './ImgContainer';
+// import menBanner from './icon/menBanner.jpg';
+// import kidsBanner from './icon/kidsBanner.gif';
 
 const MainContainer = styled.div`
-  background: green;
-  height: 80vh;
-  width: 75%;
+  width: 85%;
   box-sizing: border-box;
   float: right;
 
@@ -19,12 +19,14 @@ const MainContainer = styled.div`
 `
 const SubContainer = styled.div`
   background: #fafafa;
-  padding: 1rem;
+  padding:  0 1rem 1rem 1rem;
 `
 export default (props) => (
   <MainContainer>
-    <TopBanner banner={props.banner}/>
     <SubContainer>
+      <TopBanner 
+        banner={props.banner} 
+      />
       <Filter />
     </SubContainer>
     <ImgContainer category={props.category}/>
