@@ -5,6 +5,13 @@
   "main": "server/server.js",
   "proxy": "http://localhost:4444",
   "dependencies": {
+    "aframe": "^0.8.2",
+    "aframe-animation-component": "^4.2.0",
+    "aframe-click-drag-component": "^3.0.1",
+    "aframe-look-at-component": "^0.6.0",
+    "aframe-particle-system-component": "^1.0.11",
+    "aframe-react": "^4.4.0",
+    "aframe-text-geometry-component": "^0.5.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "botmaster": "^3.2.0",
@@ -20,6 +27,7 @@
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
     "prettier": "^1.12.1",
+    "prompt-sync": "^4.1.6",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -37,7 +45,8 @@
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
     "stripe": "^5.9.0",
-    "styled-components": "^3.2.6"
+    "styled-components": "^3.2.6",
+    "watson-developer-cloud": "^3.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,6 +57,7 @@
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "colors.css": "^3.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",

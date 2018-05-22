@@ -22,21 +22,24 @@ const Body = styled.div`
 `;
 
 const UpdateA = styled.div`
-    width: 100%;
+    width: 98%;
     /* border: 1px solid black; */
-    height: 400px;
+    height: 420px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    
     margin-bottom: 20px;
     padding: 35px;
     background-color: rgb(231, 231, 233);
+    position: relative;
+    top: 9px;
 
     @media (min-width: 740px) {
-        width: 50%;
+        width: 55%;
     }
 `;
+
 
 const TopElements = styled.div`
     display: flex;
@@ -55,6 +58,8 @@ const TwoButtons = styled.div`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    bottom: 26px;
 `;
 
 const Button1 = styled.button`
@@ -62,24 +67,52 @@ const Button1 = styled.button`
     height: 90px;
     border-radius: 5px;
     margin: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+
+    &:hover{
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    }
 `;
 
 const UpdateInput = styled.input`
     width: 40%;
     height: 25px;
-    border: 1px solid grey;
+    border: none;
+    padding-left: 5px;
 `;
 
 const FavoritesDiv = styled.div`
     width: 100%;
-    border: 1px solid grey;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 50px;
     margin-top: 50px;
+`;
+
+const FavoritesHeader = styled.div`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #E0E0E0;
+    height: 3rem;
+    padding: 0 1rem;
+    margin-top: 1rem;
+    width: 91%;
 `;
 
 const Fav = styled.div`
@@ -108,6 +141,25 @@ const InputRow = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+`;
+
+const UpdateButton = styled.button`
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 10px;
+    border: none;
+    position: relative;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    &:hover{
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+  }
+`;
+
+const UpdateText = styled.h1`
 
 `;
 
@@ -121,6 +173,7 @@ class Account extends Component {
             user: [],
 
             username: 'username',
+            username2: 'username',
             address: 'address',
             phoneNumber: 'phone number',
             email: 'email',
@@ -143,7 +196,7 @@ class Account extends Component {
         window.scrollTo(0, 0);
 
         axios.get('/api/userinfo').then( res => {
-            if(res.data[0]){ this.setState({user: res.data, username: res.data[0].username, email: res.data[0].email, profileImage: res.data[0].profile_img, address: res.data[0].address, phoneNumber: res.data[0].phone}, () => console.log(this.state))}
+            if(res.data[0]){ this.setState({user: res.data, username: res.data[0].username, username2: res.data[0].username, email: res.data[0].email, profileImage: res.data[0].profile_img, address: res.data[0].address, phoneNumber: res.data[0].phone}, () => console.log(this.state))}
         })
         this.props.getAllItems();
 
@@ -169,7 +222,7 @@ class Account extends Component {
 
 
         axios.put('/updateaccount', {username, address, phoneNumber, email}).then( res => {
-            this.setState({username: res.data[0].username, address: res.data[0].address, phoneNumber: res.data[0].phone, email: res.data[0].email, colorToggle1: 'Green' , colorToggle2: 'Green', colorToggle3: 'Green', colorToggle4: 'Green'})
+            this.setState({username: res.data[0].username, username2: res.data[0].username, address: res.data[0].address, phoneNumber: res.data[0].phone, email: res.data[0].email, colorToggle1: 'Green' , colorToggle2: 'Green', colorToggle3: 'Green', colorToggle4: 'Green'})
         })
 
     }
@@ -196,18 +249,19 @@ class Account extends Component {
                 <TopElements>
 
                     <TwoButtons>  
-                        <h1>{this.state.username}</h1>
+                        <h1>{this.state.username2}</h1>
                         <UserImageCon>
                             <UserImg src={this.state.profileImage}/>
                         </UserImageCon> 
-                        <Link to='/cart'><Button1>Cart</Button1></Link>
+                        <Link to='/cart'><Button1><h1>Cart</h1></Button1></Link>
                         {/* <a href='http://localhost:3001/logout' style={{textDecoration: 'none', color: 'white'}}> */}
-                            <Button1 onClick={() => this.logout()}>Log out</Button1>
+                            <Button1 onClick={() => this.logout()}><h1>Log Out</h1></Button1>
                         {/* </a> */}
                     </TwoButtons>
 
                     <UpdateA>
-                        <h1>Update Account</h1>
+                        <UpdateText>Update Account</UpdateText>
+
                         <InputRow>
                             <h3>User Name</h3>
                             <UpdateInput style={{ color: this.state.colorToggle1 }} value={this.state.username} onChange={(e) => this.handleChange('username', e.target.value)}/>
@@ -224,13 +278,15 @@ class Account extends Component {
                             <h3>Email</h3>
                             <UpdateInput style={{ color: this.state.colorToggle4 }} value={this.state.email} onChange={(e) => this.handleChange('email', e.target.value)}/>
                         </InputRow>
-                            <button onClick={() => this.updateAccount()}>Update Account</button>
+                            <UpdateButton onClick={() => this.updateAccount()}>Save Changes</UpdateButton>
+
                     </UpdateA>
 
                 </TopElements>
 
                 {/* {this.state.favoriteToggle ? <div>{ */}
                 <FavoritesDiv>
+                    <FavoritesHeader><h2>Favorites</h2></FavoritesHeader>
                     <Favorites/>
                 </FavoritesDiv>
                 {/* }</div> : <div/>} */}

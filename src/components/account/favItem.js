@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import blackHeart from '../details/MainContainer/icon/blackHeart.svg';
+import blackHeart from '../details/mainContainer/icon/blackHeart.svg';
 
 const Container = styled.div`
-  width: 49%;
-  margin: 1rem 0;
+  width: 46%;
+  margin: 1rem 1rem 1rem;
   background: #fafafa;
   position: relative;
 

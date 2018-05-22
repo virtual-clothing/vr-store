@@ -23,6 +23,7 @@ class Cart extends Component {
 
     componentDidMount() {
         this.props.getUserCart();
+            window.scrollTo(0, 0);
     }
 
     subTotal() {
