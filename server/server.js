@@ -219,6 +219,52 @@ const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PO
 // });
 
 
+    // Send back the context to maintain state.
+    io.on('connection', socket => {
+      // socket.on('emit message', input => {
+      //   io.sockets.emit('generate response', input);
+      // });
+      console.log('user connect')
+      let context = {};
+      socket.on('emit message', input => {
+        // Prompt for the next round of input.
+         service.message({
+           workspace_id: workspace_id,
+           input: { text: input},
+           context: context
+         }, processResponse)
+       // console.log(response.output.text[0])
+       
+     });
+
+      service.message({
+        workspace_id: workspace_id
+      }, processResponse);
+
+      
+
+      function processResponse(err, response) {
+        if (err) {
+          console.error(err); // something went wrong
+          return;
+        }
+        context = response.context;
+      
+        // If an intent was detected, log it out to the console.
+        if (response.intents.length > 0) {
+          console.log('Detected intent: #' + response.intents[0].intent);
+        }
+      
+        // Display the output from dialog, if any.
+        if (response.output.text.length != 0) {
+            console.log(response.output.text[0]);
+        }
+        socket.emit('generate response', response.output.text[0]);
+      }
+  
+      
+    });
+
 
 
 //------------------------------------------BOT
@@ -233,42 +279,7 @@ var service = new AssistantV1({
 var workspace_id = process.env.WORKSPACE_ID; 
 
 // Start conversation with empty message.
-service.message({
-  workspace_id: workspace_id
-  }, processResponse);
+
 
 // Process the service response.
-function processResponse(err, response) {
-  if (err) {
-    console.error(err); // something went wrong
-    return;
-  }
 
-  // If an intent was detected, log it out to the console.
-  if (response.intents.length > 0) {
-    console.log('Detected intent: #' + response.intents[0].intent);
-  }
-
-  // Display the output from dialog, if any.
-  if (response.output.text.length != 0) {
-      console.log(response.output.text[0]);
-  }
-
-    // Send back the context to maintain state.
-    io.on('connection', socket => {
-    socket.on('emit message', input => {
-      io.sockets.emit('generate response', input);
-    });
-
-    socket.on('emit message', input => {
-       // Prompt for the next round of input.
-        service.message({
-          workspace_id: workspace_id,
-          input: { text: input},
-          context: response.context
-        }, processResponse)
-      // console.log(response.output.text[0])
-      io.sockets.emit('generate response', response.output.text[0]);
-    });
-  });
-}
