@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background: #fafafa
+  background: #fafafa;
+  font-family: 'Roboto', sans-serif;
 }
 
 .test{
   color: rgb(248, 247, 247);
 }
+
