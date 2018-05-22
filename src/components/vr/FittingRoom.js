@@ -1,6 +1,8 @@
 import React, {Component}  from 'react';
 import aframe from 'aframe';
 import {Entity, Scene} from 'aframe-react';
+import { connect } from 'react-redux';
+import {getUserCart, getFavorites} from '../ducks/reducer';
 
 import animation from 'aframe-animation-component';
 import registerClickDrag from 'aframe-click-drag-component';
@@ -31,6 +33,9 @@ class FittingRoom extends Component {
   }
 
   render() {
+    
+
+
     return (
       <Scene background="color: #ECECEC">
 
@@ -163,7 +168,14 @@ class FittingRoom extends Component {
   }
 }
 
-export default FittingRoom;
+function mapStateToProps(state) {
+  return {
+    cart: state.userCart,
+    favorites: state.favorites
+  }
+}
+
+export default connect(mapStateToProps, {getFavorites, getUserCart})(FittingRoom);
 
 
 
