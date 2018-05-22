@@ -92,7 +92,12 @@ const OtherImage = styled.img `
     width: 80px;
     margin: 5px;
     border: 1px solid black;
-    padding: 10px;
+    padding: 4px;
+
+    &:hover{
+    background-color: #2EE59D;
+    color: #fff;
+    }
 
     @media (max-width: 777px) {
         width: 44px;
@@ -104,7 +109,7 @@ const ItemSpecs = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    
 `;
 
 //product size element
@@ -117,6 +122,13 @@ const PSE = styled.div`
     align-items: center;
     border: 1px solid black;
     margin: 5px;
+
+    &:hover{
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    margin-right: 7px;
+    }
 `;
 
 const PSE2 = styled.div`
@@ -130,6 +142,13 @@ const PSE2 = styled.div`
     margin: 5px;
     background-color: black;
     color: white;
+
+    &:hover{
+        width: 25px;
+        height: 25px;
+        margin-left: 7px;
+        margin-right: 7px;
+    }
 `;
 
 
@@ -142,7 +161,7 @@ const ReviewCon = styled.div`
     margin-top: 30px;
     width: 90%;
     height: auto;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
 `;
 
 const Review = styled.div`
@@ -151,6 +170,8 @@ const Review = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 8px;
+    background-color: rgb(231, 231, 233);
 `;
 
 const ReviewTop = styled.div`
@@ -163,7 +184,7 @@ const ReviewTop = styled.div`
 `;
 
 const RR = styled.div`
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -181,6 +202,14 @@ const NewReview = styled.button`
     width: 110px;
     height: 40px;
     border-radius: 5px;
+    margin: 8px;
+    border: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    &:hover{
+    background-color: #2EE59D;
+    color: #fff;
+    }
 
 `;
 
@@ -229,6 +258,8 @@ const ButtonDiv = styled.button`
     width: 100%;
     margin-left: 5px;
     margin-right: 5px;
+
+    
 `;
 
 const Star = styled.img`
@@ -249,6 +280,22 @@ const ReviewName = styled.h2`
     width: 160px;
 `;
 
+const CartButton = styled.button`
+    width: 110px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 10px;
+    border: none;
+    position: relative;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    &:hover{
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+  }
+`;
+
 
 class Item extends Component {
     constructor() {
@@ -256,7 +303,7 @@ class Item extends Component {
 
         this.state = {
 
-            item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "a description of the product will go here. yay!" }],
+            item: [{ name: "Jacket", img1: image1, img2: image2, img3: image3, price: 149.99, description: "All items fit true to size. International shipping available." }],
             item2:[{title: '', price: 0, product_img: '', img_back: '', type: '', img_view_2: '', img_view_3: '', size: ''}],
             mainImage: '',
 
@@ -462,6 +509,8 @@ class Item extends Component {
                 </WriteReview>
             }</div> : <div />}
 
+            <div style={{height: '35px'}}/>
+
             <TopElements >
                 <AllImages>
                     <MainImage src={this.state.mainImage}
@@ -534,11 +583,14 @@ class Item extends Component {
                 <ProductDescription >
                 <h3 > { images.description } </h3> 
                 </ProductDescription> 
-                <ButtonDiv onClick={() => this.addToCart()}>Add to cart</ButtonDiv>
+                <CartButton onClick={() => this.addToCart()}>Add to cart</CartButton>
                 </ItemSpecs> 
             </TopElements>
 
-            <h1> Customer Reviews </h1>
+            <div style={{width: '100%', display: 'flex', paddingLeft: '16%'}}>
+            <h1 style={{position: 'relative', top: '12px'}}> Customer Reviews </h1>
+            </div>
+
             <ReviewCon >
                 {allReviews}
                 <NewReview onClick={() => this.setState({ writeReview: true })}>Write Review</NewReview>

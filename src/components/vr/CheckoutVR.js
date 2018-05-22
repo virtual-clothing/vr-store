@@ -107,14 +107,24 @@ class CheckoutVR extends Component {
                 <a-animation begin="click" attribute="rotation"  duration="4000" from="0 180 0" to="0 540 0" direction="alternate-reverse" repeat="1" easing="ease" ></a-animation>
             </Entity>
 
+            <a-assets>
+                <video muted id="Avengers" autoplay='true' loop="true" src={Avengers}/> 
+            </a-assets>
+
                 {/* tv */}
-            <Entity obj-model={`obj: ${tvOBJ}; mtl: ${tvMTL};`} position="-9 -0.5 -1.5" scale=".0095 .0095 .0095" rotation="-90 180 65"></Entity>
-
+            <Entity obj-model={`obj: ${tvOBJ}; mtl: ${tvMTL};`} position="-9 -0.5 -4.5" scale=".0095 .0095 .0095" rotation="-90 180 65"></Entity>
                 {/* tv stand */}
-            <Entity obj-model={`obj: ${tvStandOBJ}; mtl: ${tvStandMTL};`} position="-9 -1 -1.5" scale="2 2 2" rotation="0 65 0"></Entity>
-
+            <Entity obj-model={`obj: ${tvStandOBJ}; mtl: ${tvStandMTL};`} position="-9 -1 -4.5" scale="2 2 2" rotation="0 65 0"></Entity>
                   {/* avengers video */}
-            <a-video src={Avengers} position="-8.9 1 -1.4" rotation="0 65 0" scale="3.2 1.8 2"></a-video>
+            <a-video muted src="#Avengers" position="-8.9 1 -4.4" rotation="0 65 0" scale="3.2 1.8 2"></a-video>
+
+              {/* tv 2 */}
+            <Entity obj-model={`obj: ${tvOBJ}; mtl: ${tvMTL};`} position="9 -0.5 -4.5" scale=".0095 .0095 .0095" rotation="-90 180 -65"></Entity>
+                {/* tv stand */}
+            <Entity obj-model={`obj: ${tvStandOBJ}; mtl: ${tvStandMTL};`} position="9 -1 -4.5" scale="2 2 2" rotation="0 -65 0"></Entity>
+                  {/* avengers video */}
+            <a-video muted src="#Avengers" position="8.9 1 -4.4" rotation="0 -65 0" scale="3.2 1.8 2"></a-video>
+
 
             <Entity 
             id="thoughtBubble"  
@@ -129,7 +139,7 @@ class CheckoutVR extends Component {
 
              <a-sound src={elevator} autoplay="true" position="0 2 5"></a-sound>
 
-            <a-Camera look-controls-enabled="true" camera>
+            <a-Camera look-controls-enabled="true" camera position="0 1.7 5">
               <a-Cursor>
               </a-Cursor>
             </a-Camera>

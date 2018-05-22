@@ -10,6 +10,10 @@ const KidsComponent = styled.div`
 `
 export default class Kids extends Component {
 
+    componentWillMount(){
+        window.scrollTo(0, 0);
+    }
+
     render() {
         return (
             <KidsComponent>

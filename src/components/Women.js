@@ -10,6 +10,10 @@ const WomanComponent = styled.div`
 `
 export default class Women extends Component {
 
+    componentWillMount(){
+        window.scrollTo(0, 0);
+    }
+
     render() {
         return (
             <WomanComponent >
