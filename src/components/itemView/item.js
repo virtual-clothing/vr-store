@@ -34,6 +34,8 @@ const TopElements = styled.div`
     align-items: center;
     position: relative;
     bottom: 25px;
+    /* padding-left: 50px;
+    padding-right: 50px; */
 
     @media (max-width: 777px) {
         flex-direction: column;
@@ -56,6 +58,7 @@ const Sizes = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    max-width: 210px;
 `;
 
 const MainImageCon = styled.div`
@@ -64,8 +67,8 @@ const MainImageCon = styled.div`
 `;
 
 const MainImage = styled.img`
-    margin-top: 30px;
-    width: 500px;
+    margin-top: -4px;
+    width: 506px;
     height: auto;
     /* border: 1px solid black; */
 
@@ -89,7 +92,7 @@ const OtherImageCon = styled.div`
 `;
 
 const OtherImage = styled.img `
-    width: 80px;
+    width: 105px;
     margin: 5px;
     border: 1px solid black;
     padding: 4px;
@@ -124,10 +127,15 @@ const PSE = styled.div`
     margin: 5px;
 
     &:hover{
+<<<<<<< HEAD
     width: 25px;
     height: 25px;
     margin-left: 7px;
     margin-right: 7px;
+=======
+    background-color: #2EE59D;
+    color: #fff;
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     }
 `;
 
@@ -144,10 +152,15 @@ const PSE2 = styled.div`
     color: white;
 
     &:hover{
+<<<<<<< HEAD
         width: 25px;
         height: 25px;
         margin-left: 7px;
         margin-right: 7px;
+=======
+        background-color: #2EE59D;
+        color: #fff;
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     }
 `;
 
@@ -205,12 +218,19 @@ const NewReview = styled.button`
     margin: 8px;
     border: none;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
 
     &:hover{
     background-color: #2EE59D;
     color: #fff;
     }
+=======
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 
+    &:hover{
+    background-color: #2EE59D;
+    color: #fff;
+    }
 `;
 
 const WriteReview = styled.div`
@@ -296,6 +316,14 @@ const CartButton = styled.button`
   }
 `;
 
+<<<<<<< HEAD
+=======
+const PlaceHolder = styled.div`
+    width: 50px;
+    height: 10px;
+`;
+
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 
 class Item extends Component {
     constructor() {
@@ -512,6 +540,9 @@ class Item extends Component {
             <div style={{height: '35px'}}/>
 
             <TopElements >
+
+                <PlaceHolder/>
+
                 <AllImages>
                     <MainImage src={this.state.mainImage}
                         alt='main' />
@@ -552,8 +583,9 @@ class Item extends Component {
                     </OtherImageCon>
                 </AllImages>
 
-                <ItemSpecs >
-                <h1 > { item.title } </h1> 
+                <ItemSpecs>
+
+                <h1 style={{maxWidth: '250px'}}> { item.title } </h1> 
                 <h1 > { `$${item.price}` } </h1> 
 
                 {/* sizes */}
@@ -585,10 +617,18 @@ class Item extends Component {
                 </ProductDescription> 
                 <CartButton onClick={() => this.addToCart()}>Add to cart</CartButton>
                 </ItemSpecs> 
+
+                <PlaceHolder/>
+
             </TopElements>
 
+<<<<<<< HEAD
             <div style={{width: '100%', display: 'flex', paddingLeft: '16%'}}>
             <h1 style={{position: 'relative', top: '12px'}}> Customer Reviews </h1>
+=======
+            <div style={{width: '100%', display: 'flex', paddingLeft: '12%', background: '#E0E0E0'}}>
+            <h1 style={{position: 'relative', top: '4px'}}> Customer Reviews </h1>
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
             </div>
 
             <ReviewCon >

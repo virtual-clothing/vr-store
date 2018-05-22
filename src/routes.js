@@ -10,6 +10,8 @@ import Failure from './components/auth/Failure';
 import Item from './components/itemView/item';
 import Account from './components/account/account';
 import FittingRoom from './components/vr/FittingRoom';
+import CheckoutVR from './components/vr/CheckoutVR';
+import Hollywood from './components/vr/Hollywood';
 
 export default () => {
     return (
@@ -24,6 +26,8 @@ export default () => {
             <Route path='/item/:id' component={Item} />
             <Route path='/account' component={Account}/>
             <Route path='/fittingroom' component={FittingRoom}/>
+            <Route path='/checkout' component={CheckoutVR}/>
+            <Route path='/hollywood' component={Hollywood}/>
         </Switch>
     )
 }
