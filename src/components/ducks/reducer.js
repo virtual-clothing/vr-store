@@ -3,7 +3,7 @@ import axios from 'axios';
 const initState = {
   userInfo: {},
   contactIsOpen: false,
-  chatIsOpen: false,
+  chatIsOpen: 'none',
   userCart: [],
   allItems: [],
   searchKeyWord: '',
@@ -46,7 +46,7 @@ export default (state = initState, action) => {
     case CONTACT_IS_OPEN:
       return Object.assign({}, state, {contactIsOpen: !state.contactIsOpen});
     case TOGGLE_CHAT:
-      return {...state, chatIsOpen: !state.chatIsOpen};
+      return {...state, chatIsOpen: state.chatIsOpen === 'none' ? 'block' : 'none'};
     case GET_ALL_ITEMS + '_FULFILLED':
       return {...state, allItems: action.payload};
     case GET_SEARCH_KEYWORD:
