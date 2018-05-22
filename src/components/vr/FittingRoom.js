@@ -33,14 +33,17 @@ class FittingRoom extends Component {
   }
 
   render() {
-    
 
+    const favorites = this.props.favorites.map((item, index) => {
+      <Entity primitive='a-image' position={{x: 0, y: 0, z: index}}/>
+    })
 
     return (
       <Scene background="color: #ECECEC">
 
 
 
+      {favorites}
       
       {/* Model */}
         <a-assets>
