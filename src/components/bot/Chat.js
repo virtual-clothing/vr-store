@@ -130,6 +130,18 @@ class Chat extends Component {
     });
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   sendMessage(message, type) {
     let chat = [...this.state.chat, this.state.newMessage];
     this.setState({chat})
@@ -141,6 +153,16 @@ class Chat extends Component {
     this.setState({ newMessage });
   }
 
+  handleKeyPress (e) {
+    if(e.which === 13){
+      this.setState({newMessage: e.target.value}, () => {
+        this.sendMessage(this.state.newMessage, 'emit');
+      })
+
+      e.target.value = '';
+    }
+  }
+
   render() {
     const chat = this.state.chat.map((e, i) => <Li key={i}>{e}</Li>);
     return (
@@ -148,15 +170,16 @@ class Chat extends Component {
         <Header>
           <Ul>
             {chat}
+            <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </Ul>
         </Header>
         <ChatFooter>
           <Input
+            placeholder="Type here..."
             type="text"
-            value={this.state.newMessage}
-            onChange={e => {
-              this.handleChange(e.target.value);
-            }} 
+            onKeyPress={(e) => this.handleKeyPress(e)}
             />
           <Button
             onClick={() => {
