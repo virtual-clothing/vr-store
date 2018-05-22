@@ -9,7 +9,10 @@ const MenComponent = styled.div`
     margin-top: 80px;
 `
 export default class Men extends Component {
-
+    
+    componentWillMount(){
+        window.scrollTo(0, 0);
+    }
     render() {
         return (
             <MenComponent>
