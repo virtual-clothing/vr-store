@@ -23,7 +23,10 @@ import tvStandOBJ from './icon/tvStand/model.obj';
 
 import computerMTL from './icon/computerModel/model.mtl';
 import computerOBJ from './icon/computerModel/model.obj';
+<<<<<<< HEAD
+=======
 import cartIcon from '../media/cart.png';
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 
 import personMTL from './icon/person/materials.mtl';
 import personOBJ from './icon/person/model.obj';
@@ -103,8 +106,11 @@ class CheckoutVR extends Component {
               {/* computer obj */}
             <Entity obj-model={`obj: ${computerOBJ}; mtl: ${computerMTL};`} position="-1.4 0.35 -7.2" scale="4 4 4" rotation="5 200 0" events={{click: this.cartLink.bind(this)}}></Entity>
 
+<<<<<<< HEAD
+=======
             <Entity primitive='a-image' src={cartIcon} position='-1.5 1.75 -7.62' rotation="-8 24 0" scale="0.8 0.6 0.8"/>
 
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
                 {/* person obj */}
             <Entity obj-model={`obj: ${personOBJ}; mtl: ${personMTL};`} position="1.5 -0.5 -10" scale="5 5 5" rotation="0 180 0" events={{click: this.message.bind(this)}}>
                 <a-animation begin="click" attribute="rotation"  duration="4000" from="0 180 0" to="0 540 0" direction="alternate-reverse" repeat="1" easing="ease" ></a-animation>

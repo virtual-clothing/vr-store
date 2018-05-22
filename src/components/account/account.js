@@ -24,7 +24,11 @@ const Body = styled.div`
 const UpdateA = styled.div`
     width: 98%;
     /* border: 1px solid black; */
+<<<<<<< HEAD
+    height: 420px;
+=======
     height: 330px;
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -36,7 +40,11 @@ const UpdateA = styled.div`
     top: 9px;
 
     @media (min-width: 740px) {
+<<<<<<< HEAD
+        width: 55%;
+=======
         width: 65%;
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     }
 `;
 
@@ -86,6 +94,8 @@ const UpdateInput = styled.input`
     height: 25px;
     border: none;
     padding-left: 5px;
+<<<<<<< HEAD
+=======
     border-radius: 5px;
     height: 30px;
     border: none;
@@ -95,6 +105,7 @@ const UpdateInput = styled.input`
     right: 120px;
     width: 55%;
     }
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 `;
 
 const FavoritesDiv = styled.div`
@@ -108,6 +119,26 @@ const FavoritesDiv = styled.div`
     margin-top: 50px;
     position: relative;
     bottom: 40px;
+`;
+
+const FavoritesHeader = styled.div`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #E0E0E0;
+    height: 3rem;
+    padding: 0 1rem;
+    margin-top: 1rem;
+    width: 91%;
 `;
 
 const FavoritesHeader = styled.div`
@@ -156,11 +187,14 @@ const InputRow = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+<<<<<<< HEAD
+=======
     position: relative;
 
     @media (min-width: 740px) {
     left: 40px;
     }
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 `;
 
 const UpdateButton = styled.button`
@@ -268,6 +302,13 @@ class Account extends Component {
             <Body>
                 <TopElements>
 
+<<<<<<< HEAD
+                    <TwoButtons>  
+                        <h1>{this.state.username2}</h1>
+                        <UserImageCon>
+                            <UserImg src={this.state.profileImage}/>
+                        </UserImageCon> 
+=======
                     <TwoButtons> 
                         <div style={{position: 'relative', width: '100%', alignItems: 'left'}}>
                             <h1>{this.state.username2}</h1>
@@ -276,6 +317,7 @@ class Account extends Component {
                             <UserImg src={this.state.profileImage}/>
                         </UserImageCon> 
                         <div style={{height: '20px', width: '10px'}}/>
+>>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
                         <Link to='/cart'><Button1><h1>Cart</h1></Button1></Link>
                         {/* <a href='http://localhost:3001/logout' style={{textDecoration: 'none', color: 'white'}}> */}
                             <Button1 onClick={() => this.logout()}><h1>Log Out</h1></Button1>

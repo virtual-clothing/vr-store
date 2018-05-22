@@ -245,7 +245,6 @@ class Home extends Component {
                             offsetYMax='0%'
                             offsetY='0%'
                             // offsetYMin='-500%'
-                            slowerScrollRate='10'
 
                         >
                             <Pimage1 src={vrGuy} />
