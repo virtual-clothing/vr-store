@@ -23,7 +23,7 @@ import tvStandOBJ from './icon/tvStand/model.obj';
 
 import computerMTL from './icon/computerModel/model.mtl';
 import computerOBJ from './icon/computerModel/model.obj';
-import cartIcon from '../media/cart.png';
+import cartIcon from '../media/cart.svg';
 
 import personMTL from './icon/person/materials.mtl';
 import personOBJ from './icon/person/model.obj';

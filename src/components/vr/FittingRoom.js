@@ -15,7 +15,6 @@ import whiteShirt from './icon/grayHoody.png';
 import brownShoes from './icon/brownShoes.png';
 import model from './icon/model/men.dae';
 import modelWoman from './icon/model/modelWoman.dae';
-import {connect} from 'react-redux';
 import {addToCart} from '../ducks/reducer';
 registerClickDrag(aframe);
 
