@@ -8,15 +8,14 @@ import animation from 'aframe-animation-component';
 import registerClickDrag from 'aframe-click-drag-component';
 import textGeometry from 'aframe-text-geometry-component';
 
-import blackShirt from './icon/blackShirt.jpg';
-import shoes from './icon/shoes.png';
+import blackShirt from './icon/redHoody.png';
+import shoes from './icon/blackShoes.png';
 import store from './icon/store.jpg';
-import whiteShirt from './icon/whiteShirt.jpg';
+import whiteShirt from './icon/grayHoody.png';
 import brownShoes from './icon/brownShoes.png';
 import model from './icon/model/men.dae';
-import tree from './icon/model/tree.dae';
 import modelWoman from './icon/model/modelWoman.dae';
-
+import {addToCart} from '../ducks/reducer';
 registerClickDrag(aframe);
 
 class FittingRoom extends Component {
@@ -27,34 +26,32 @@ class FittingRoom extends Component {
     }
   }
 
-  handleClick() {
-    const color = this.state.color === 'yellow' ? 'red' : 'yellow';
-    this.setState({ color })
-  }
-
   render() {
-
-    const favorites = this.props.favorites.map((item, index) => {
-      return (
-        <Entity 
-          primitive='a-image' 
-          height='.8' 
-          rotation='0 90 0' 
-          crossorigin 
-          src={item.product_img} 
-          position={index <  8 ? { x: 5, y: 0.6, z: -index } : { x: 5, y: 1.2, z: -index}} 
-        />
-      )
-    })
-
+    let z = 0;
     return (
       <Scene background="color: #ECECEC">
-
-
-
-        {favorites}
-
-        {/* Model */}
+      {
+        this.props.favorites.map((item, i) => {
+          z += 1
+          return (
+            <Entity 
+            key={i}
+            primitive='a-image'           
+            click-drag
+            src={item.product_img}
+            scale="1 1 1"
+            position={`-4 1 ${z}`}
+            rotation="0 90 0"
+            
+            // fires each time .map loops through an array
+            events={{click: this.addToCart(item.product_id)}} 
+            />
+    
+          )
+        })
+      }
+      
+      {/* Model */}
         <a-assets>
           <a-asset-item
             id="why-male-models"
@@ -180,50 +177,11 @@ class FittingRoom extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    cart: state.userCart,
     favorites: state.favorites
   }
 }
-
-export default connect(mapStateToProps, { getFavorites, getUserCart })(FittingRoom);
-
+export default connect(mapStateToProps, {addToCart})(FittingRoom);
 
 
-    //     {/* tree */}
-    //     <a-assets>
-    //     <a-asset-item 
-    //       id="tree" 
-    //       src={tree}
-    //     >
-    //     </a-asset-item>
-
-    //     {/*
-    //     <img id="fall" src="fall.png">
-    //     <img id="goggles" src="goggles.png">
-    //     <img id="mozvr" src="../../assets/img/mozvr.png">
-    //     <img id="price" src="price.png">
-    //     <img id="shadow2" src="../../assets/img/radial-shadow-2.png">
-    //     <img id="shoes" src="shoes.png">
-    //     */}
-    // </a-assets>
-
-    //   <a-entity id="model" position="-2 0 -1">
-    //     <a-animation 
-    //       attribute="rotation" 
-    //       from="0 -30 0" 
-    //       to="0 330 0" 
-    //       dur="15000"
-    //       easing="linear" 
-    //       repeat="indefinite">
-    //     </a-animation>
-
-    //     <a-collada-model 
-    //       position="-.35 0 .55" 
-    //       rotation="0 -20 0" 
-    //       scale="1.5 1.5 1.5"   
-    //       src="#tree">
-    //     </a-collada-model>
-    //     <a-image src="#shadow2" rotation="-90 0 0" scale="0.5 0.5 0.5"></a-image>
-    //   </a-entity>

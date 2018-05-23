@@ -127,15 +127,8 @@ const PSE = styled.div`
     margin: 5px;
 
     &:hover{
-<<<<<<< HEAD
-    width: 25px;
-    height: 25px;
-    margin-left: 7px;
-    margin-right: 7px;
-=======
     background-color: #2EE59D;
     color: #fff;
->>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     }
 `;
 
@@ -152,15 +145,8 @@ const PSE2 = styled.div`
     color: white;
 
     &:hover{
-<<<<<<< HEAD
-        width: 25px;
-        height: 25px;
-        margin-left: 7px;
-        margin-right: 7px;
-=======
         background-color: #2EE59D;
         color: #fff;
->>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
     }
 `;
 
@@ -218,14 +204,6 @@ const NewReview = styled.button`
     margin: 8px;
     border: none;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
-
-    &:hover{
-    background-color: #2EE59D;
-    color: #fff;
-    }
-=======
->>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 
     &:hover{
     background-color: #2EE59D;
@@ -316,14 +294,11 @@ const CartButton = styled.button`
   }
 `;
 
-<<<<<<< HEAD
-=======
 const PlaceHolder = styled.div`
     width: 50px;
     height: 10px;
 `;
 
->>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
 
 class Item extends Component {
     constructor() {
@@ -622,13 +597,8 @@ class Item extends Component {
 
             </TopElements>
 
-<<<<<<< HEAD
-            <div style={{width: '100%', display: 'flex', paddingLeft: '16%'}}>
-            <h1 style={{position: 'relative', top: '12px'}}> Customer Reviews </h1>
-=======
             <div style={{width: '100%', display: 'flex', paddingLeft: '12%', background: '#E0E0E0'}}>
             <h1 style={{position: 'relative', top: '4px'}}> Customer Reviews </h1>
->>>>>>> aa3eac84dddc6044f6afdc01bb7babcc9d12f949
             </div>
 
             <ReviewCon >
