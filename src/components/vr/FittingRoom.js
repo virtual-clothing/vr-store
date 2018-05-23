@@ -6,15 +6,16 @@ import animation from 'aframe-animation-component';
 import registerClickDrag from 'aframe-click-drag-component';
 import textGeometry from 'aframe-text-geometry-component';
 
-import blackShirt from './icon/blackShirt.jpg';
-import shoes from './icon/shoes.png';
+import blackShirt from './icon/redHoody.png';
+import shoes from './icon/blackShoes.png';
 import store from './icon/store.jpg';
-import whiteShirt from './icon/whiteShirt.jpg';
+import whiteShirt from './icon/grayHoody.png';
 import brownShoes from './icon/brownShoes.png';
 import model from './icon/model/men.dae';
 import tree from './icon/model/tree.dae';
 import modelWoman from './icon/model/modelWoman.dae';
-
+import {connect} from 'react-redux';
+import {addToCart} from '../ducks/reducer';
 registerClickDrag(aframe);
 
 class FittingRoom extends Component {
@@ -25,17 +26,30 @@ class FittingRoom extends Component {
     }
   }
 
-  handleClick() {
-    const color = this.state.color === 'yellow' ? 'red' : 'yellow';
-    this.setState({color})
-  }
-
   render() {
+    let z = 0;
     return (
       <Scene background="color: #ECECEC">
-
-
-
+      {
+        this.props.favorites.map((item, i) => {
+          z += 1
+          return (
+            <Entity 
+            key={i}
+            primitive='a-image'           
+            click-drag
+            src={item.product_img}
+            scale="1 1 1"
+            position={`-4 1 ${z}`}
+            rotation="0 90 0"
+            
+            // fires each time .map loops through an array
+            events={{click: this.addToCart(item.product_id)}} 
+            />
+    
+          )
+        })
+      }
       
       {/* Model */}
         <a-assets>
@@ -163,7 +177,12 @@ class FittingRoom extends Component {
   }
 }
 
-export default FittingRoom;
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites
+  }
+}
+export default connect(mapStateToProps, {addToCart})(FittingRoom);
 
 
 

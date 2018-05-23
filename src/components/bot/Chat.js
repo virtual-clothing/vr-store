@@ -21,10 +21,10 @@ const ChatRoom = styled.div`
   padding: 3px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding-bottom: 0;
+  zIndex: 6
 
   @media (min-width: 450px) {
     width: 300px;
-    margin-bottom: 5vh;
   }
 `;
 

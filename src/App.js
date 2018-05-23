@@ -8,32 +8,28 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Chat from './components/bot/Chat';
 import { openCloseContact } from './components/ducks/reducer';
-
+import ChatButton from './components/ChatButton';
+import { relative } from 'path';
 const Body = styled.div`
   min-height: 100vh;
 `
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{position: "relative"}}>
        
         <div style={{ position: 'fixed', top: '0', zIndex: "2" }}>
           <Nav/>
         </div>
         
-        <div style={{ position: 'relative', zIndex: "1", marginTop: '70px' }}>
+        <div style={{ position: 'relative', zIndex: "1", marginTop: '10rem' }}>
           <Routes />
         </div>
-
-        <div style={{ position: 'relative', zIndex: "2" }}>
-          <Footer />
-        </div>
-
 
         <div style={{ position: 'relative', zIndex: "3" }}>
         <ContactUs isOpen={this.props.contactIsOpen} cancel={this.props.openCloseContact}/>
         </div>
-
+        <ChatButton />
       </div>
     );
   }
