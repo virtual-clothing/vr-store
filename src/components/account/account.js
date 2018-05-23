@@ -149,6 +149,7 @@ const UserImageCon = styled.div`
 
 const UserImg = styled.img`
     width: 100%;
+    border-radius: 10px;
 `;
 
 const InputRow = styled.div`
@@ -199,6 +200,7 @@ class Account extends Component {
             phoneNumber: 'phone number',
             email: 'email',
             profileImage: '',
+
             //changing favorites button/toggle to log out
             // favoriteToggle: false,
             colorToggle1: "Green",
@@ -209,23 +211,21 @@ class Account extends Component {
             favorites: [{test: "test"},{test: "test"},{test: "test"}],
 
         }
+        this.handleChange = this.handleChange.bind(this);
     }
 
 
     componentWillMount(){
-
         window.scrollTo(0, 0);
-
         axios.get('/api/userinfo').then( res => {
             if(res.data[0]){ this.setState({user: res.data, username: res.data[0].username, username2: res.data[0].username, email: res.data[0].email, profileImage: res.data[0].profile_img, address: res.data[0].address, phoneNumber: res.data[0].phone}, () => console.log(this.state))}
         })
         this.props.getAllItems();
-
-        //need endpoint to grab users favorites. will build when there are products in db
+        this.props.getUserInfo();
     }
 
     handleChange(prop, val){
-        this.setState({[prop]: val, colorToggle: 'Red'})
+        this.setState({[prop]: val})
         if(prop === 'username'){
             this.setState({colorToggle1: 'Red'})
         }else if(prop === 'address'){
@@ -239,13 +239,12 @@ class Account extends Component {
 
     updateAccount(){
         const {username, address, phoneNumber, email} = this.state;
-        console.log(this.state)
-
-
+        console.log(this.state, "state")
+       
         axios.put('/updateaccount', {username, address, phoneNumber, email}).then( res => {
             this.setState({username: res.data[0].username, username2: res.data[0].username, address: res.data[0].address, phoneNumber: res.data[0].phone, email: res.data[0].email, colorToggle1: 'Green' , colorToggle2: 'Green', colorToggle3: 'Green', colorToggle4: 'Green'})
         })
-
+        
     }
 
     logout(){
@@ -257,14 +256,7 @@ class Account extends Component {
     }
 
     render() {
-
-        var favorites = this.state.favorites.map( (fav, i) => {
-            return (
-                <Fav key={i}>
-                    {/* build product display */}
-                </Fav>
-            )
-        })
+        console.log(this.props.userInfo, "info from redux")
         return (
             <Body>
                 <TopElements>
@@ -278,9 +270,9 @@ class Account extends Component {
                         </UserImageCon> 
                         <div style={{height: '20px', width: '10px'}}/>
                         <Link to='/cart'><Button1><h1>Cart</h1></Button1></Link>
-                        {/* <a href='http://localhost:3001/logout' style={{textDecoration: 'none', color: 'white'}}> */}
+
                             <Button1 onClick={() => this.logout()}><h1>Log Out</h1></Button1>
-                        {/* </a> */}
+
                     </TwoButtons>
 
                     <UpdateA>
@@ -308,12 +300,10 @@ class Account extends Component {
 
                 </TopElements>
 
-                {/* {this.state.favoriteToggle ? <div>{ */}
                 <FavoritesDiv>
                     <FavoritesHeader><h2>Favorites</h2></FavoritesHeader>
                     <Favorites/>
                 </FavoritesDiv>
-                {/* }</div> : <div/>} */}
 
             </Body>
         )

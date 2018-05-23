@@ -200,7 +200,7 @@ class Home extends Component {
                 <Featured>
                     <Link to='/men'>
                         <ItemClass>
-                            <ItemImage src={bJacket} alt='jacket'/>
+                            <ItemImage label='a' src={bJacket} alt='jacket'/>
                             <ItemBuy>
                                 <ItemText>Men</ItemText>
                             </ItemBuy>
@@ -208,7 +208,7 @@ class Home extends Component {
                     </Link>
                     <Link to='/women'>
                         <ItemClass>
-                            <ItemImage src={gJacket} alt='jacket'/>
+                            <ItemImage id='2' src={gJacket} alt='jacket'/>
                             <ItemBuy>
                                 <ItemText>Women</ItemText>
                             </ItemBuy>
@@ -216,7 +216,7 @@ class Home extends Component {
                     </Link>
                     <Link to='/kids'>
                         <ItemClass>
-                            <ItemImage src={pJacket} alt='jacket'/>
+                            <ItemImage id='3' src={pJacket} alt='jacket'/>
                             <ItemBuy>
                                 <ItemText>Kids</ItemText>
                             </ItemBuy>

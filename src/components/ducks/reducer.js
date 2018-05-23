@@ -28,8 +28,10 @@ const REM_FROM_FAVORITES = "REM_FROM_FAVORITES";
 const ADD_CART_QUANTITY = "ADD_CART_QUANTITY";
 const REM_CART_QUANTITY = "REM_CART_QUANTITY";
 const ADD_TO_CART = "ADD_TO_CART";
+const REM_ALL_CART = "REM_ALL_CART";
 
 export default (state = initState, action) => {
+  // console.log(action.payload)
   switch (action.type) {
     case GET_USER_INFO + '_FULFILLED':
       return { ...state, userInfo: action.payload }
@@ -65,6 +67,18 @@ export default (state = initState, action) => {
       return Object.assign({}, state, {favorites: action.payload});
     case REM_FROM_FAVORITES + '_FULFILLED':
       return Object.assign({}, state, {favorites: action.payload});
+    case REM_ALL_CART + '_FULFILLED':
+      return Object.assign({}, state, {userCart: action.payload})
+  }
+}
+
+export const remAllFromCart = () => {
+
+  const promise = axios.delete('/remallcart').then( res => res.data )
+
+  return {
+    type: REM_ALL_CART,
+    payload: promise
   }
 }
 

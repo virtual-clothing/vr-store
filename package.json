@@ -23,6 +23,7 @@
     "eslint": "^4.19.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "jest": "^22.4.4",
     "live-server": "^1.2.0",
     "massive": "^4.8.0",
     "nodemailer": "^4.6.4",
@@ -53,13 +54,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "colors.css": "^3.0.0",
+    "cypress": "^2.1.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
