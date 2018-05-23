@@ -256,6 +256,8 @@ const ButtonDiv = styled.button`
     width: 100%;
     margin-left: 5px;
     margin-right: 5px;
+
+    
 `;
 
 const Star = styled.img`

@@ -130,6 +130,7 @@ const FavoritesHeader = styled.div`
     width: 91%;
 `;
 
+
 const Fav = styled.div`
     width: 250px;
     height: 250px;

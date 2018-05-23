@@ -19,7 +19,6 @@ const h3 = styled.h3`
   color: white;
   font-family: Anton, sans-serif;
   size: 8em;
-  weight: bold;
 `
 
 const Span = styled.span`

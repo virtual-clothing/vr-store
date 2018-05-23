@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Cart from './media/cart.png';
+import Cart from './media/cart.svg';
 import hIcon from './media/hamburgerIcon.png';
 import profileIcon from './media/person.png';
 import searchIcon from './media/searchIcon.png';
-import chatIcon from './media/chat.png';
+import chatIcon from './media/chat.svg';
 import { Link } from 'react-router-dom';
 import Chat from './bot/Chat';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {toggleChat} from './ducks/reducer';
-import Logo from './media/mountain2.png';
+import {toggleChat, openCloseContact} from './ducks/reducer';
+import Logo from './media/V.png';
 
 const NavBody = styled.div`
     width: 100%;
-    height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,16 +21,18 @@ const NavBody = styled.div`
     border-bottom: 1px solid black;
     box-shadow: 0 4px 7px 0 rgba(112, 95, 212, 0.1), 0 2px 4px 0 rgba(0,0,0,.3);
     z-index: 1;
+    padding-top: 2rem;
+    box-sizing: border-box;
 `;
 
 const Top = styled.div`
+  position: relative;
   width: 100%;
-  height: 25px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: black;
+
 `;
 
 const Bottom = styled.div`
@@ -40,6 +41,9 @@ const Bottom = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 2rem;
 `;
 
 const CatsDesktop = styled.div`
@@ -55,15 +59,15 @@ const CatsDesktop = styled.div`
 `;
 
 const Cats2 = styled.div`
+  position: absolute;
   width: 66%;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
 
 const CartIcon = styled.img`
-  width: 40px;
+  width: 25px;
   position: relative;
   top: 2px;
 `;
@@ -109,9 +113,11 @@ const SearchIcon = styled.img`
 `;
 
 const DesktopDisplay = styled.div`
+  position: absolute;
+  right: 1rem;
   display: flex;
   width: auto;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   @media (max-width: 740px) {
@@ -203,7 +209,6 @@ class Nav extends Component {
         search: '',
         user: []
       }
-
     }
 
     componentWillMount(){
@@ -230,6 +235,23 @@ class Nav extends Component {
               <SearchIcon src={searchIcon} alt='search'/>
             </SearchB></Link>
           </SearchElements> */}
+          <Cats2>
+            <Link to='/' style={{ textDecoration: 'none', color: 'black'}}><SiteLogo src={Logo} alt='Logo'/></Link>
+          </Cats2>
+
+          <DesktopDisplay>
+              {toggle === false ? <div>{
+                <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+                  <p>Sign In</p>
+                </a>
+              }</div> :
+                <Link to='/account' style={{ textDecoration: 'none', color: 'black' }}>
+                  <p>Account</p>
+                </Link>
+              }
+            <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
+            <Link to='/cart'><CartIcon src={ Cart } alt='cart'/></Link>
+          </DesktopDisplay>
         </Top>
 
         <Bottom>
@@ -252,37 +274,19 @@ class Nav extends Component {
 
 
               {/* replace h2 with logo */}
-          <Cats2>
-            <Link to='/' style={{ textDecoration: 'none', color: 'black' }}><SiteLogo src={Logo} alt='Logo'/></Link>
-          </Cats2>
+
 
             {/* these will disappear in mobile view and will be replaced by icon */}
           <CatsDesktop>
-            <Link to='/men' style={{ textDecoration: 'none', color: 'black' }}>Men</Link>
-            <Link to='/women' style={{ textDecoration: 'none', color: 'black' }}>Women</Link>
-            <Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}>Kids</Link>
-            <Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}>Fitting Room</Link>
-          </CatsDesktop>
+            <Link to='/men' style={{ textDecoration: 'none', color: 'black' }}><p>Men</p></Link>
+            <Link to='/women' style={{ textDecoration: 'none', color: 'black' }}><p>Women</p></Link>
+            <Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}><p>Kids</p></Link>
+            <Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>Fitting Room</p></Link>
+            <p onClick={() => this.props.openCloseContact()}>Contact Us</p>
 
+          </CatsDesktop>
           <Cats2>
 
-            <DesktopDisplay>
-
-                {toggle === false ? <div>{
-                  <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
-                    <p>login/signup</p>
-                  </a>
-                }</div> :
-                  <Link to='/account' style={{ textDecoration: 'none', color: 'black' }}>
-                    <p>Account</p>
-                  </Link>
-                }
-
-              <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
-              
-            </DesktopDisplay>
-
-            <Link to='/cart'><CartIcon src={ Cart } alt='cart'/></Link>
             <DropIcon src={ hIcon} alt='hIcon' onClick={() => this.setState({toggleMenu: !this.state.toggleMenu})}></DropIcon>
 
           </Cats2>
@@ -310,8 +314,16 @@ class Nav extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    chatIsOpen: state.chatIsOpen
+    contactIsOpen: state.contactIsOpen,
+    chatIsOpen: state.chatIsOpen,
   }
 }
 
-export default connect(mapStateToProps, {toggleChat})(Nav);
+
+const actionCreators = {
+  openCloseContact,
+  toggleChat
+}
+
+
+export default connect(mapStateToProps, actionCreators)(Nav);

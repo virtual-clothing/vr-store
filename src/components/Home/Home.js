@@ -245,7 +245,6 @@ class Home extends Component {
                             offsetYMax='0%'
                             offsetY='0%'
                             // offsetYMin='-500%'
-                            slowerScrollRate='10'
 
                         >
                             <Pimage1 src={vrGuy} />
@@ -253,6 +252,7 @@ class Home extends Component {
 
                     </ParallaxBanner>
                 </Link>
+                
                 
                 {/* {!this.state.buttonPress ? <div>{
                     <EnterVR onClick={() => this.setState({buttonPress: true}, () => this.switchBack())}>Shop in VR</EnterVR>
