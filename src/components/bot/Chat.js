@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
-const socket = io('http://localhost:4444');
+const socket = io();
+// 'http://localhost:4444'
 // const socket = io('http://localhost:4444?botmasterUserId=6');
 
 

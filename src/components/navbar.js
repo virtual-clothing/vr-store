@@ -21,7 +21,7 @@ const NavBody = styled.div`
     border-bottom: 1px solid black;
     box-shadow: 0 4px 7px 0 rgba(112, 95, 212, 0.1), 0 2px 4px 0 rgba(0,0,0,.3);
     z-index: 1;
-    padding-top: 2rem;
+  padding-top: 2rem;
     box-sizing: border-box;
 `;
 
