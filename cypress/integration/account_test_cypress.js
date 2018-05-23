@@ -10,11 +10,6 @@ describe('testing Home page', () =>{
         cy.get('div.sc-eqIVtm.gZZquL')
             .contains('m')
             .click();
+
     })
-    // it('other stuff', () => {
-    //     cy.visit('localhost:4444')
-    //     cy.get('a')
-    //         .contains('Women')
-    //         .should('contain', 'Woman')
-    // })
 })
