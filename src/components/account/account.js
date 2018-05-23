@@ -149,6 +149,7 @@ const UserImageCon = styled.div`
 
 const UserImg = styled.img`
     width: 100%;
+    border-radius: 10px;
 `;
 
 const InputRow = styled.div`

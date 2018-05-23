@@ -24,7 +24,7 @@ class Checkout extends Component {
         <StripeCheckout
           token={this.onToken}
           stripeKey={stripe}
-          amount={this.props.total}
+          amount={this.props.total * 100}
         />
       </div>
     );

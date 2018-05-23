@@ -44,7 +44,7 @@ class FittingRoom extends Component {
             rotation="0 90 0"
             
             // fires each time .map loops through an array
-            events={{click: this.addToCart(item.product_id)}} 
+            events={{click: () => this.props.addToCart(item.product_id)}} 
             />
     
           )

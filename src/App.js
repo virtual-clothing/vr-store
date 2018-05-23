@@ -22,7 +22,7 @@ class App extends Component {
           <Nav/>
         </div>
         
-        <div style={{ position: 'relative', zIndex: "1", marginTop: '10rem' }}>
+        <div style={{ position: 'relative', zIndex: "1", marginTop: '9.5rem' }}>
           <Routes />
         </div>
 
