@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-
 import axios from 'axios';
+import { connect } from "react-redux";
+import { remAllFromCart } from  '../ducks/reducer';
+
 const stripe = 'pk_test_mRqSgRYkBpto8ufq1dknHTZz'
 
 class Checkout extends Component {
+
   onToken = (token) => {
     token.card = void 0;
     console.log('token', token);
     axios.post('http://localhost:4444/api/payment', { token, amount: 100 }).then(response => {
-      alert('we are in business')
+      this.props.remAllFromCart();
+      alert('Your order is being processed, thank you for using Vshopify!');
     });
   }
 
@@ -27,5 +31,4 @@ class Checkout extends Component {
   }
 }
 
-
-export default Checkout;
+export default connect(state => state, { remAllFromCart })(Checkout)

@@ -100,6 +100,8 @@ app.get('/itemReviews', controller.getItemReviews)
 app.post('/submitreview', controller.submitReview)
 //add to cart
 app.post('/cart', controller.addToCart)
+//add to order
+app.delete('/remallcart', controller.remAllFromCart)
 
 
 

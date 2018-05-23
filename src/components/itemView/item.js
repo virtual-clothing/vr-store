@@ -369,6 +369,7 @@ class Item extends Component {
                 this.setState({ alreadyInCart: true })
             }
         })
+        
         console.log(this.state.alreadyInCart)
         if (this.state.alreadyInCart === true) {
             this.props.addCartQuantity(pID);
