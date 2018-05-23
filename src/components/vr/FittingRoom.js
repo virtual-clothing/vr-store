@@ -14,7 +14,6 @@ import store from './icon/store.jpg';
 import whiteShirt from './icon/whiteShirt.jpg';
 import brownShoes from './icon/brownShoes.png';
 import model from './icon/model/men.dae';
-import tree from './icon/model/tree.dae';
 import modelWoman from './icon/model/modelWoman.dae';
 
 registerClickDrag(aframe);
