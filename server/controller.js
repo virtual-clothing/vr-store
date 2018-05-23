@@ -124,7 +124,13 @@ module.exports = {
         } else {
             res.status(200).send("failure")
         }
+    },
+
+    remAllFromCart: (req, res) => {
+        const db = req.app.get('db');
+        db.remAllFromUserCart(req.user).then( cart => {
+            res.status(200).send(cart)
+        })
     }
 
-    
 }

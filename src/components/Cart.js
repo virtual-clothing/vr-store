@@ -48,17 +48,18 @@ class Cart extends Component {
 
     render() {
 
-        const cartItems = this.props.cart.map((item, index) => {
-            return (
-                <CartItem
-                    key={index}
-                    item={item}
-                    removeFn={this.props.remFromCart}
-                    remCartQtyFn={this.props.remCartQuantity}
-                    addCartQtyFn={this.props.addCartQuantity}
-                />
-            )
-        })
+            const cartItems = this.props.cart.map((item, index) => {
+                return (
+                    <CartItem
+                        key={index}
+                        item={item}
+                        removeFn={this.props.remFromCart}
+                        remCartQtyFn={this.props.remCartQuantity}
+                        addCartQtyFn={this.props.addCartQuantity}
+                    />
+                )
+            })
+
 
         return (
             <CartWindow>
