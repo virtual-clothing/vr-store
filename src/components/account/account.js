@@ -24,7 +24,7 @@ const Body = styled.div`
 const UpdateA = styled.div`
     width: 98%;
     /* border: 1px solid black; */
-    height: 420px;
+    height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -36,7 +36,7 @@ const UpdateA = styled.div`
     top: 9px;
 
     @media (min-width: 740px) {
-        width: 55%;
+        width: 65%;
     }
 `;
 
@@ -63,8 +63,12 @@ const TwoButtons = styled.div`
 `;
 
 const Button1 = styled.button`
-    width: 250px;
-    height: 90px;
+    width: 180px;
+    margin-left: 35px;
+    margin-right: 35px;
+    height: 60px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     border-radius: 5px;
     margin: 10px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -82,6 +86,15 @@ const UpdateInput = styled.input`
     height: 25px;
     border: none;
     padding-left: 5px;
+    border-radius: 5px;
+    height: 30px;
+    border: none;
+
+    @media (min-width: 740px) {
+    position: relative;
+    right: 120px;
+    width: 55%;
+    }
 `;
 
 const FavoritesDiv = styled.div`
@@ -93,6 +106,8 @@ const FavoritesDiv = styled.div`
     flex-wrap: wrap;
     margin-bottom: 50px;
     margin-top: 50px;
+    position: relative;
+    bottom: 40px;
 `;
 
 const FavoritesHeader = styled.div`
@@ -115,6 +130,7 @@ const FavoritesHeader = styled.div`
     width: 91%;
 `;
 
+
 const Fav = styled.div`
     width: 250px;
     height: 250px;
@@ -123,7 +139,7 @@ const Fav = styled.div`
 `;
 
 const UserImageCon = styled.div`
-    width: 250px;
+    width: 200px;
     height: auto;
     display: flex;
     justify-content: center;
@@ -141,6 +157,11 @@ const InputRow = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+
+    @media (min-width: 740px) {
+    left: 40px;
+    }
 `;
 
 const UpdateButton = styled.button`
@@ -248,11 +269,14 @@ class Account extends Component {
             <Body>
                 <TopElements>
 
-                    <TwoButtons>  
-                        <h1>{this.state.username2}</h1>
+                    <TwoButtons> 
+                        <div style={{position: 'relative', width: '100%', alignItems: 'left'}}>
+                            <h1>{this.state.username2}</h1>
+                        </div>
                         <UserImageCon>
                             <UserImg src={this.state.profileImage}/>
                         </UserImageCon> 
+                        <div style={{height: '20px', width: '10px'}}/>
                         <Link to='/cart'><Button1><h1>Cart</h1></Button1></Link>
                         {/* <a href='http://localhost:3001/logout' style={{textDecoration: 'none', color: 'white'}}> */}
                             <Button1 onClick={() => this.logout()}><h1>Log Out</h1></Button1>

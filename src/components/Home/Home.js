@@ -93,7 +93,7 @@ const Featured = styled.div`
 const ItemClass = styled.div`
     width: 250px;
     height: 250px;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
@@ -111,6 +111,10 @@ const ItemImage = styled.img`
     height: 100%;
     max-width: 340px;
     position: relative;
+
+    @media (max-width: 777px) {
+        
+    }
 `;
 
 const ItemBuy = styled.div`
@@ -123,14 +127,13 @@ const ItemBuy = styled.div`
     align-items: center;
     position: absolute;
     /* border: 1px solid black; */
-    margin-top: 100px;
+    margin-top: 50px;
 
     @media (max-width: 777px) {
         flex-direction: column;
         width: 95%;
         height: 350px;
         max-width: 420px;
-        width: 95%;
         margin-top: 140px;
         height: 70px;
     }
@@ -242,7 +245,6 @@ class Home extends Component {
                             offsetYMax='0%'
                             offsetY='0%'
                             // offsetYMin='-500%'
-                            slowerScrollRate='10'
 
                         >
                             <Pimage1 src={vrGuy} />

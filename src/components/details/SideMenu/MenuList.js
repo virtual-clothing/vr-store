@@ -7,7 +7,6 @@ const Container = styled.div`
   display: inline-block;
   width: 15%;
   box-sizing: border-box;
-  float: left;
 
 
   @media(max-width: 450px) {
