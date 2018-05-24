@@ -1,3 +1,4 @@
+
 require('dotenv').config({silent: true});
 const express = require('express');
 const session = require('express-session');
@@ -5,9 +6,9 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const nodemailer = require('nodemailer');
-// const Botmaster = require('botmaster');
-// const SocketioBot = require('botmaster-socket.io');
-var watson = require('watson-developer-cloud'); // watson sdk
+var watson = require('watson-developer-cloud');
+
+
 
 
 const controller = require('./controller');
@@ -231,3 +232,49 @@ var service = new AssistantV1({
 
 var workspace_id = process.env.WORKSPACE_ID; 
 
+//_________________________________________Twillo
+var middleWare = require('botkit-middleware-watson')({
+  username: process.env.WATSON_USERNAME,
+  password: process.env.WATSON_PASSWORD,
+  workspace_id: process.env.WORKSPACE_ID,
+  version_date: '2018-02-16'
+})
+
+
+var TwilioSMSBot = require('botkit-sms');
+var controllers = TwilioSMSBot({
+  account_sid: process.env.ACCOUNT_SID,
+  auth_token: process.env.AUTH_TOKEN,
+  twilio_number: process.env.TWILIO_NUMBER
+});
+
+let bot = controllers.spawn({})
+
+
+controllers.setupWebserver('8000', function (err, webserver) {
+  if (err) console.log(err)
+  controllers.createWebhookEndpoints(controllers.webserver, bot, function () {
+    console.log('TwilioSMSBot is online!');
+  })
+});
+
+controllers.hears(['.*'], 'message_received', function (bot, message) {
+  middleware.interpret(bot, message, function(err) {
+      bot.reply(message, message.watsonData.output.text[0]);
+    })
+});
+
+// let bot = controllers.spawn({});
+
+// controllers.setupWebserver(PORT), function(err, webserver) {
+//   if (err) console.log(err);
+//   controllers.createWebhookEndpoints(controllers.webserver, bot, function () {
+//     console.log('TwilloSMSBot is online');
+//   })
+// };
+
+// controllers.hears(['.*']), 'message_received', function(bot, message) {
+//   middleWare.interpret(bot, message, function(err) {
+//     bot.reply(message, message.watsonData.output.text[0]);
+//   })
+// }
