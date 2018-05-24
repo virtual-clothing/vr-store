@@ -251,7 +251,7 @@ var controllers = TwilioSMSBot({
 let bot = controllers.spawn({})
 
 
-controllers.setupWebserver('8000', function (err, webserver) {
+controllers.setupWebserver(PORT, function (err, webserver) {
   if (err) console.log(err)
   controllers.createWebhookEndpoints(controllers.webserver, bot, function () {
     console.log('TwilioSMSBot is online!');
@@ -259,7 +259,7 @@ controllers.setupWebserver('8000', function (err, webserver) {
 });
 
 controllers.hears(['.*'], 'message_received', function (bot, message) {
-  middleware.interpret(bot, message, function(err) {
+  middleWare.interpret(bot, message, function(err) {
       bot.reply(message, message.watsonData.output.text[0]);
     })
 });

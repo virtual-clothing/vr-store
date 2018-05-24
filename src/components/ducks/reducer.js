@@ -73,7 +73,6 @@ export default (state = initState, action) => {
 }
 
 export const remAllFromCart = () => {
-
   const promise = axios.delete('/remallcart').then( res => res.data )
 
   return {
