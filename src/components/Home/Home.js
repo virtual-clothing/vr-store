@@ -9,9 +9,9 @@ import image5 from './testCarouselImages/image5.jpeg';
 import image6 from './testCarouselImages/image6.jpeg';
 // import store from './testCarouselImages/store.jpg';
 import './Home.css';
-import bJacket from './itemImages/mens3.jpg';
-import gJacket from './itemImages/womens3.jpg';
-import pJacket from './itemImages/kids3.jpg';
+import bJacket from './itemImages/homeMen.jpg';
+import gJacket from './itemImages/homeWomen.jpg';
+import pJacket from './itemImages/kidsHome.jpg';
 import vrGuy from './testCarouselImages/vrGuy.png';
 
 // import vrGuy2 from './testCarouselImages/vrGuy2.png';
@@ -91,8 +91,8 @@ const Featured = styled.div`
 `;
 
 const ItemClass = styled.div`
-    width: 250px;
-    height: 250px;
+    width: 20rem;
+    height: 20rem;
     /* border: 1px solid grey; */
     margin-bottom: 20px;
     display: flex;
@@ -201,25 +201,19 @@ class Home extends Component {
                     <Link to='/men'>
                         <ItemClass>
                             <ItemImage label='a' src={bJacket} alt='jacket'/>
-                            <ItemBuy>
-                                <ItemText>Men</ItemText>
-                            </ItemBuy>
+                      
                         </ItemClass>
                     </Link>
                     <Link to='/women'>
                         <ItemClass>
                             <ItemImage id='2' src={gJacket} alt='jacket'/>
-                            <ItemBuy>
-                                <ItemText>Women</ItemText>
-                            </ItemBuy>
+                        
                         </ItemClass>
                     </Link>
                     <Link to='/kids'>
                         <ItemClass>
                             <ItemImage id='3' src={pJacket} alt='jacket'/>
-                            <ItemBuy>
-                                <ItemText>Kids</ItemText>
-                            </ItemBuy>
+                        
                         </ItemClass>
                     </Link>
                 </Featured>
