@@ -8,9 +8,6 @@ const massive = require('massive');
 const nodemailer = require('nodemailer');
 var watson = require('watson-developer-cloud');
 
-
-
-
 const controller = require('./controller');
 const app = express();
 
@@ -105,7 +102,6 @@ app.post('/cart', controller.addToCart)
 //add to order
 app.delete('/remallcart', controller.remAllFromCart)
 
-
 // NodeMailer
 const smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
@@ -115,12 +111,8 @@ const smtpTransport = nodemailer.createTransport({
   }
 });
 
-
 // NODE MAILER
-
 app.post('/email', function create(req, res, next) {
-
-  console.log('req', req.body)
   var mail = {
     from: req.body.email,
     to: process.env.NODE_MAILER_USER,
@@ -264,17 +256,3 @@ controllers.hears(['.*'], 'message_received', function (bot, message) {
     })
 });
 
-// let bot = controllers.spawn({});
-
-// controllers.setupWebserver(PORT), function(err, webserver) {
-//   if (err) console.log(err);
-//   controllers.createWebhookEndpoints(controllers.webserver, bot, function () {
-//     console.log('TwilloSMSBot is online');
-//   })
-// };
-
-// controllers.hears(['.*']), 'message_received', function(bot, message) {
-//   middleWare.interpret(bot, message, function(err) {
-//     bot.reply(message, message.watsonData.output.text[0]);
-//   })
-// }

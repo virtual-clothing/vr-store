@@ -17,7 +17,7 @@ export default class Women extends Component {
     render() {
         return (
             <WomanComponent >
-                <Title title="WOMAN"/>
+                <Title title="WOMEN"/>
                 <MenuList category="women"/>
                 <MainContainer banner={sale} category="Women"/>
             </WomanComponent>

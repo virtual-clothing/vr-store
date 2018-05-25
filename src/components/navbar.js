@@ -11,6 +11,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {toggleChat, openCloseContact} from './ducks/reducer';
 import Logo from './media/V.png';
+import { isAbsolute } from 'path';
 
 const NavBody = styled.div`
     width: 100%;
@@ -41,13 +42,12 @@ const Bottom = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding: 1rem;
   box-sizing: border-box;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const CatsDesktop = styled.div`
-  width: 66%;
+  width: 40%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -128,13 +128,23 @@ const DesktopDisplay = styled.div`
 const MobileDisplay = styled.div`
   display: flex;
   width: 50%;
+  right: 2rem;
   position: relative;
-  left: 5%;
+  justify-content: space-between;
+  align-items: center;
 
   @media (min-width: 740px) {
   display: none;
   }
 `;
+
+const Acc = styled.div`
+  display: absolute;
+  right: 0;
+  @media (min-width: 740px) {
+    display: none
+  }
+`
 
 const ProfileIcon = styled.img`
   width: 27px;
@@ -257,19 +267,17 @@ class Nav extends Component {
         <Bottom>
 
             {/* these will disappear in desktop view */}
+
+          <Acc>
+          <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
+          <ProfileIcon src={profileIcon} alt='profile' style={{display: 'absolute', right: '1px'}}/>
+        </a>
+          </Acc>
           <MobileDisplay>
-
-            {toggle === false ? <div>{
-              <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
-                <ProfileIcon src={profileIcon} alt='profile'/>
-              </a>
-            }</div> :
-              <Link to='/account'>
-                <ProfileIcon src={profileIcon} alt='profile'/>
-              </Link>
-            }
-
-            <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
+              <Link to='/men' style={{ textDecoration: 'none', color: 'black' }}><p>Men</p></Link>
+              <Link to='/women' style={{ textDecoration: 'none', color: 'black' }}><p>Women</p></Link>
+              <Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}><p>Kids</p></Link>
+              <Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>VR</p></Link>
           </MobileDisplay>
 
 
@@ -285,11 +293,13 @@ class Nav extends Component {
             <p onClick={() => this.props.openCloseContact()}>Contact Us</p>
 
           </CatsDesktop>
+          {/*
           <Cats2>
 
             <DropIcon src={ hIcon} alt='hIcon' onClick={() => this.setState({toggleMenu: !this.state.toggleMenu})}></DropIcon>
 
           </Cats2>
+          */}
 
         </Bottom>
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { toggleChat } from '../ducks/reducer';
 
 const socket = io();
 // 'http://localhost:4444'
@@ -12,8 +14,8 @@ const ChatRoom = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 50%;;
-  height: 19.2rem;
+  width: 60%;;
+  height: 21rem;
   box-sizing: border-box;
   background-color: white;
   opacity: 9;
@@ -37,6 +39,7 @@ const Header = styled.div`
   overflow: auto;
   box-sizing: border-box;
   padding: 0.5rem;
+  padding-top: 0;
 `;
 
 const Messages = styled.div`
@@ -44,8 +47,6 @@ const Messages = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   width: 70%;
-  font-weight: 400;
-  font-size: 1rem;
   padding: 3px;
   border: 0;
   outline: none;
@@ -55,7 +56,7 @@ const Messages = styled.div`
 const ChatFooter = styled.div`
   position: absolute;
   flex-direction: column;
-  background: red;
+  background: gray;
   bottom: 0;
   width: 100%;
   height: 10%;
@@ -64,14 +65,14 @@ const ChatFooter = styled.div`
 `;
 
 const Input = styled.input`
-margin: 0;
+  margin: 0;
   width: 70%;
   height: 100%;
   outline: 0px;
   border-width: 0px;
   resize: none;
   border-width: 1px;
-  border-color: black;
+  border-color: gray;
   border-style: solid;
   font-size: 12px;
   padding: 10px;
@@ -81,9 +82,10 @@ margin: 0;
 const Button = styled.button`
   width: 27%;
   height: 100%;
-  border: none;
+  border-radius: gray;
   background-color: white;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
 `;
 
 const Ul = styled.ul`
@@ -116,6 +118,8 @@ const Li = styled.li`
   }
 
 `
+
+
 
 class Chat extends Component {
   constructor(props) {
@@ -168,6 +172,9 @@ class Chat extends Component {
     const chat = this.state.chat.map((e, i) => <Li key={i}>{e}</Li>);
     return (
       <ChatRoom style={{display: this.props.toggle}}>
+
+        <p onClick={() => this.props.toggleChat()} style={{margin:0, marginLeft: '10px'}}>X</p>
+
         <Header>
           <Ul>
             {chat}
@@ -195,4 +202,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default connect(null, {toggleChat})(Chat);

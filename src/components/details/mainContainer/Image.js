@@ -88,7 +88,8 @@ export default class Images extends Component {
   constructor() {
     super();
     this.state = {
-      addedToFavorite: undefined
+      addedToFavorite: undefined,
+      isHovered: false,
     }
   }
 
@@ -100,12 +101,33 @@ export default class Images extends Component {
     }
     this.setState({addedToFavorite: !this.state.addedToFavorite})
   }
-  
+
+  handleHover() {
+    this.setState({
+      isHovered: !this.state.isHovered
+    })
+  }
+
   render() {
+    const type = this.state.isHovered ? "hide" : 'block';
     return (
-      <Container>
+      <Container className="IMG_CONTAINER">
         <Link to={`/item/${this.props.id}`} style={{ textDecoration: 'none' }}>
-          <ImageWrapper src={this.props.img} />
+          {
+            this.state.isHovered
+            ?            
+            <ImageWrapper src={this.props.back}
+            style={{display: type}}
+            onMouseEnter={() => this.handleHover()}
+            onMouseLeave={() => this.handleHover()}
+            />
+            :
+            <ImageWrapper src={this.props.img} 
+            style={{display: type}}
+            onMouseEnter={() => this.handleHover()}
+            onMouseLeave={() => this.handleHover()}
+            />
+          }
           <Wrapper title={this.props.title} price={this.props.price}/>
         </Link>
         <CircleWrapper toggle={() => this.toggle()}  addedToFavorite={this.state.addedToFavorite}/>

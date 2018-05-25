@@ -16,6 +16,8 @@ import brownShoes from './icon/brownShoes.png';
 import model from './icon/model/men.dae';
 import modelWoman from './icon/model/modelWoman.dae';
 import {addToCart} from '../ducks/reducer';
+import swal from 'sweetalert';
+
 registerClickDrag(aframe);
 
 class FittingRoom extends Component {
@@ -26,13 +28,20 @@ class FittingRoom extends Component {
     }
   }
 
+  add(id) {
+    this.props.addToCart(id);
+
+    swal("Successful!", "The item added to your cart!", "success");
+
+  }
+
   render() {
-    let z = 0;
+    let z = -3;
     return (
       <Scene background="color: #ECECEC">
       {
         this.props.favorites.map((item, i) => {
-          z += 1
+          z += 2
           return (
             <Entity 
             key={i}
@@ -40,16 +49,23 @@ class FittingRoom extends Component {
             click-drag
             src={item.product_img}
             scale="1 1 1"
-            position={`-4 1 ${z}`}
+            position={`-4 2 ${z}`}
             rotation="0 90 0"
             
             // fires each time .map loops through an array
-            events={{click: () => this.props.addToCart(item.product_id)}} 
+            events={{click: () => this.add(item.product_id)}} 
             />
     
           )
         })
       }
+
+      <a-entity text="Favorite items"
+        position="0 0 0"
+   
+
+      ></a-entity>
+
       
       {/* Model */}
         <a-assets>
@@ -62,23 +78,14 @@ class FittingRoom extends Component {
 
         </a-assets>
 
-        <a-entity id="model" position="-3 0 -1">
-          <a-animation
-            attribute="rotation"
-            from="0 -30 0"
-            to="0 330 0"
-            dur="15000"
-            easing="linear"
-            repeat="indefinite">
-          </a-animation>
+        <a-entity id="model" position="-2.5 0 -3">
 
           <a-collada-model
             position="-.35 0 .55"
-            rotation="0 -20 0"
+            rotation="0 -280 0"
             scale="1.5 1.5 1.5"
             src="#why-male-models">
           </a-collada-model>
-          <a-image src="#shadow2" rotation="-90 0 0" scale="0.5 0.5 0.5"></a-image>
         </a-entity>
 
         {/* Items */}
@@ -118,8 +125,35 @@ class FittingRoom extends Component {
           position="2 2 -4"
         />
 
-        <a-entity text-geometry="value: Fitting Room"
+
+          <a-entity text-geometry="value: Fitting Room"
+          material="color: gray"
           position="-2 4 -5"></a-entity>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <a-entity 
+          text-geometry="value: Favorite items"
+          position="-8 4 3"
+          rotation="0 90 0"
+          material="color: gray"
+
+          
+          >
+          
+          </a-entity>
 
 
         <a-link
@@ -128,8 +162,10 @@ class FittingRoom extends Component {
           image={store}
           borderColor="blue"
           backgroundColor="red"
-          position="0 2 4.3"
+          position="-2.7 2 3.5"
           geometry="width: 10"
+          rotation="0 -25 0"
+
         >
         </a-link>
 
@@ -139,7 +175,7 @@ class FittingRoom extends Component {
           image={store}
           borderColor="blue"
           backgroundColor="red"
-          position="2.8 2 3.5"
+          position="2 2 3.5"
           rotation="0 25 0"
           geometry="width: 10"
         >
