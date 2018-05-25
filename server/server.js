@@ -7,9 +7,11 @@ const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
 const nodemailer = require('nodemailer');
 var watson = require('watson-developer-cloud');
+const http = require('http');
 
 const controller = require('./controller');
 const app = express();
+var server = http.Server(app);
 
 // Routing for index.html
 app.use(express.static(__dirname + '/../build')); 
@@ -175,8 +177,8 @@ app.post('/api/payment', function(req, res, next){
 });
 });
 
-const io = socket(app.listen(PORT, () => console.log(`VR is running on port ${PORT}`)))
-
+const io = socket(server)
+server.listen(PORT, () => console.log(`Running on port: ${PORT}`));
 // ___________________________BOT
 io.on('connection', socket => {
   console.log('user connect')
