@@ -5,7 +5,7 @@ import hIcon from './media/hamburgerIcon.png';
 import profileIcon from './media/person.png';
 import searchIcon from './media/searchIcon.png';
 import chatIcon from './media/chat.svg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Chat from './bot/Chat';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -239,28 +239,22 @@ class Nav extends Component {
       <NavBody>
 
         <Top>
-          {/* <SearchElements>
-            <SearchBox placeholder='Search' onChange={(e) => this.handleChange({search: e.target.value})}></SearchBox>
-            <Link to={`/search/${this.state.search}`}><SearchB>
-              <SearchIcon src={searchIcon} alt='search'/>
-            </SearchB></Link>
-          </SearchElements> */}
           <Cats2>
-            <Link to='/' style={{ textDecoration: 'none', color: 'black'}}><SiteLogo src={Logo} alt='Logo'/></Link>
+            <NavLink to='/' style={{ textDecoration: 'none', color: 'black'}}><SiteLogo src={Logo} alt='Logo'/></NavLink>
           </Cats2>
 
           <DesktopDisplay>
               {toggle === false ? <div>{
                 <a href={process.env.REACT_APP_LOGIN}  style={{ textDecoration: 'none', color: 'black' }}>
-                  <p>Sign In</p>
+                  <p>Sign in</p>
                 </a>
               }</div> :
-                <Link to='/account' style={{ textDecoration: 'none', color: 'black' }}>
+                <NavLink to='/account' style={{ textDecoration: 'none', color: 'black' }}>
                   <p>Account</p>
-                </Link>
+                </NavLink>
               }
             <ProfileIcon src={chatIcon} onClick={() => this.props.toggleChat()} alt='profile'/>
-            <Link to='/cart'><CartIcon src={ Cart } alt='cart'/></Link>
+            <NavLink to='/cart'><CartIcon src={ Cart } alt='cart'/></NavLink>
           </DesktopDisplay>
         </Top>
 
@@ -274,49 +268,24 @@ class Nav extends Component {
         </a>
           </Acc>
           <MobileDisplay>
-              <Link to='/men' style={{ textDecoration: 'none', color: 'black' }}><p>Men</p></Link>
-              <Link to='/women' style={{ textDecoration: 'none', color: 'black' }}><p>Women</p></Link>
-              <Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}><p>Kids</p></Link>
-              <Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>VR</p></Link>
+              <NavLink to='/men' style={{textDecoration: 'none', color: 'black'}} activeStyle={{color: 'green', fontWeight: '600' }}>Men</NavLink>
+              <NavLink to='/women' style={{textDecoration: 'none'}} activeStyle={{color: 'green', fontWeight: '600' }}><p>Women</p></NavLink>
+              <NavLink to='/kids' style={{textDecoration: 'none'}} activeStyle={{color: 'green', fontWeight: '600' }}><p>Kids</p></NavLink>
+              <NavLink to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>VR</p></NavLink>
           </MobileDisplay>
-
-
               {/* replace h2 with logo */}
-
-
             {/* these will disappear in mobile view and will be replaced by icon */}
           <CatsDesktop>
-            <Link to='/men' style={{ textDecoration: 'none', color: 'black' }}><p>Men</p></Link>
-            <Link to='/women' style={{ textDecoration: 'none', color: 'black' }}><p>Women</p></Link>
-            <Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}><p>Kids</p></Link>
-            <Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>Fitting Room</p></Link>
+            <NavLink to='/men' style={{ textDecoration: 'none', color: 'black' }}>Men</NavLink>
+            <NavLink to='/women' style={{ textDecoration: 'none', color: 'black' }}>Women</NavLink>
+            <NavLink to='/kids' style={{ textDecoration: 'none', color: 'black' }}>Kids</NavLink>
+            <NavLink to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}><p>Fitting Room</p></NavLink>
             <p onClick={() => this.props.openCloseContact()}>Contact Us</p>
 
           </CatsDesktop>
-          {/*
-          <Cats2>
-
-            <DropIcon src={ hIcon} alt='hIcon' onClick={() => this.setState({toggleMenu: !this.state.toggleMenu})}></DropIcon>
-
-          </Cats2>
-          */}
-
         </Bottom>
-
       </NavBody>
-
-        { this.state.toggleMenu ? 
-        <div>{ 
-          <DropMenu>
-            <CatSelect><Link to='/men' style={{ textDecoration: 'none', color: 'black' }}>Men</Link></CatSelect>
-            <CatSelect><Link to='/women' style={{ textDecoration: 'none', color: 'black' }}>Women</Link></CatSelect>
-            <CatSelect><Link to='/kids' style={{ textDecoration: 'none', color: 'black' }}>Kids</Link></CatSelect>
-            <CatSelect><Link to='/fittingRoom' style={{ textDecoration: 'none', color: 'black' }}>Fitting Room</Link></CatSelect>
-          </DropMenu>
-        }</div> : <div/>}
- 
         <Chat toggle={this.props.chatIsOpen}/>
-
       </NavOutter>
     );
   }

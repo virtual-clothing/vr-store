@@ -7,22 +7,18 @@ const Container = styled.div`
   padding: 0 1rem 1.5rem 1rem;
   padding-left: 2rem;
   box-sizing: border-box;
-  color: #111111;
   font-size: 1.1rem;
-  font-weight: 450;
+  color: black
   &:hover{
-
       animation: text-shadow 12s ease infinite;
-      font-weight: normal;
-  
+      font-weight: 450;
+
       @for $i from 1 through 6 {
         &:nth-of-type(#{$i}) {
           animation-delay: #{$i * 140}ms;
         }
       }
-
   }
-
 `
 // border-bottom: solid black 1px;
 // color:  #2EE59D;
@@ -35,8 +31,7 @@ const Item = props => {
 
   return (
     <Container onClick={() => getKeyword(props.type)}>
-
-       {props.type} 
+      {props.type} 
     </Container>
   )
 }

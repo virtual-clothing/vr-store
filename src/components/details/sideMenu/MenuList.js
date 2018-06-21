@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from './Item';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
+  position: fixed;
   display: inline-block;
   width: 15%;
   box-sizing: border-box;
 
 
   @media(max-width: 450px) {
+    position: relative;
     float: none;
     width: 100%;
   }
@@ -21,9 +23,13 @@ const Container = styled.div`
 const MenuList = props => {
   const types = ["View All", "Shirts", "Hoodies & Jackets", "Pants", "Shorts", "SwimWear", "Shoes", "Bags"];
   let item = types.map(item => 
-    <Link to={`/${props.category}/${item}`} key={item} style={{ textDecoration: 'none' }}>
+    <NavLink to={`/${props.category}/${item}`} 
+      key={item} 
+      style={{textDecoration: 'none'}}
+      activeStyle={{ color: 'green', fontWeight: '600' }}
+     >
       <Item type={item} category={props.category}/>
-    </Link>)
+    </NavLink>)
   return (
     <Container>
       {item}
@@ -31,7 +37,13 @@ const MenuList = props => {
   )
 }
 
-export default MenuList;
 
-// "View All", "T-shirt & Tank Tops", "Shirts", "Hoodies & Sweatshirts", 
-//   "Jeans", "Pants", "Jackets & Suits", "Shorts", "SwimWear", "Shoes", "Bags"
+
+
+// <NavLink to={`/${props.category}/${item}`} 
+// key={item} 
+// style={{ textDecoration: 'none'}}
+// activeStyle={{ color: 'red' }}
+// >
+
+export default MenuList;

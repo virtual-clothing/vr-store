@@ -60,7 +60,11 @@ const Image = styled.img`
 `
 const ImageWrapper = props => {
   return (
-    <div style={{position: "relative"}}>
+    <div 
+      style={{position: "relative"}}
+      onMouseEnter={() => props.handleHover()}
+      onMouseLeave={() => props.handleHover()}
+    >
       <Image src={props.src}  />
     </div>
   )
@@ -118,14 +122,12 @@ export default class Images extends Component {
             ?            
             <ImageWrapper src={this.props.back}
             style={{display: type}}
-            onMouseEnter={() => this.handleHover()}
-            onMouseLeave={() => this.handleHover()}
+            handleHover={() => this.handleHover()}
             />
             :
             <ImageWrapper src={this.props.img} 
             style={{display: type}}
-            onMouseEnter={() => this.handleHover()}
-            onMouseLeave={() => this.handleHover()}
+            handleHover={() => this.handleHover()}
             />
           }
           <Wrapper title={this.props.title} price={this.props.price}/>
