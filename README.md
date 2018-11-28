@@ -39,14 +39,15 @@ This is an e-commerce static web application that supported by Web/VR features. 
       * Tell jokes
       * Tell greetings
 9. Payment /Stripe/
-# Screenshot/GIF
-## Woman clothing page
+## Screenshot/GIF
+### Women page
+
 ![screen shot 2018-11-28 at 12 27 21 am](https://user-images.githubusercontent.com/24214152/49138592-71a50a80-f2a4-11e8-8b4d-338e2dfce833.png)
 
-# Security
+## Security
   1. Access to API is protected by several middleware layer that if the client should be made access to recource
   2. Each input by the user protected from common security vulnerabilities
-# API list
+## API list
   1. `GET /logout`
   2. `GET /callback`
   3. `GET /api/userinfo`
@@ -66,11 +67,11 @@ This is an e-commerce static web application that supported by Web/VR features. 
   17. `POST /cart`
   18. `DELETE /remallcart`
   19. `POST /api/payment``
-# Set UP
+## Set UP
 To set up the development environment, you need the following steps
   1. Download npm and node.js
   2. Downlaod and install postgresSQL
-# Running the App
+## Running the App
   1. Run `npm install`
   2. Run `nodemon start`
   3. Open `localhost:3000` on your browser
