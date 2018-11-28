@@ -66,7 +66,7 @@ This is an e-commerce static web application that supported by Web/VR features. 
   16. `POST /submitreviews`
   17. `POST /cart`
   18. `DELETE /remallcart`
-  19. `POST /api/payment``
+  19. `POST /api/payment`
 ## Set UP
 To set up the development environment, you need the following steps
   1. Download npm and node.js
